@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Enum;
+using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;
 using Newtonsoft.Json;
@@ -19,33 +21,33 @@ namespace ConnectionSampleCode.HandleUtil
             {
                 if (readEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
-                    var reader = File.ReadAllText(FileConstant.BookConstantPath);
+                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
                 {
-                    var reader = File.ReadAllText(FileConstant.EntertainmentConstantPath);
+                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.QUOTESCONSTANT)
                 {
-                    var reader = File.ReadAllText(FileConstant.QuotesConstantPath);
+                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.EVENTINYEAR)
                 {
-                    var reader = File.ReadAllText(FileConstant.EventInYearConstantPath);
+                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.USERLOGIN)
                 {
-                    var reader = File.ReadAllText(FileConstant.UserLoginPath);
+                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error unexpected to read file" + e.Message);
+                Console.WriteLine("Error unexpected to read file: " + e.Message);
             }
         }
 

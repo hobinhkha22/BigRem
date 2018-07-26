@@ -1,4 +1,5 @@
 ﻿using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Enum;
 
 namespace ConnectionSampleCode.Interface
 {

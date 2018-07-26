@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;

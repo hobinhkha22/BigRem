@@ -60,10 +60,11 @@
     <Compile Include="Constant\CategoriesBookConstant.cs" />
     <Compile Include="Constant\CategoriesCountryOccuredConstant.cs" />
     <Compile Include="Constant\CategoriesEntertainmentConstant.cs" />
-    <Compile Include="Constant\EnumFileConstant.cs" />
+    <Compile Include="Enum\EnumFileConstant.cs" />
     <Compile Include="Constant\TypesQuoteConstant.cs" />
     <Compile Include="Enum\UserRoleEnum.cs" />
     <Compile Include="Extension\HandleRandom.cs" />
+    <Compile Include="Extension\PathHandle.cs" />
     <Compile Include="HandleUtil\BooksUtil.cs" />
     <Compile Include="HandleUtil\EntertainmentUtil.cs" />
     <Compile Include="HandleUtil\EvenInYearUtil.cs" />

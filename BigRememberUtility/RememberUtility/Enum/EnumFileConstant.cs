@@ -1,4 +1,4 @@
-﻿namespace ConnectionSampleCode.Constant
+﻿namespace ConnectionSampleCode.Enum
 {
     public enum EnumFileConstant
     {
