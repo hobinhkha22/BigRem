@@ -105,7 +105,7 @@ namespace BookSampleCode
                         {
                             var currentBookResult = bookUtil.FindBookBy(placeHoldBookName);
                             HandleRandom.ChooseColorForString("Found book", ConsoleColor.Blue);
-                            Console.WriteLine("Info Book---");
+                            Console.WriteLine("Book Info---");
                             Console.WriteLine("Id: " + currentBookResult.BookId);
                             Console.WriteLine("Book Name: " + currentBookResult.BookName);
                             Console.WriteLine("Author: " + currentBookResult.Author);

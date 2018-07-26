@@ -33,7 +33,6 @@ namespace UserSampleCode
                         {
                             Console.WriteLine("User Name: " + itemUsers.Username);
                             Console.WriteLine("Password encrypt: " + itemUsers.PasswordEncrypt);
-                            //Console.WriteLine("Password decrypt: " + HandleRandom.Decrypt(itemUsers.PasswordEncrypt));
                             Console.WriteLine("Created date: " + itemUsers.CreatedDate);
                             Console.WriteLine("Role: " + itemUsers.UserRole);
                             Console.WriteLine("-----------------------------");
@@ -57,7 +56,7 @@ namespace UserSampleCode
                         if (result != null)
                         {
                             HandleRandom.ChooseColorForString("Found User", ConsoleColor.Blue);
-                            Console.WriteLine("Info user---");
+                            Console.WriteLine("User info---");
                             Console.WriteLine("Id: " + result.UserId);
                             Console.WriteLine("User Name: " + result.Username);
                             Console.WriteLine("Password encrypt: " + result.PasswordEncrypt);

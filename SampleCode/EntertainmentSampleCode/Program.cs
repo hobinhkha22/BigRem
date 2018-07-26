@@ -77,7 +77,7 @@ namespace EntertainmentSampleCode
                         var result = etUtil.FindEntertainmentBy(findEtName);
                         if (result != null)
                         {
-                            Console.WriteLine("Info Entertainment---");
+                            Console.WriteLine("Entertainment info---");
                             HandleRandom.ChooseColorForString("Found ET", ConsoleColor.Blue);
                             Console.WriteLine("Id: " + result.EnterId);
                             Console.WriteLine("Et Name: " + result.EnterName);

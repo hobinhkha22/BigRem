@@ -97,7 +97,7 @@ namespace QuoteSampleCode
                         {
                             var currentquoteResult = quoteUtil.FindQuoteBy(placeHoldquoteName);
                             HandleRandom.ChooseColorForString("Found quote", ConsoleColor.Blue);
-                            Console.WriteLine("Info Quote---");
+                            Console.WriteLine("Quote info---");
                             Console.WriteLine("Id: " + currentquoteResult.QuotesId);
                             Console.WriteLine("Quote Name: " + currentquoteResult.QuotesName);
                             Console.WriteLine("Author: " + currentquoteResult.Author);

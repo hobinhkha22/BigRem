@@ -115,7 +115,7 @@ namespace EventInYearSampleCode
                         {
                             var currentEtResult = eventUtil.FindEventInYear(placeHoldEtName);
                             HandleRandom.ChooseColorForString("Found Event", ConsoleColor.Blue);
-                            Console.WriteLine("Info event---");
+                            Console.WriteLine("Event info---");
                             Console.WriteLine("Id: " + currentEtResult.EventYearId);
                             Console.WriteLine("Et Name: " + currentEtResult.EventName);
                             Console.WriteLine("Link: " + currentEtResult.EventLink);
