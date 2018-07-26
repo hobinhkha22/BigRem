@@ -1,0 +1,32 @@
+{
+  "Books": null,
+  "Entertainment": null,
+  "Quotes": [
+    {
+      "QuotesId": "5sw6a8s5",
+      "QuotesName": "The first wealth is health",
+      "Author": "Ralph Waldo Emerson",
+      "Type": "Health",
+      "CreatedDate": null,
+      "LastModifiedDate": "July 15, 2018"
+    },
+    {
+      "QuotesId": "oxjszrll",
+      "QuotesName": "I will",
+      "Author": "under armour",
+      "Type": "Happiness",
+      "CreatedDate": null,
+      "LastModifiedDate": "July 15, 2018"
+    },
+    {
+      "QuotesId": "1wrk5mmj",
+      "QuotesName": "asdasd",
+      "Author": "qweqer",
+      "Type": "qwrqwfr",
+      "CreatedDate": "July 15, 2018",
+      "LastModifiedDate": "July 15, 2018"
+    }
+  ],
+  "EventInYears": null,
+  "UserLogin": null
+}

@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "TakePlace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<h2 class="h-100 text-center">All Projects</h2>
+<hr />
+
+<body>
+    <div class="container">
+        <div class="row">
+            <ul class="thumbnails list-unstyled">
+
+                <li class="col-md-3">
+                    <div class="thumbnail" style="padding: 0">
+                        <div style="padding: 4px">
+                            <img alt="300x200" style="width: 100%" src="~/Content/images/bookproject.jpg">
+                        </div>
+                        <div class="caption">
+                            <h2 class="text-center">
+                                @Html.ActionLink("Book", actionName: "GoBook", controllerName:"Home")
+                            </h2>
+                            <p>All data about books was stored here</p>
+                            <p><i class="icon icon-map-marker"></i>HCM, Vietnam</p>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                    <span class="sr-only">30% Complete</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><b>50%</b><br /><small>READ</small></div>
+                                <div class="col-md-4"><b>35%</b><br /><small>PENDING</small></div>
+                                <div class="col-md-4"><b>15%</b><br /><small>DONE</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="col-md-3">
+                    <div class="thumbnail" style="padding: 0">
+                        <div style="padding: 4px">
+                            <img alt="300x200" style="width: 100%" src="~/Content/images/entertainmentproject.jpg">
+                        </div>
+                        <div class="caption">
+                            <h2 class="text-center">@Html.ActionLink("Entertainment", actionName: "GoEntertainment", controllerName: "Home")</h2>
+                            <p>Every link interested was stored here</p>
+                            <p><i class="icon icon-map-marker"></i> HCM, Vietnam</p>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                    <span class="sr-only">56% Complete</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><b>65%</b><br /><small>NEW</small></div>
+                                <div class="col-md-4"><b>20%</b><br /><small>NORMAL</small></div>
+                                <div class="col-md-4"><b>15%</b><br /><small>OLD</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="col-md-3">
+                    <div class="thumbnail" style="padding: 0">
+                        <div style="padding: 4px">
+                            <img alt="300x200" style="width: 100%" src="~/Content/images/quoteproject.jpg">
+                        </div>
+                        <div class="caption">
+                            <h2 class="text-center">@Html.ActionLink("Quote", actionName: "GoQuote", controllerName: "Home")</h2>
+                            <p>About good quotes was filtered carefully to save here</p>
+                            <p><i class="icon icon-map-marker"></i> HCM, Vietnam</p>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                    <span class="sr-only">25% Complete</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><b>40%</b><br /><small>MOTIVATION</small></div>
+                                <div class="col-md-4"><b>35%</b><br /><small>LIFE</small></div>
+                                <div class="col-md-4"><b>25%</b><br /><small>PEOPLE</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="col-md-3">
+                    <div class="thumbnail" style="padding: 0">
+                        <div style="padding: 4px">
+                            <img alt="300x200" style="width: 100%" src="~/Content/images/eveninyear.jpg">
+                        </div>
+                        <div class="caption">
+                            <h2 class="text-center">@Html.ActionLink("Event in year", actionName: "GoEventInYear", controllerName: "Home")</h2>
+                            <p>Event in year every country</p>
+                            <p><i class="icon icon-map-marker"></i> Anywhere, Around the world</p>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+                                    <span class="sr-only">2% Complete</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4"><b>15%</b><br /><small>VIETNAM</small></div>
+                                <div class="col-md-4"><b>60%</b><br /><small>US</small></div>
+                                <div class="col-md-4"><b>25%</b><br /><small>RUSSIA</small></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>

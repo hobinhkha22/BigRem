@@ -1,0 +1,40 @@
+{
+  "Books": [
+    {
+      "BookId": "2ra6a1g3",
+      "BookName": "Hunger Game",
+      "Author": "Chasing Dream",
+      "Category": "Business",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "BookId": "a2fq654s",
+      "BookName": "Steve Jobs Biography",
+      "Author": "Chasing Dream",
+      "Category": "Biography",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "BookId": "8gq8uyep",
+      "BookName": "Tuổi trẻ đáng giá bao nhiêu",
+      "Author": "Rosie Nguyễn",
+      "Category": "Self Help",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "BookId": "fu4yufbd",
+      "BookName": "Siêu dự báo",
+      "Author": "dan gardner",
+      "Category": "Business",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    }
+  ],
+  "Entertainment": null,
+  "Quotes": null,
+  "EventInYears": null,
+  "UserLogin": null
+}

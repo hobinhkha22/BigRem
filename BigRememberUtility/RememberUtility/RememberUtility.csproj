@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BD188EFA-8AA6-43B6-A09D-91F0C53D0332}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ConnectionSampleCode</RootNamespace>
+    <AssemblyName>ConnectionSampleCode</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constant\CategoriesBookConstant.cs" />
+    <Compile Include="Constant\CategoriesCountryOccuredConstant.cs" />
+    <Compile Include="Constant\CategoriesEntertainmentConstant.cs" />
+    <Compile Include="Constant\EnumFileConstant.cs" />
+    <Compile Include="Constant\TypesQuoteConstant.cs" />
+    <Compile Include="Enum\UserRoleEnum.cs" />
+    <Compile Include="Extension\HandleRandom.cs" />
+    <Compile Include="HandleUtil\BooksUtil.cs" />
+    <Compile Include="HandleUtil\EntertainmentUtil.cs" />
+    <Compile Include="HandleUtil\EvenInYearUtil.cs" />
+    <Compile Include="HandleUtil\FileHandlerUtil.cs" />
+    <Compile Include="HandleUtil\QuoteUtil.cs" />
+    <Compile Include="HandleUtil\UserUtil.cs" />
+    <Compile Include="Interface\IEntertainment.cs" />
+    <Compile Include="Interface\IEventInYear.cs" />
+    <Compile Include="Interface\IHealth.cs" />
+    <Compile Include="Interface\IQuote.cs" />
+    <Compile Include="Interface\IUser.cs" />
+    <Compile Include="Model\Books.cs" />
+    <Compile Include="Constant\FileConstant.cs" />
+    <Compile Include="Interface\IBooks.cs" />
+    <Compile Include="Interface\IFileHandle.cs" />
+    <Compile Include="Model\ConfigModel.cs" />
+    <Compile Include="Model\Entertainment.cs" />
+    <Compile Include="Model\EventInYear.cs" />
+    <Compile Include="Model\Quotes.cs" />
+    <Compile Include="Model\UserLogin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="JsonDb\Books.json" />
+    <None Include="JsonDb\Entertainment.json" />
+    <None Include="JsonDb\EventInYear.json" />
+    <None Include="JsonDb\Quotes.json" />
+    <None Include="JsonDb\User.json" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

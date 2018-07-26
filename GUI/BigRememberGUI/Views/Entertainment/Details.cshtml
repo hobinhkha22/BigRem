@@ -1,0 +1,66 @@
+﻿@model ConnectionSampleCode.Model.Entertainment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EnterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnterId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Links)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Links)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", "Entertainment", new {  id = Model.EnterId }, null) |
+    @Html.ActionLink("Back to List", "Index", "Entertainment")
+</p>

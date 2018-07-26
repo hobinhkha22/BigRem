@@ -1,0 +1,80 @@
+{
+  "Books": null,
+  "Entertainment": [
+    {
+      "EnterId": "11s5ygd1",
+      "EnterName": "Calisthenics Frank medrano",
+      "Links": "https://www.youtube.com/watch?v=mvJHw64fxgQ",
+      "Category": "Music",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "s5ga4w3f",
+      "EnterName": "Phai dấu cuộc tình - mỏi mòn - nhạc hoa",
+      "Links": "https://www.youtube.com/watch?v=tF70wh0uzS4",
+      "Category": "Music",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "yny10yko",
+      "EnterName": "Mattafix - Big City Life (LEEX Remix)",
+      "Links": "https://www.youtube.com/watch?v=Ai3Ay9A7WqM",
+      "Category": "Music",
+      "CreatedDate": null,
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "gjg2mmjg",
+      "EnterName": "Kodaline - All I Want [13 Reasons Why]",
+      "Links": "https://www.youtube.com/watch?v=mAtBu-fk-_4",
+      "Category": "Video Music",
+      "CreatedDate": "July 04, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "lwtqihmf",
+      "EnterName": "[C#] Format DateTime as String Examples",
+      "Links": "https://www.code-sample.net/CSharp/Format-DateTime",
+      "Category": "Research Information",
+      "CreatedDate": "July 04, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "4qwqeg92",
+      "EnterName": "When to stop reading a bad book?",
+      "Links": "https://boingboing.net/2018/07/03/when-to-stop-reading-a-bad-boo.html?utm_source=facebook&utm_medium=editorial&utm_content=boing-boing",
+      "Category": "Research Information",
+      "CreatedDate": "July 05, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "ygspsmur",
+      "EnterName": "50 Free HTML5 And CSS3 Login Forms For Your Website 2018",
+      "Links": "https://colorlib.com/wp/html5-and-css3-login-forms/",
+      "Category": "Research Information",
+      "CreatedDate": "July 07, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "r6b01kvv",
+      "EnterName": "7 phương pháp để làm chủ tiềm thức diệu kỳ trong bạn (Phần 1)",
+      "Links": "http://post.sufo.vn/song/7-phuong-phap-de-lam-chu-tiem-thuc-dieu-ky-trong-ban-phan-1-post71.html",
+      "Category": "Research Information",
+      "CreatedDate": "July 11, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "dg0qepjz",
+      "EnterName": "Muhammad Ali In His Prime - Blinding Speed",
+      "Links": "https://www.youtube.com/watch?v=axMLZZNINCU",
+      "Category": "Motivation",
+      "CreatedDate": "July 15, 2018",
+      "LastModifiedDate": null
+    }
+  ],
+  "Quotes": null,
+  "EventInYears": null,
+  "UserLogin": null
+}
