@@ -58,27 +58,27 @@ namespace ConnectionSampleCode.HandleUtil
                 if (saveEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
-                    File.WriteAllText(FileConstant.BookConstantPath, _jsonObject);
+                    File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.BOOKCONSTANT), _jsonObject);
                 }
                 else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
-                    File.WriteAllText(FileConstant.EntertainmentConstantPath, _jsonObject);
+                    File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.ENTERTAINMENTCONSTAT), _jsonObject);
                 }
                 else if (saveEnumFile == EnumFileConstant.QUOTESCONSTANT)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
-                    File.WriteAllText(FileConstant.QuotesConstantPath, _jsonObject);
+                    File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.QUOTESCONSTANT), _jsonObject);
                 }
                 else if (saveEnumFile == EnumFileConstant.EVENTINYEAR)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
-                    File.WriteAllText(FileConstant.EventInYearConstantPath, _jsonObject);
+                    File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.EVENTINYEAR), _jsonObject);
                 }
                 else if (saveEnumFile == EnumFileConstant.USERLOGIN)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
-                    File.WriteAllText(FileConstant.UserLoginPath, _jsonObject);
+                    File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.USERLOGIN), _jsonObject);
                 }
             }
             catch (Exception e)

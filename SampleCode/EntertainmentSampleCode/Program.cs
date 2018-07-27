@@ -88,7 +88,7 @@ namespace EntertainmentSampleCode
                             break;
                         }
 
-                        HandleRandom.ChooseColorForString("There are no Et you find", ConsoleColor.Blue);
+                        HandleRandom.ChooseColorForString("There are no '" + findEtName + "' you find", ConsoleColor.Blue);
                         break;
 
                     case 4: // update Et
