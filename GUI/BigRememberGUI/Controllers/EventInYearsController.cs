@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.HandleUtil;
 
 namespace BigRememberGUI.Controllers
@@ -31,6 +29,11 @@ namespace BigRememberGUI.Controllers
         // GET: EventInYears/Create
         public ActionResult Create()
         {
+            var listConstantValue = typeof(CategoriesCountryOccuredConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+
+            ViewBag.ListCountry = new SelectList(listConstantValue);
+
             return View();
         }
 
@@ -53,6 +56,11 @@ namespace BigRememberGUI.Controllers
         // GET: EventInYears/Edit/5
         public ActionResult Edit(int id)
         {
+            var listConstantValue = typeof(CategoriesCountryOccuredConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+
+            ViewBag.EditListCountry = new SelectList(listConstantValue);
+
             return View();
         }
 

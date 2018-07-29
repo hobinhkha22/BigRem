@@ -40,7 +40,7 @@ namespace BigRememberGUI.Controllers
         {
             var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
-            ViewBag.ListEntertainment = listConstantValue;
+            ViewBag.ListEntertainment = new SelectList(listConstantValue);
 
             if (Session["Name"] != null)
             {
@@ -68,7 +68,7 @@ namespace BigRememberGUI.Controllers
         {
             var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
-            ViewBag.EditListEntertainment = listConstantValue;
+            ViewBag.EditListEntertainment = new SelectList(listConstantValue);
 
             if (id == null)
             {

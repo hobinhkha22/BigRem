@@ -41,7 +41,8 @@ namespace BigRememberGUI.Controllers
         {
             var listConstantValue = typeof(TypesQuoteConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
-            ViewBag.ListQuotes = listConstantValue;
+            ViewBag.ListQuotes = new SelectList(listConstantValue);
+
             if (Session["Name"] != null)
             {
                 return View();
@@ -65,6 +66,10 @@ namespace BigRememberGUI.Controllers
         // GET: Quotes/Edit/5
         public ActionResult Edit(string id)
         {
+            var listConstantValue = typeof(TypesQuoteConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            ViewBag.EditListQuotes = new SelectList(listConstantValue);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
