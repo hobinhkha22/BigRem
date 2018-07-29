@@ -75,6 +75,7 @@ namespace BigRememberGUI.Controllers
             var listConstantValue = typeof(CategoriesBookConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
             ViewBag.EditListBook = listConstantValue;
+
             if (Session["Name"] == null || id == null) return RedirectToAction("Login", "Home");
             var tempBook = _booksUtil.FindBookByBookId(id);
             if (tempBook == null)
@@ -101,9 +102,9 @@ namespace BigRememberGUI.Controllers
         // GET: Books/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["Name"] == null || id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
 
             var deleteBook = _booksUtil.FindBookByBookId(id);

@@ -29,7 +29,7 @@ namespace BigRememberGUI.Controllers
         // GET: Entertainment/Details/5
         public ActionResult Details(string id)
         {
-            if (Session["Name"] == null) return RedirectToAction("Login", "Home");
+            if (Session["Name"] == null || id == null) return RedirectToAction("Login", "Home");
 
             var getEtObj = _entertainmentUtil.FindEntertainmentByEnterId(id);
             return getEtObj != null ? View(getEtObj) : View();
@@ -70,9 +70,9 @@ namespace BigRememberGUI.Controllers
             listConstantValue.Sort();
             ViewBag.EditListEntertainment = new SelectList(listConstantValue);
 
-            if (id == null)
+            if (Session["Name"] == null || id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
 
             if (Session["Name"] == null) return RedirectToAction("Login", "Home");
@@ -80,7 +80,7 @@ namespace BigRememberGUI.Controllers
 
             if (tempEt == null)
             {
-                return HttpNotFound("Sorry '" + id + "' doesn't exist in our Db.");
+                return View("Error");
             }
 
             return View(tempEt);
@@ -102,9 +102,9 @@ namespace BigRememberGUI.Controllers
         // GET: Entertainment/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
+            if (Session["Name"] == null || id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
 
             var deleteEt = _entertainmentUtil.FindEntertainmentByEnterId(id);

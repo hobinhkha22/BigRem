@@ -30,7 +30,8 @@ namespace BigRememberGUI.Controllers
         // GET: Quotes/Details/5
         public ActionResult Details(string id)
         {
-            if (Session["Name"] == null) return HttpNotFound("Oops. Something happened wrong.");
+            if (Session["Name"] == null || id == null) return RedirectToAction("Login", "Home");
+
             var getQuote = _quoteUtil.FindQuoteByQuoteId(id);
 
             return getQuote != null ? View(getQuote) : View();
@@ -70,9 +71,9 @@ namespace BigRememberGUI.Controllers
             listConstantValue.Sort();
             ViewBag.EditListQuotes = new SelectList(listConstantValue);
 
-            if (id == null)
+            if (Session["Name"] == null || id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
 
             if (Session["Name"] == null) return RedirectToAction("Login", "Home");
@@ -101,7 +102,7 @@ namespace BigRememberGUI.Controllers
         // GET: Quotes/Delete/5
         public ActionResult Delete(string id)
         {
-            if (Session["Name"] == null) return RedirectToAction("Login", "Home");
+            if (Session["Name"] == null || id == null) return RedirectToAction("Login", "Home");
 
             var deleteQuote = _quoteUtil.FindQuoteByQuoteId(id);
             ViewBag.deleteQuote = deleteQuote.QuotesName;
