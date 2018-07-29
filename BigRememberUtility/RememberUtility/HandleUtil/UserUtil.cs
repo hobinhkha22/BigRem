@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Constant;
+using System.Security.Cryptography.X509Certificates;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
@@ -32,12 +32,13 @@ namespace ConnectionSampleCode.HandleUtil
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
         }
 
-        public UserLogin CheckUser(string username)
+        public UserLogin CheckUser(string username, string password)
         {
             _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
 
             var findUser = _fileHandlerUtil.JsonModel.UserLogin.
-                Find(x => string.Equals(x.Username, username, StringComparison.CurrentCultureIgnoreCase));
+                Find(x => string.Equals(x.Username, username, StringComparison.CurrentCultureIgnoreCase) &&
+                          string.Equals(HandleRandom.Decrypt(x.PasswordEncrypt), password, StringComparison.CurrentCultureIgnoreCase));
 
             if (findUser != null)
             {
@@ -97,7 +98,7 @@ namespace ConnectionSampleCode.HandleUtil
             _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
 
             var listUser = _fileHandlerUtil.JsonModel.UserLogin.ToList();
-            
+
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
 
             return listUser;

@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.HandleUtil;
 using ConnectionSampleCode.Model;
 
@@ -39,6 +41,12 @@ namespace BigRememberGUI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            // Get list book categories constant
+            var listConstantValue = typeof(CategoriesBookConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+
+            ViewBag.ListBook = new SelectList(listConstantValue);
+
             if (Session["Name"] != null)
             {
                 return View();

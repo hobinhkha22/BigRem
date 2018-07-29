@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.HandleUtil;
 using ConnectionSampleCode.Model;
 
@@ -37,6 +39,9 @@ namespace BigRememberGUI.Controllers
         // GET: Quotes/Create
         public ActionResult Create()
         {
+            var listConstantValue = typeof(TypesQuoteConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            ViewBag.ListQuotes = listConstantValue;
             if (Session["Name"] != null)
             {
                 return View();

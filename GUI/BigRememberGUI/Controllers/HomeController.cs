@@ -29,7 +29,7 @@ namespace BigRememberGUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var checkName = _userUtil.CheckUser(userLogin.Username);
+                var checkName = _userUtil.CheckUser(userLogin.Username, userLogin.PasswordEncrypt);
                 if (checkName != null)
                 {
                     Session["Name"] = checkName.Username;

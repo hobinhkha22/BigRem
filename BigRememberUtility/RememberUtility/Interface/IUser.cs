@@ -12,7 +12,7 @@ namespace ConnectionSampleCode.Interface
     {
         void AddUser(UserLogin userLogin);
 
-        UserLogin CheckUser(string username);
+        UserLogin CheckUser(string username, string password);
 
         bool UpdateUser(string currentUserName, string newUserName, string newPassword);
 

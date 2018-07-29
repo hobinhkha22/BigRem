@@ -4,10 +4,10 @@ namespace ConnectionSampleCode.Model
 {
     public class Books
     {
-        [DisplayName("Book Id")]
+        [DisplayName("Book id")]
         public string BookId { get; set; }
 
-        [DisplayName("Book Name")]
+        [DisplayName("Book name")]
         public string BookName { get; set; }
 
         [DisplayName("Author")]
@@ -16,10 +16,10 @@ namespace ConnectionSampleCode.Model
         [DisplayName("Category")]
         public string Category { get; set; }
 
-        [DisplayName("Created Date")]
+        [DisplayName("Created date")]
         public string CreatedDate { get; set; }
 
-        [DisplayName("L. Modified Date")]
+        [DisplayName("Last mod date")]
         public string LastModifiedDate { get; set; }
 
         public override string ToString()
