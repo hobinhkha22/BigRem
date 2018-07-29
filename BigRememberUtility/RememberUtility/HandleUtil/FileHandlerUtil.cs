@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
-using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
@@ -12,7 +12,7 @@ namespace ConnectionSampleCode.HandleUtil
     public class FileHandlerUtil : IFileHandle
     {
         public ConfigModel JsonModel;
-
+        
         private string _jsonObject;
 
         public void ReadFile(EnumFileConstant readEnumFile)
@@ -47,6 +47,7 @@ namespace ConnectionSampleCode.HandleUtil
             }
             catch (Exception e)
             {
+                Debug.WriteLine("[ReadFile] Error read file: " + e.Message);
                 Console.WriteLine("Error unexpected to read file: " + e.Message);
             }
         }
@@ -83,6 +84,7 @@ namespace ConnectionSampleCode.HandleUtil
             }
             catch (Exception e)
             {
+                Debug.WriteLine("[SaveFile] Error SaveFile: " + e.Message);
                 Console.WriteLine("Error unexpected to save file" + e.Message);
             }
         }

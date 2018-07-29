@@ -7,33 +7,60 @@ namespace ConnectionSampleCode.Extension
 {
     public static class PathHandle
     {
-        private static readonly string PathAtSlnFile = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))));
-        
         public static string GetPathOfFile(EnumFileConstant chooseModelForPath)
         {
-            var combinePath = "";
-            if (chooseModelForPath == EnumFileConstant.BOOKCONSTANT)
+            Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory; // Set current directory
+
+            var pathAtSlnFile = "";
+            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory());
+            if (directoryInfo.Parent != null && !directoryInfo.Parent.FullName.EndsWith("BigRememberGit"))
             {
-                combinePath = Path.Combine(PathAtSlnFile ?? throw new InvalidOperationException(), FileConstant.BookConstantPath);
+                var getFromToEnd = directoryInfo.FullName.Split('\\');
+                foreach (var item in getFromToEnd)
+                {
+                    if (item == "BigRememberGit")
+                    {
+                        pathAtSlnFile += item + "\\";
+                        break;
+                    }
+                    pathAtSlnFile += item + "\\";
+                }
             }
-            else if (chooseModelForPath == EnumFileConstant.ENTERTAINMENTCONSTAT)
+            else
             {
-                combinePath = Path.Combine(PathAtSlnFile, FileConstant.EntertainmentConstantPath);
-            }
-            else if (chooseModelForPath == EnumFileConstant.EVENTINYEAR)
-            {
-                combinePath = Path.Combine(PathAtSlnFile, FileConstant.EventInYearConstantPath);
-            }
-            else if (chooseModelForPath == EnumFileConstant.QUOTESCONSTANT)
-            {
-                combinePath = Path.Combine(PathAtSlnFile, FileConstant.QuotesConstantPath);
-            }
-            else if (chooseModelForPath == EnumFileConstant.USERLOGIN)
-            {
-                combinePath = Path.Combine(PathAtSlnFile, FileConstant.UserLoginPath);
+                pathAtSlnFile = directoryInfo.Parent?.FullName;
             }
 
+            var combinePath = "";
+
+            if (chooseModelForPath == EnumFileConstant.BOOKCONSTANT && pathAtSlnFile != null)
+            {
+                combinePath = Path.Combine(pathAtSlnFile,
+                    FileConstant.BookConstantPath);
+            }
+            else if (chooseModelForPath == EnumFileConstant.ENTERTAINMENTCONSTAT && pathAtSlnFile != null)
+            {
+                combinePath = Path.Combine(pathAtSlnFile,
+                    FileConstant.EntertainmentConstantPath);
+            }
+            else if (chooseModelForPath == EnumFileConstant.EVENTINYEAR && pathAtSlnFile != null)
+            {
+                combinePath = Path.Combine(pathAtSlnFile,
+                    FileConstant.EventInYearConstantPath);
+            }
+            else if (chooseModelForPath == EnumFileConstant.QUOTESCONSTANT && pathAtSlnFile != null)
+            {
+                combinePath = Path.Combine(pathAtSlnFile,
+                    FileConstant.QuotesConstantPath);
+            }
+            else if (chooseModelForPath == EnumFileConstant.USERLOGIN && pathAtSlnFile != null)
+            {
+                combinePath = Path.Combine(pathAtSlnFile,
+                    FileConstant.UserLoginPath);
+            }
             return combinePath;
         }
+
+
     }
 }

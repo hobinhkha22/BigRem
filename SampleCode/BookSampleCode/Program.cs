@@ -1,7 +1,5 @@
 ﻿using ConnectionSampleCode.HandleUtil;
 using System;
-using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using ConnectionSampleCode.Constant;
@@ -13,7 +11,7 @@ namespace BookSampleCode
 {
     public class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             var bookUtil = new BooksUtil();
 
