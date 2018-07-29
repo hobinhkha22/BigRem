@@ -71,6 +71,10 @@ namespace BigRememberGUI.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
+            // Get list book categories constant
+            var listConstantValue = typeof(CategoriesBookConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            ViewBag.EditListBook = listConstantValue;
             if (Session["Name"] == null || id == null) return RedirectToAction("Login", "Home");
             var tempBook = _booksUtil.FindBookByBookId(id);
             if (tempBook == null)

@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
+using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.HandleUtil;
 using ConnectionSampleCode.Model;
 
@@ -36,6 +38,10 @@ namespace BigRememberGUI.Controllers
         // GET: Entertainment/Create
         public ActionResult Create()
         {
+            var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            ViewBag.ListEntertainment = listConstantValue;
+
             if (Session["Name"] != null)
             {
                 return View();
@@ -60,6 +66,10 @@ namespace BigRememberGUI.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
+            var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            ViewBag.EditListEntertainment = listConstantValue;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
