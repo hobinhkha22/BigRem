@@ -78,7 +78,12 @@ namespace ConnectionSampleCode.HandleUtil
             var getCurrentEvent = _fileHandlerUtil.JsonModel.EventInYears.Find(x =>
                 string.Equals(x.EventName, eventName, StringComparison.CurrentCultureIgnoreCase));
 
-            if (getCurrentEvent == null) return false;
+            if (getCurrentEvent == null)
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.EVENTINYEAR);
+
+                return false;
+            }
 
             _fileHandlerUtil.JsonModel.EventInYears.Remove(getCurrentEvent);
 
