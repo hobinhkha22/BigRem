@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
@@ -86,6 +85,7 @@ namespace ConnectionSampleCode.HandleUtil
             {
                 _fileHandlerUtil.JsonModel.UserLogin.Remove(getUser);
                 _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+
                 return true;
             }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
@@ -92,6 +91,13 @@ namespace ConnectionSampleCode.HandleUtil
             var getQuote = _fileHandlerUtil.JsonModel.Quotes
                 .Find(q => string.Equals(q.QuotesName, quoteName, StringComparison.CurrentCultureIgnoreCase));
             _fileHandlerUtil.JsonModel.Quotes.Remove(getQuote);
+
+            if (getQuote == null)
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
+
+                return false;
+            }
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
 

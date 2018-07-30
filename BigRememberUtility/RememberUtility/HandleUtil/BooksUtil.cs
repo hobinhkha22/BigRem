@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;
@@ -88,7 +87,13 @@ namespace ConnectionSampleCode.HandleUtil
             // Make it all lower case words
             var getCurrentBook = _fileHandlerUtil.JsonModel.Books.
                 Find(x => string.Equals(x.BookName, bookName, StringComparison.CurrentCultureIgnoreCase));
+            if (getCurrentBook == null)
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+                return false;
+            }
             _fileHandlerUtil.JsonModel.Books.Remove(getCurrentBook);
+
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
             return true;
         }

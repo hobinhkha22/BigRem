@@ -94,6 +94,13 @@ namespace ConnectionSampleCode.HandleUtil
 
             var getEt = _fileHandlerUtil.JsonModel.Entertainment.
                 Find(e => string.Equals(e.EnterName, enterName, StringComparison.CurrentCultureIgnoreCase));
+
+            if (getEt == null)
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+
+                return false;
+            }
             _fileHandlerUtil.JsonModel.Entertainment.Remove(getEt);
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);

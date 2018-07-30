@@ -29,7 +29,7 @@ namespace EntertainmentSampleCode
                 switch (choose)
                 {
                     case 1: // add et
-                        foreach (var itemEt in etUtil.GetListEntertainments())
+                        foreach (var itemEt in etUtil.GetListEntertainments().GetRange(4, 3))
                         {
                             Console.WriteLine("Entertainment Name: " + itemEt.EnterName);
                             Console.WriteLine("Links: " + itemEt.Links);
@@ -80,7 +80,7 @@ namespace EntertainmentSampleCode
                         var result = etUtil.FindEntertainmentBy(findEtName);
                         if (result != null)
                         {
-                            HandleRandom.ChooseColorForString("--- Entertainment info ---", ConsoleColor.White);
+                            HandleRandom.ChooseColorForString("--- Entertainment info ---", ConsoleColor.DarkRed);
                             HandleRandom.ChooseColorForString("Found ET", ConsoleColor.Blue);
                             Console.WriteLine("Id: " + result.EnterId);
                             Console.WriteLine("Et Name: " + result.EnterName);
@@ -165,7 +165,8 @@ namespace EntertainmentSampleCode
 
             } while (choose != 0);
 
-            HandleRandom.ChooseColorForString("There is no option you chose.", ConsoleColor.Blue);
+            HandleRandom.ChooseColorForString(choose == 0 ? "Good bye" : "There is no option you chose.",
+                ConsoleColor.Blue);
             Thread.Sleep(1500);
         }
     }
