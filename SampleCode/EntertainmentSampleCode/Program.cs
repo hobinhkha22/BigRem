@@ -34,18 +34,21 @@ namespace EntertainmentSampleCode
                             Console.WriteLine("Entertainment Name: " + itemEt.EnterName);
                             Console.WriteLine("Links: " + itemEt.Links);
                             Console.WriteLine("Category: " + itemEt.Category);
+                            Console.WriteLine("Created date: " + itemEt.CreatedDate);
+                            Console.WriteLine("Last modified date: " + itemEt.LastModifiedDate);
                             Console.WriteLine("------------------------------");
                         }
                         break;
 
                     case 2: // add Entertainment
-                        Console.Write("ET name: ");
-                        var etName = Console.ReadLine();
-
                         Console.Write("Link: ");
                         var link = Console.ReadLine();
 
-                        Console.WriteLine("Types of Category");
+                        Console.Write("ET name: ");
+                        var etName = Console.ReadLine();
+
+                        HandleRandom.ChooseColorForString("Types of Category", ConsoleColor.DarkGreen);
+
                         string category;
                         var count = 1;
                         var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
@@ -77,12 +80,14 @@ namespace EntertainmentSampleCode
                         var result = etUtil.FindEntertainmentBy(findEtName);
                         if (result != null)
                         {
-                            Console.WriteLine("Entertainment info---");
+                            HandleRandom.ChooseColorForString("--- Entertainment info ---", ConsoleColor.White);
                             HandleRandom.ChooseColorForString("Found ET", ConsoleColor.Blue);
                             Console.WriteLine("Id: " + result.EnterId);
                             Console.WriteLine("Et Name: " + result.EnterName);
                             Console.WriteLine("Link: " + result.Links);
                             Console.WriteLine("Category: " + result.Category);
+                            Console.WriteLine("Created date: " + result.CreatedDate);
+                            Console.WriteLine("Last modeified date: " + result.LastModifiedDate);
                             Console.WriteLine("---------------------------");
 
                             break;
@@ -121,7 +126,7 @@ namespace EntertainmentSampleCode
                                 Console.WriteLine(counts++ + ". " + propertyInfo);
                             }
 
-                            Console.Write("Please choose a category to update: ");
+                            HandleRandom.ChooseColorForString("Please choose a category to update: ", ConsoleColor.DarkBlue);
                             var categoryToUpdate = Console.ReadLine();
 
                             if (categoryToUpdate != null)
@@ -142,7 +147,7 @@ namespace EntertainmentSampleCode
                         }
                         else
                         {
-                            HandleRandom.ChooseColorForString("Nothing found entertainment", ConsoleColor.DarkRed);
+                            HandleRandom.ChooseColorForString("Nothing found entertainment.", ConsoleColor.DarkRed);
                         }
 
                         break;
@@ -154,14 +159,14 @@ namespace EntertainmentSampleCode
                             HandleRandom.ChooseColorForString("Deleted successful", ConsoleColor.Blue);
                             break;
                         }
-                        HandleRandom.ChooseColorForString("Nothing entertainment name to delete", ConsoleColor.DarkRed);
+                        HandleRandom.ChooseColorForString("Nothing entertainment name to delete.", ConsoleColor.DarkRed);
                         break;
                 }
 
             } while (choose != 0);
 
-            HandleRandom.ChooseColorForString("There is no option you chose", ConsoleColor.Blue);
-            Thread.Sleep(2000);
+            HandleRandom.ChooseColorForString("There is no option you chose.", ConsoleColor.Blue);
+            Thread.Sleep(1500);
         }
     }
 }
