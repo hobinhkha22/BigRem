@@ -22,7 +22,6 @@ namespace UserSampleCode
                 Console.WriteLine("3. Find user");
                 Console.WriteLine("4. Upate user");
                 Console.WriteLine("5. Delete user");
-                Console.WriteLine("6. Test function");
                 Console.WriteLine("0. Exit");
                 Console.Write("Choose: ");
                 choose = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
@@ -53,7 +52,10 @@ namespace UserSampleCode
                     case 3: // find user
                         Console.Write("User name: ");
                         var findUserName = Console.ReadLine();
-                        var result = userUtil.CheckUser(findUserName);
+                        Console.Write("Password: ");
+                        var findPassword = Console.ReadLine();
+
+                        var result = userUtil.CheckUser(findUserName, findPassword);
                         if (result != null)
                         {
                             HandleRandom.ChooseColorForString("Found User", ConsoleColor.Blue);
@@ -72,10 +74,12 @@ namespace UserSampleCode
                     case 4: // update user
                         Console.Write("Find user to UPDATE: ");
                         var placeHoldUsername = Console.ReadLine();
+                        Console.Write("Find password: ");
+                        var placeHoldPasword = Console.ReadLine();
 
-                        if (userUtil.CheckUser(placeHoldUsername) != null)
+                        if (userUtil.CheckUser(placeHoldUsername, placeHoldPasword) != null)
                         {
-                            var currentUserResult = userUtil.CheckUser(placeHoldUsername);
+                            var currentUserResult = userUtil.CheckUser(placeHoldUsername, placeHoldPasword);
                             HandleRandom.ChooseColorForString("Found User", ConsoleColor.Blue);
                             Console.WriteLine("Info User---");
                             Console.WriteLine("Id: " + currentUserResult.UserId);
@@ -111,15 +115,6 @@ namespace UserSampleCode
                             break;
                         }
                         HandleRandom.ChooseColorForString("Nothing user name to delete", ConsoleColor.DarkRed);
-                        break;
-                    case 6:
-                        Console.Write("");
-                        var usernames = Console.ReadLine();
-                        var resultU = userUtil.CheckUser(usernames);
-                        Console.WriteLine(resultU.Username);
-                        Console.WriteLine(resultU.UserId);
-                        Console.WriteLine("Password decrypt: " + HandleRandom.Decrypt(resultU.PasswordEncrypt));
-
                         break;
                 }
 
