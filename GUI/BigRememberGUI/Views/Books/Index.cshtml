@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ConnectionSampleCode.Model.Books>
+﻿@model PagedList.IPagedList<ConnectionSampleCode.Model.Books>
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -13,22 +14,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BookId)
+            @Html.ActionLink("Book Id", "Index", new { sortingOrder = ViewBag.BookId, filterValue = ViewBag.FilterValue })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BookName)
+            @Html.ActionLink("Book Name", "Index", new { sortingOrder = ViewBag.BookName, filterValue = ViewBag.FilterValue })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.ActionLink("Author", "Index", new { sortingOrder = ViewBag.Author, filterValue = ViewBag.FilterValue })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.ActionLink("Category", "Index", new { sortingOrder = ViewBag.Category, filterValue = ViewBag.FilterValue })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            @Html.ActionLink("Created Date", "Index", new { sortingOrder = ViewBag.CreatedDate, filterValue = ViewBag.FilterValue })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastModifiedDate)
+            @Html.ActionLink("Last Modified Date", "Index", new { sortingOrder = ViewBag.LastModifiedDate, filterValue = ViewBag.FilterValue })
         </th>
         <th></th>
     </tr>
@@ -61,7 +62,19 @@
             </td>
         </tr>
     }
-    
+
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pageNo => Url.Action("Index",
+    new { pageNo, sortingOrder = ViewBag.CurrentSortOrder, filterValue = ViewBag.FilterValue }),
+    new PagedListRenderOptions {
+        LinkToFirstPageFormat = "<< First",
+        LinkToPreviousPageFormat = "Previous Page",
+        LinkToNextPageFormat = "Next Page",
+        LinkToLastPageFormat = "Last >>",
+        MaximumPageNumbersToDisplay = 5,
+        DisplayEllipsesWhenNotShowingAllPageNumbers = true
+    })
 
 <h3>@Html.ActionLink("Log out", "Logout", "Home")</h3>

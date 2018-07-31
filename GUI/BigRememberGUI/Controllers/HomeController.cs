@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -27,6 +28,9 @@ namespace BigRememberGUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLogin userLogin)
         {
+            Debug.WriteLine("[Login] Username: " + userLogin.Username);
+            Debug.WriteLine("[Login] Password: " + userLogin.PasswordEncrypt);
+
             if (ModelState.IsValid)
             {
                 var checkName = _userUtil.CheckUser(userLogin.Username, userLogin.PasswordEncrypt);
@@ -42,7 +46,6 @@ namespace BigRememberGUI.Controllers
 
                     System.Web.HttpContext.Current.Session["DetailUser"] = checkName;
                     System.Web.HttpContext.Current.Session["UserNameCookie"] = cookie.Value;
-
 
                     return RedirectToAction(checkName.UserRole == UserRoleEnum.NormalUser ? "TakePlace" : "Login");
                 }
