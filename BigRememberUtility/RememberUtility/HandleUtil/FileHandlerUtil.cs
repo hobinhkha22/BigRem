@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
+using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;
+using log4net;
 using Newtonsoft.Json;
 
 namespace ConnectionSampleCode.HandleUtil
@@ -12,43 +13,52 @@ namespace ConnectionSampleCode.HandleUtil
     public class FileHandlerUtil : IFileHandle
     {
         public ConfigModel JsonModel;
-        
+
         private string _jsonObject;
+
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(FileHandlerUtil));
 
         public void ReadFile(EnumFileConstant readEnumFile)
         {
             try
             {
+                Logger.Info("[ReadFile] Begin reading file");
+
                 if (readEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
+                    Logger.Info("[ReadFile] Reading Book db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
                 {
+                    Logger.Info("[ReadFile] Reading Entertainment db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.QUOTESCONSTANT)
                 {
+                    Logger.Info("[ReadFile] Reading Quote db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.EVENTINYEAR)
                 {
+                    Logger.Info("[ReadFile] Reading Event in year db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.USERLOGIN)
                 {
+                    Logger.Info("[ReadFile] Reading User db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
+                Logger.Info("[ReadFile] Ending reading file");
             }
             catch (Exception e)
             {
-                Debug.WriteLine("[ReadFile] Error read file: " + e.Message);
-                Console.WriteLine("Error unexpected to read file: " + e.Message);
+                Logger.Error($"[ReadFile] Unexpected error: {e.Message}");
             }
         }
 
@@ -56,6 +66,7 @@ namespace ConnectionSampleCode.HandleUtil
         {
             try
             {
+                Logger.Info("[SaveFile] Begin Save file db");
                 if (saveEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
@@ -81,11 +92,12 @@ namespace ConnectionSampleCode.HandleUtil
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented);
                     File.WriteAllText(PathHandle.GetPathOfFile(EnumFileConstant.USERLOGIN), _jsonObject);
                 }
+
+                Logger.Info("[SaveFile] Ending Save file db");
             }
             catch (Exception e)
             {
-                Debug.WriteLine("[SaveFile] Error SaveFile: " + e.Message);
-                Console.WriteLine("Error unexpected to save file" + e.Message);
+                Logger.Error($"[SaveFile] Unexpected error: {e.Message}");
             }
         }
 

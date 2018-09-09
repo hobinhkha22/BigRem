@@ -71,6 +71,7 @@
     <Compile Include="HandleUtil\EntertainmentUtil.cs" />
     <Compile Include="HandleUtil\EvenInYearUtil.cs" />
     <Compile Include="HandleUtil\FileHandlerUtil.cs" />
+    <Compile Include="HandleUtil\LoggerUtil.cs" />
     <Compile Include="HandleUtil\QuoteUtil.cs" />
     <Compile Include="HandleUtil\UserUtil.cs" />
     <Compile Include="Interface\IEntertainment.cs" />
@@ -96,6 +97,9 @@
     <None Include="JsonDb\EventInYear.json" />
     <None Include="JsonDb\Quotes.json" />
     <None Include="JsonDb\User.json" />
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

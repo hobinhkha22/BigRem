@@ -6,13 +6,13 @@ using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Model;
 
-
 namespace BookSampleCode
 {
     public class Program
     {
         private static void Main()
         {
+            LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName, FileConstant.LoggerName);
             var bookUtil = new BooksUtil();
 
             int choose;
