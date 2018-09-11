@@ -16,5 +16,7 @@ namespace ConnectionSampleCode.Interface
         bool UpdateBook(string currentBookName, string bookName, string author, string category);
 
         List<Books> GetListBooks();
+
+        void SaveBookToExcel(string filePath, string tableName);
     }
 }

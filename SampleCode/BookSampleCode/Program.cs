@@ -1,15 +1,18 @@
 ﻿using ConnectionSampleCode.HandleUtil;
 using System;
+using System.IO;
 using System.Text;
 using System.Threading;
 using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.Model;
+using System.Windows.Forms;
 
 namespace BookSampleCode
 {
     public class Program
     {
+        [STAThread]
         private static void Main()
         {
             LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName, FileConstant.LoggerName);
@@ -24,6 +27,7 @@ namespace BookSampleCode
                 Console.WriteLine("3. Find book");
                 Console.WriteLine("4. Delete book");
                 Console.WriteLine("5. Upate book");
+                Console.WriteLine("6. Save book to Excel");
                 Console.WriteLine("0. Exit");
                 Console.Write("Choose: ");
                 choose = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
@@ -150,6 +154,19 @@ namespace BookSampleCode
                         {
                             HandleRandom.ChooseColorForString("Nothing found book", ConsoleColor.DarkRed);
                         }
+                        break;
+                    case 6:// save book to excel
+                        //var fbd = new FolderBrowserDialog();
+                        var saveFile = new SaveFileDialog();
+                        Console.Write("Table Name: ");
+                        var tableName = Console.ReadLine();
+                        var filePath = "";
+                        if (saveFile.ShowDialog() == DialogResult.OK)
+                        {
+                            filePath = Path.GetFullPath(saveFile.FileName);
+                        }
+
+                        bookUtil.SaveBookToExcel(filePath, tableName);
                         break;
                 }
 

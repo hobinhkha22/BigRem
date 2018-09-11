@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;
@@ -108,6 +107,15 @@ namespace ConnectionSampleCode.HandleUtil
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
 
             return list;
+        }
+
+        public void SaveBookToExcel(string filePath, string tableName)
+        {
+            _fileHandlerUtil.ReadFile(EnumFileConstant.BOOKCONSTANT);
+
+            _fileHandlerUtil.SaveFileTo(filePath, tableName);
+
+            _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
         }
     }
 }
