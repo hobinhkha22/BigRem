@@ -30,31 +30,31 @@ namespace ConnectionSampleCode.HandleUtil
 
                 if (readEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
-                    Logger.Info("[ReadFile] Reading Book db");
+                    Logger.Info($"[ReadFile] Reading {nameof(Books)} db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
                 {
-                    Logger.Info("[ReadFile] Reading Entertainment db");
+                    Logger.Info($"[ReadFile] Reading {nameof(Entertainment)} db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.QUOTESCONSTANT)
                 {
-                    Logger.Info("[ReadFile] Reading Quote db");
+                    Logger.Info($"[ReadFile] Reading ${nameof(Quotes)} db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.EVENTINYEAR)
                 {
-                    Logger.Info("[ReadFile] Reading Event in year db");
+                    Logger.Info($"[ReadFile] Reading ${nameof(EventInYear)} db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
                 else if (readEnumFile == EnumFileConstant.USERLOGIN)
                 {
-                    Logger.Info("[ReadFile] Reading User db");
+                    Logger.Info($"[ReadFile] Reading ${nameof(UserLogin)} db");
                     var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
                     JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                 }
@@ -119,7 +119,7 @@ namespace ConnectionSampleCode.HandleUtil
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                 wb.Style.Font.Bold = true;
                 
-                // Save file
+                // Save file as excel
                 wb.SaveAs(filePath);
             }
 

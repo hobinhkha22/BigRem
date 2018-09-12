@@ -9,20 +9,21 @@ namespace ConnectionSampleCode.HandleUtil
 {
     public class LoggerUtil
     {
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(LoggerUtil));
-
+        private static readonly ILog Logs = LogManager.GetLogger(typeof(LoggerUtil));
+        //private static readonly ILog Logs = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod
+        //    ().DeclaringType);
         public static void HandleLogPath(string folderName)
         {
             var datetimeNow = $"{DateTime.Now:MMMM dd, yyyy}";
-
+            
             GlobalContext.Properties[FileConstant.LoggerFileName] = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 FileConstant.LoggerFolderName + "\\" + datetimeNow);
 
-            Logger.Info($"[HandlePathLog] Path combine: {Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), FileConstant.LoggerFolderName + "\\" + datetimeNow)}");
-
+            Logs.Info($"[HandlePathLog] Path combine: {Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), FileConstant.LoggerFolderName + "\\" + datetimeNow)}");
+            
             var executePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            Logger.Debug($"[HandlePathLog] Execute path: {executePath}");
+            Logs.Debug($"[HandlePathLog] Execute path: {executePath}");
 
             if (executePath == null) return;
 
@@ -31,9 +32,9 @@ namespace ConnectionSampleCode.HandleUtil
             if (!File.Exists(executePath)) return;
 
             var fi = new FileInfo(executePath);
-            Logger.Debug($"[HandlePathLog] fileinfo directory: {fi.Directory}");
-            Logger.Debug($"[HandlePathLog] fileinfo directory name: {fi.DirectoryName}");
-            XmlConfigurator.ConfigureAndWatch(fi);
+            Logs.Debug($"[HandlePathLog] fileinfo directory: {fi.Directory}");
+            Logs.Debug($"[HandlePathLog] fileinfo directory name: {fi.DirectoryName}");
+            XmlConfigurator.Configure(fi);
         }
 
     }

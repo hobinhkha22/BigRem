@@ -4,12 +4,14 @@ using System.Linq;
 using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Interface;
 using ConnectionSampleCode.Model;
+using log4net;
 
 namespace ConnectionSampleCode.HandleUtil
 {
     public class BooksUtil : IBooks
     {
         private readonly FileHandlerUtil _fileHandlerUtil;
+        private static readonly ILog Logs = LogManager.GetLogger(typeof(BooksUtil));
 
         public BooksUtil()
         {
@@ -19,9 +21,11 @@ namespace ConnectionSampleCode.HandleUtil
         public void AddBook(Books books)
         {
             _fileHandlerUtil.ReadFile(EnumFileConstant.BOOKCONSTANT);
-            
+
             books.CreatedDate = $"{DateTime.Now:MMMM dd, yyyy}";
             _fileHandlerUtil.JsonModel.Books.Add(books);
+
+            Logs.Info($"[AddBook] Adding '{books.BookName}' successful");
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
         }
@@ -55,10 +59,13 @@ namespace ConnectionSampleCode.HandleUtil
 
                 _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
 
+                Logs.Info($"[UpdateBook] Update '{bookName}' successful");
+
                 return true;
             }
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+
             return false;
         }
 
@@ -90,11 +97,15 @@ namespace ConnectionSampleCode.HandleUtil
             if (getCurrentBook == null)
             {
                 _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+
                 return false;
             }
             _fileHandlerUtil.JsonModel.Books.Remove(getCurrentBook);
 
+            Logs.Info($"[DeleteBook] Delete {bookName} successful");
+
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+
             return true;
         }
 
@@ -113,8 +124,9 @@ namespace ConnectionSampleCode.HandleUtil
         {
             _fileHandlerUtil.ReadFile(EnumFileConstant.BOOKCONSTANT);
 
-            _fileHandlerUtil.SaveFileTo(filePath, tableName);
-
+            _fileHandlerUtil.SaveFileTo(
+                filePath.ToLower().EndsWith(".xlsx") ? filePath : filePath.Insert(filePath.Length, ".xlsx"), tableName);
+            
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
         }
     }
