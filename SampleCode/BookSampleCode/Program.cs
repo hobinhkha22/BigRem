@@ -15,7 +15,7 @@ namespace BookSampleCode
         [STAThread]
         private static void Main()
         {
-            LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName, FileConstant.LoggerName);
+            LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName);
             var bookUtil = new BooksUtil();
 
             int choose;

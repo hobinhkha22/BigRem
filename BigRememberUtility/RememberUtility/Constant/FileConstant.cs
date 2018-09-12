@@ -11,7 +11,6 @@
         // Logger name
         public const string LogNetFile = "log4net.config";
         public const string LoggerFileName = "LogFileName";
-        public const string LoggerFolderName = "HoBinhKha";
-        public const string LoggerName = "Mylogger";
+        public const string LoggerFolderName = "RememberList";
     }
 }
