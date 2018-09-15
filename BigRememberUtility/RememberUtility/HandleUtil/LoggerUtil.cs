@@ -10,8 +10,7 @@ namespace ConnectionSampleCode.HandleUtil
     public class LoggerUtil
     {
         private static readonly ILog Logs = LogManager.GetLogger(typeof(LoggerUtil));
-        //private static readonly ILog Logs = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod
-        //    ().DeclaringType);
+        
         public static void HandleLogPath(string folderName)
         {
             var datetimeNow = $"{DateTime.Now:MMMM dd, yyyy}";

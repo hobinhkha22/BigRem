@@ -1,6 +1,7 @@
 ﻿using ConnectionSampleCode.HandleUtil;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using ConnectionSampleCode.Constant;
@@ -19,18 +20,21 @@ namespace BookSampleCode
             var bookUtil = new BooksUtil();
 
             int choose;
-            do
+            int tempChoose;
+
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine("1. Get list books");
+            Console.WriteLine("2. Add book");
+            Console.WriteLine("3. Find book");
+            Console.WriteLine("4. Delete book");
+            Console.WriteLine("5. Upate book");
+            Console.WriteLine("6. Save book to Excel");
+            Console.WriteLine("0. Exit");
+            Console.Write("Choose: ");
+
+            while (int.TryParse(Console.ReadLine(), out tempChoose))
             {
-                Console.OutputEncoding = Encoding.UTF8;
-                Console.WriteLine("1. Get list books");
-                Console.WriteLine("2. Add book");
-                Console.WriteLine("3. Find book");
-                Console.WriteLine("4. Delete book");
-                Console.WriteLine("5. Upate book");
-                Console.WriteLine("6. Save book to Excel");
-                Console.WriteLine("0. Exit");
-                Console.Write("Choose: ");
-                choose = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+                choose = tempChoose;
 
                 switch (choose)
                 {
@@ -156,7 +160,6 @@ namespace BookSampleCode
                         }
                         break;
                     case 6:// save book to excel
-                        //var fbd = new FolderBrowserDialog();
                         var saveFile = new SaveFileDialog();
                         Console.Write("Table Name: ");
                         var tableName = Console.ReadLine();
@@ -170,10 +173,25 @@ namespace BookSampleCode
                         break;
                 }
 
-            } while (choose != 0);
+                if (choose == 0)
+                {
+                    HandleRandom.ChooseColorForString("There is no option you chose", ConsoleColor.Blue);
+                    Thread.Sleep(2000);
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("1. Get list books");
+                    Console.WriteLine("2. Add book");
+                    Console.WriteLine("3. Find book");
+                    Console.WriteLine("4. Delete book");
+                    Console.WriteLine("5. Upate book");
+                    Console.WriteLine("6. Save book to Excel");
+                    Console.WriteLine("0. Exit");
+                    Console.Write("Choose: ");
+                }
 
-            HandleRandom.ChooseColorForString("There is no option you chose", ConsoleColor.Blue);
-            Thread.Sleep(2000);
+            }
         }
     }
 }
