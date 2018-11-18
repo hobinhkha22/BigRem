@@ -22,7 +22,7 @@ namespace ConnectionSampleCode.Extension
 
         public static void ChooseColorForString(string message, ConsoleColor consoleColor)
         {
-            Console.BackgroundColor = consoleColor;
+            Console.ForegroundColor = consoleColor;
             Console.WriteLine(message);
             Console.ResetColor();
         }

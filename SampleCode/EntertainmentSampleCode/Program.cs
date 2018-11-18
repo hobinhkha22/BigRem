@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 using ConnectionSampleCode.Constant;
 using ConnectionSampleCode.Extension;
 using ConnectionSampleCode.HandleUtil;
@@ -10,11 +13,12 @@ namespace EntertainmentSampleCode
 {
     public class Program
     {
+        [STAThread]
         private static void Main()
         {
             var etUtil = new EntertainmentUtil();
             int choose;
-
+            Console.OutputEncoding = Encoding.UTF8;
             do
             {
                 Console.WriteLine("1. Get list entertainments");
@@ -22,6 +26,7 @@ namespace EntertainmentSampleCode
                 Console.WriteLine("3. Find entertainment");
                 Console.WriteLine("4. Update entertainment");
                 Console.WriteLine("5. Delete entertainment");
+                Console.WriteLine("6. Export to excel");
                 Console.WriteLine("0. Exit");
                 Console.Write("Choose: ");
                 choose = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
@@ -161,11 +166,23 @@ namespace EntertainmentSampleCode
                         }
                         HandleRandom.ChooseColorForString("Nothing entertainment name to delete.", ConsoleColor.DarkRed);
                         break;
+                    case 6: // export to excel file
+                        var saveFile = new SaveFileDialog();
+                        Console.Write("Table name: ");
+                        var tableName = Console.ReadLine();
+                        var filePath = "";
+                        if (saveFile.ShowDialog() == DialogResult.OK)
+                        {
+                            filePath = Path.GetFullPath(saveFile.FileName);
+                        }
+
+                        etUtil.SaveFileTo(filePath, tableName);
+                        break;
                 }
 
             } while (choose != 0);
 
-            HandleRandom.ChooseColorForString(choose == 0 ? "Good bye" : "There is no option you chose.",
+            HandleRandom.ChooseColorForString(choose == 0 ? "Goodbye" : "There is no any option you choose.",
                 ConsoleColor.Blue);
             Thread.Sleep(1500);
         }

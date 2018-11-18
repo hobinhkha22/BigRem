@@ -12,5 +12,12 @@
         public const string LogNetFile = "log4net.config";
         public const string LoggerFileName = "LogFileName";
         public const string LoggerFolderName = "RememberList";
+
+        // Json file
+        public const string BookJson = "Books.json";
+        public const string EntertainmentJson = "Entertainment.json";
+        public const string QuotesJson = "Quotes.json";
+        public const string EventInYearJson = "EventInYear.json";
+        public const string UserJson = "User.json";
     }
 }

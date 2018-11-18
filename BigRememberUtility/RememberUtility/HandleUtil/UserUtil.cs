@@ -15,12 +15,11 @@ namespace ConnectionSampleCode.HandleUtil
         public UserUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.USERLOGIN);
         }
 
         public void AddUser(UserLogin userLogin)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
-
             userLogin.CreatedDate = $"{DateTime.Now:MMMM dd,yyyy}";
             userLogin.UserId = HandleRandom.RandomString(10);
             HandleRandom.Encrypt(userLogin.PasswordEncrypt);
@@ -33,8 +32,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public UserLogin CheckUser(string username, string password)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
-
             var findUser = _fileHandlerUtil.JsonModel.UserLogin.
                 Find(x => string.Equals(x.Username, username, StringComparison.CurrentCultureIgnoreCase) &&
                           string.Equals(HandleRandom.Decrypt(x.PasswordEncrypt), password, StringComparison.CurrentCultureIgnoreCase));
@@ -53,8 +50,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public bool UpdateUser(string currentUserName, string newUserName, string newPassword)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
-
             var getCurrentUser = _fileHandlerUtil.JsonModel.UserLogin.
                 Find(x => string.Equals(x.Username, currentUserName, StringComparison.CurrentCultureIgnoreCase));
             var indexOfUser = _fileHandlerUtil.JsonModel.UserLogin.IndexOf(getCurrentUser);
@@ -75,7 +70,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public bool DeleteUser(string username)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
             if (username == null) return false;
 
             var getUser = _fileHandlerUtil.JsonModel.UserLogin.Find(x =>
@@ -95,8 +89,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public List<UserLogin> GetListUsers()
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.USERLOGIN);
-
             var listUser = _fileHandlerUtil.JsonModel.UserLogin.ToList();
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);

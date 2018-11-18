@@ -20,5 +20,7 @@ namespace ConnectionSampleCode.Interface
         bool DeleteEntertainment(string enterName);
 
         List<Entertainment> GetListEntertainments();
+
+        void SaveFileTo(string filePath, string tableName);
     }
 }

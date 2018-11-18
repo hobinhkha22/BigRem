@@ -13,5 +13,6 @@
         public const string Dictionary = "Dictionary";
         public const string History = "History";
         public const string Literature = "Literature";
+        public const string Motivational = "Motivational";
     }
 }

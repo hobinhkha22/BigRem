@@ -17,12 +17,11 @@ namespace ConnectionSampleCode.HandleUtil
         public EvenInYearUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.EVENTINYEAR);
         }
 
         public void AddEvent(EventInYear eventInYear)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.EVENTINYEAR);
-
             eventInYear.CreatedDate = $"{DateTime.Now:MMMM dd, yyyy}";
             _fileHandlerUtil.JsonModel.EventInYears.Add(eventInYear);
 
@@ -31,8 +30,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public EventInYear FindEventInYear(string eventName)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.EVENTINYEAR);
-
             var getEvent = _fileHandlerUtil.JsonModel.EventInYears
                 .Find(x => string.Equals(x.EventName, eventName, StringComparison.CurrentCultureIgnoreCase));
 
@@ -45,8 +42,6 @@ namespace ConnectionSampleCode.HandleUtil
         public bool UpdateEvent(string currentEventName, string newEventName, string newCountryOccured, string newEventLink,
             string newEventDate, string newShortDescribe)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.EVENTINYEAR);
-
             var getCurrentEvent = _fileHandlerUtil.JsonModel.EventInYears.
                 Find(x => string.Equals(x.EventName, currentEventName, StringComparison.CurrentCultureIgnoreCase));
             var indexOfEvent = _fileHandlerUtil.JsonModel.EventInYears.IndexOf(getCurrentEvent);
@@ -71,8 +66,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public bool DeleteEvent(string eventName)
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.EVENTINYEAR);
-
             if (eventName == null) return false;
 
             var getCurrentEvent = _fileHandlerUtil.JsonModel.EventInYears.Find(x =>
@@ -94,8 +87,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public List<EventInYear> GetEventInYears()
         {
-            _fileHandlerUtil.ReadFile(EnumFileConstant.EVENTINYEAR);
-
             var list = _fileHandlerUtil.JsonModel.EventInYears.ToList();
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.EVENTINYEAR);

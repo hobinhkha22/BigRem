@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ConnectionSampleCode.Enum;
 using ConnectionSampleCode.Model;
 
 namespace ConnectionSampleCode.Interface
@@ -18,5 +19,9 @@ namespace ConnectionSampleCode.Interface
         List<Books> GetListBooks();
 
         void SaveBookToExcel(string filePath, string tableName);
+
+        void SaveBookDb();
+
+        bool CreateJsonDb(EnumFileConstant enumFileConstant);
     }
 }

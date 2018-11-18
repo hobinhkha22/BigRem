@@ -1,7 +1,6 @@
 ﻿using ConnectionSampleCode.HandleUtil;
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using ConnectionSampleCode.Constant;
@@ -16,19 +15,22 @@ namespace BookSampleCode
         [STAThread]
         private static void Main()
         {
+            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.UTF8;
+            
             LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName);
             var bookUtil = new BooksUtil();
 
             int choose;
             int tempChoose;
 
-            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("1. Get list books");
             Console.WriteLine("2. Add book");
             Console.WriteLine("3. Find book");
             Console.WriteLine("4. Delete book");
             Console.WriteLine("5. Upate book");
             Console.WriteLine("6. Save book to Excel");
+            Console.WriteLine("7. Save book Model to db");
             Console.WriteLine("0. Exit");
             Console.Write("Choose: ");
 
@@ -42,7 +44,8 @@ namespace BookSampleCode
 
                         foreach (var itemBook in bookUtil.GetListBooks())
                         {
-                            Console.WriteLine("Book Name: " + itemBook.BookName);
+                            Console.WriteLine("Book Id: " + itemBook.BookId);
+                            HandleRandom.ChooseColorForString($"Book name: {itemBook.BookName}", ConsoleColor.Green);
                             Console.WriteLine("Author: " + itemBook.Author);
                             Console.WriteLine("Category: " + itemBook.Category);
                             Console.WriteLine("-----------------------------");
@@ -79,7 +82,7 @@ namespace BookSampleCode
                         bookUtil.AddBook(new Books() { BookId = HandleRandom.RandomString(8), BookName = bookName, Author = author, Category = category });
                         HandleRandom.ChooseColorForString("Adding successful", ConsoleColor.Blue);
                         break;
-                    case 3: // find book
+                    case 3: // find book                        
                         Console.Write("Book name: ");
                         var findBookName = Console.ReadLine();
                         var result = bookUtil.FindBookBy(findBookName);
@@ -98,12 +101,22 @@ namespace BookSampleCode
                     case 4:
                         Console.Write("Book name to delete: ");
                         var findBookToDelete = Console.ReadLine();
-                        if (bookUtil.DeleteBook(findBookToDelete))
+                        Console.WriteLine($"Are you sure wants to delete '{findBookToDelete}'");
+                        Console.Write("Y/n? ");
+                        var yesNoQuestion = Console.ReadLine();
+
+                        if (yesNoQuestion.ToLower() == "y")
                         {
-                            HandleRandom.ChooseColorForString("Deleted successful", ConsoleColor.Blue);
+                            if (bookUtil.DeleteBook(findBookToDelete))
+                            {
+                                HandleRandom.ChooseColorForString("Deleted successful", ConsoleColor.Blue);
+                                break;
+                            }
+
+                            HandleRandom.ChooseColorForString("Nothing book name to delete", ConsoleColor.DarkRed);
                             break;
                         }
-                        HandleRandom.ChooseColorForString("Nothing book name to delete", ConsoleColor.DarkRed);
+
                         break;
                     case 5: // update book
                         Console.Write("Find book to UPDATE: ");
@@ -170,6 +183,9 @@ namespace BookSampleCode
                         }
 
                         bookUtil.SaveBookToExcel(filePath, tableName);
+                        break;
+                    case 7:
+                        // Test a request                        
                         break;
                 }
 
