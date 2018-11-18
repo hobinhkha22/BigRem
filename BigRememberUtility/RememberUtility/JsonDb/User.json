@@ -1,0 +1,32 @@
+{
+  "Books": null,
+  "Entertainment": null,
+  "Quotes": null,
+  "EventInYears": null,
+  "UserLogin": [
+    {
+      "UserId": "5a6r8xa153",
+      "Username": "user01",
+      "PasswordEncrypt": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmK1gRrnxfkSXojzhpDzBYgAAAAACAAAAAAAQZgAAAAEAACAAAAAdEAWkSdmZCb/oyBNkavebIFMvgWeT3lLYSw6h5eBAGwAAAAAOgAAAAAIAACAAAACYoXUR9NYYah8UIBBqFLDWv8Ji0ITWsLR43Eel2Acw+yAAAADSZGDPXSOkySkQFeptIFq7eV435EpwSGw1WVnDZ7Gz1UAAAAAmnOlimqdQ70PgJhg5rYJ9DAldIsQ+/BmPb+hUxu80yogbzuejUfwZy3LN0jQnVCq8HFPmVJNY6PUZ31WQcvws",
+      "CreatedDate": null,
+      "LastModifiedDate": "July 06, 2018",
+      "UserRole": 0
+    },
+    {
+      "UserId": "s5g6q534gt",
+      "Username": "admin1",
+      "PasswordEncrypt": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmK1gRrnxfkSXojzhpDzBYgAAAAACAAAAAAAQZgAAAAEAACAAAACJqFCueye+y9XS1BPS6OtbBKdtocywAJfQehxPwAkymwAAAAAOgAAAAAIAACAAAAAWXZIFs/oE2CBn8+RwwLeB1BZ+y32O7uMj6KQFwesKphAAAACRTS33AVk5uKn4zryJOu5nQAAAAC2sjDHUcWF5nabhXJ/W+fCMpFmb+e3+xJZKqqT9UpgNPSyZIHPtJkxOiRGjitBI0GO1wZBl2Fh533rQakpiahw=",
+      "CreatedDate": null,
+      "LastModifiedDate": "July 06, 2018",
+      "UserRole": 1
+    },
+    {
+      "UserId": "5s9r5rt2h5",
+      "Username": "specialadmin",
+      "PasswordEncrypt": "AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAmK1gRrnxfkSXojzhpDzBYgAAAAACAAAAAAAQZgAAAAEAACAAAACcRlOPEs/vs+v31yZuU5E34z6bdF8xUDyqkZF7lyQC/QAAAAAOgAAAAAIAACAAAACMbqI+FOw3mGffFIvVBQptKmdtgac5lM0NQBniAPlTpyAAAAAAKBILKELlZxOCVP1k5fe4yHX+DvR1Qj83jThU6HohkkAAAACfPnIoatuKzZycccLC0PFeFjSkw2+15ujN6VB7fvW1n7vAucXGexB6LW9UKTTl9cvh6Ie1JcOS621dF/KZMPmb",
+      "CreatedDate": null,
+      "LastModifiedDate": "July 06, 2018",
+      "UserRole": 2
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<ConnectionSampleCode.Model.Books>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">List Books</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Book Id", "Index", new { sortingOrder = ViewBag.BookId, filterValue = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Book Name", "Index", new { sortingOrder = ViewBag.BookName, filterValue = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Author", "Index", new { sortingOrder = ViewBag.Author, filterValue = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Category", "Index", new { sortingOrder = ViewBag.Category, filterValue = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Created Date", "Index", new { sortingOrder = ViewBag.CreatedDate, filterValue = ViewBag.FilterValue })
+        </th>
+        <th>
+            @Html.ActionLink("Last Modified Date", "Index", new { sortingOrder = ViewBag.LastModifiedDate, filterValue = ViewBag.FilterValue })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifiedDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Books", new { id = item.BookId }, null) |
+                @Html.ActionLink("Details", "Details", "Books", new { id = item.BookId }, null) |
+                @Html.ActionLink("Delete", "Delete", "Books", new { id = item.BookId }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, pageNo => Url.Action("Index",
+    new { pageNo, sortingOrder = ViewBag.CurrentSortOrder, filterValue = ViewBag.FilterValue }),
+    new PagedListRenderOptions {
+        LinkToFirstPageFormat = "<< First",
+        LinkToPreviousPageFormat = "Previous Page",
+        LinkToNextPageFormat = "Next Page",
+        LinkToLastPageFormat = "Last >>",
+        MaximumPageNumbersToDisplay = 5,
+        DisplayEllipsesWhenNotShowingAllPageNumbers = true
+    })
+
+<h3>@Html.ActionLink("Log out", "Logout", "Home")</h3>

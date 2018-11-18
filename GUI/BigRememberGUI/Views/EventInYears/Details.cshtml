@@ -1,0 +1,82 @@
+﻿@model ConnectionSampleCode.Model.EventInYear
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EventYearId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventYearId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryOccured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryOccured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventLink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventLink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDescribe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDescribe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", "EventInYears", new {  id = Model.EventYearId }, null)|
+    @Html.ActionLink("Back to List", "Index", "EventInYears")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ConnectionSampleCode.Model.Entertainment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">List Entertainments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EnterId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnterName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Links)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModifiedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnterId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnterName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Links)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModifiedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Entertainment", new { id=item.EnterId  }, null) |
+            @Html.ActionLink("Details", "Details", "Entertainment", new { id = item.EnterId }, null) |
+            @Html.ActionLink("Delete", "Delete", "Entertainment", new { id = item.EnterId }, null)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ConnectionSampleCode.Model.EventInYear>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">List Events in year</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventYearId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryOccured)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventLink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortDescribe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModifiedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventYearId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryOccured)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortDescribe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModifiedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "EventInYears", new {  id=item.EventYearId },null) |
+            @Html.ActionLink("Details", "Details", "EventInYears", new { id = item.EventYearId }, null) |
+            @Html.ActionLink("Delete", "Delete", "EventInYears", new { id = item.EventYearId }, null)
+        </td>
+    </tr>
+}
+
+</table>
