@@ -99,7 +99,11 @@
     },
     {
       "EnterId": "ixy3xrm7",
+<<<<<<< Updated upstream
       "EnterName": "Bí quy?t h?c ngo?i ng? c?c nhanh ch? v?i 4 bu?c",
+=======
+      "EnterName": "Bí quyết học ngoại ngữ cực nhanh chỉ với 4 buớc",
+>>>>>>> Stashed changes
       "Links": "https://baomoi.com/bi-quyet-hoc-ngoai-ngu-cuc-nhanh-chi-voi-4-buoc/c/23296321.epi",
       "Category": "Research Information",
       "CreatedDate": "July 29, 2018",
@@ -107,7 +111,11 @@
     },
     {
       "EnterId": "jf58g8mo",
+<<<<<<< Updated upstream
       "EnterName": "Giúp nao b? t?nh táo, nhanh nh?y hon",
+=======
+      "EnterName": "Giúp não bộ tỉnh táo, nhanh nhạy hon",
+>>>>>>> Stashed changes
       "Links": "http://kenh14.vn/de-giup-nao-bo-tinh-tao-nhanh-nhay-hon-thi-ban-nen-cham-an-nhung-loai-thuc-pham-nay-20180226154047402.chn",
       "Category": "Health Information",
       "CreatedDate": "July 30, 2018",
@@ -208,6 +216,121 @@
       "Category": "Music",
       "CreatedDate": "September 09, 2018",
       "LastModifiedDate": null
+<<<<<<< Updated upstream
+=======
+    },
+    {
+      "EnterId": "zvvshlpu",
+      "EnterName": "Start off by making your bed",
+      "Links": "https://www.youtube.com/watch?v=3sK3wJAxGfs",
+      "Category": "Motivation",
+      "CreatedDate": "September 23, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "9aif4i49",
+      "EnterName": "Asus ROG STRIX B350-F GAMING Manual: Front I/o Connector",
+      "Links": "https://www.manualslib.com/manual/1277451/Asus-Rog-Strix-B350-F-Gaming.html?page=39",
+      "Category": "It Device",
+      "CreatedDate": "September 24, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "6of9b4dq",
+      "EnterName": "MicrosoftrUpdate Catalog",
+      "Links": "http://www.catalog.update.microsoft.com/home.aspx",
+      "Category": "Research Information",
+      "CreatedDate": "September 26, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "4vrmtjo1",
+      "EnterName": "Review Sách \"Cách H?c Ngo?i Ng? Nhanh Và Không Bao Gi? Quên\": Chìa Khóa Hi?u Qu? Làm Ch? Da Ngôn Ng?",
+      "Links": "https://ybox.vn/ky-nang/review-sach-cach-hoc-ngoai-ngu-nhanh-va-khong-bao-gio-quen-chia-khoa-hieu-qua-lam-chu-da-ngon-ngu-kc7mfdbt1r",
+      "Category": "Special Information",
+      "CreatedDate": "September 27, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "flad3w0l",
+      "EnterName": "LAM SAO D? KHONG C?M TH?Y \"NG?P\" KHI H?C CAI M?I?",
+      "Links": "https://toidicodedao.com/2018/05/31/hoc-cong-nghe-moi-hieu-qua/",
+      "Category": "Research Information",
+      "CreatedDate": "October 01, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "0fnpt453",
+      "EnterName": "PROTOTYPE 2 Original Soundtrack - Resurrection (Main Theme) HD",
+      "Links": "https://www.youtube.com/watch?v=dIfxo_Hs07I",
+      "Category": "Video Music",
+      "CreatedDate": "October 02, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "4jvtwkud",
+      "EnterName": "Barner 2.0 | The Ultimate Computer Glasses",
+      "Links": "https://www.kickstarter.com/projects/edugaya/barner-20-the-ultimate-computer-glasses?ref=5vdwa7&utm_medium=referral&utm_source=15.backer.camp",
+      "Category": "Special Information",
+      "CreatedDate": "October 07, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "06d9hhng",
+      "EnterName": "Dây là cách mà âm nh?c ?nh hu?ng d?n nao b? và m?i vi?c chúng ta làm",
+      "Links": "http://genk.vn/day-la-cach-ma-am-nhac-anh-huong-den-nao-bo-va-moi-viec-chung-ta-lam-20171002190441727.chn",
+      "Category": "Music",
+      "CreatedDate": "October 07, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "oyx83ddb",
+      "EnterName": "SMARTDESK",
+      "Links": "http://bancongnghe.com/collections/smartdesk",
+      "Category": "Research Information",
+      "CreatedDate": "October 07, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "uwfoxg5o",
+      "EnterName": "DevOps là gì? DevOps Engineer là làm gì?",
+      "Links": "https://itviec.com/blog/devops-engineer-la-gi/",
+      "Category": "Special Information",
+      "CreatedDate": "October 08, 2018",
+      "LastModifiedDate": "October 08, 2018"
+    },
+    {
+      "EnterId": "p1vjdpje",
+      "EnterName": "BEST Workout Motivation - Never Give Up! [MUST WATCH]",
+      "Links": "https://www.youtube.com/watch?v=qapsrR8zIJM",
+      "Category": "Motivation",
+      "CreatedDate": "October 10, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "fy7b3tj3",
+      "EnterName": "Qualcomm aptX",
+      "Links": "https://www.aptx.com/",
+      "Category": "Research Information",
+      "CreatedDate": "October 19, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "2izsbf3z",
+      "EnterName": "FSHAREFILM",
+      "Links": "http://fsharefilm.com/",
+      "Category": "Video",
+      "CreatedDate": "October 24, 2018",
+      "LastModifiedDate": null
+    },
+    {
+      "EnterId": "nxrpd0cr",
+      "EnterName": "Indigo - Hope",
+      "Links": "https://www.youtube.com/watch?v=XjGdQ6vImVM",
+      "Category": "Dubstep",
+      "CreatedDate": "November 05, 2018",
+      "LastModifiedDate": null
+>>>>>>> Stashed changes
     }
   ],
   "Quotes": null,
