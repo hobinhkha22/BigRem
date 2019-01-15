@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using ConnectionSampleCode.Enum;
+using RememberUtility.Enum;
 
-namespace ConnectionSampleCode.Model
+namespace RememberUtility.Model
 {
     public class UserLogin
     {

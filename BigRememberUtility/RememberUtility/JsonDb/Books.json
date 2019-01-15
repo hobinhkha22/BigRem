@@ -31,8 +31,6 @@
       "Category": "Business",
       "CreatedDate": null,
       "LastModifiedDate": null
-<<<<<<< Updated upstream
-=======
     },
     {
       "BookId": "my2bj0a9",
@@ -41,7 +39,6 @@
       "Category": "Business",
       "CreatedDate": "November 06, 2018",
       "LastModifiedDate": null
->>>>>>> Stashed changes
     }
   ],
   "Entertainment": null,

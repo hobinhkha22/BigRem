@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 
 namespace BigRememberGUI.Controllers
 {

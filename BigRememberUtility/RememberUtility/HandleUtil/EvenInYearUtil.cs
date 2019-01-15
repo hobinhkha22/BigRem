@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class EvenInYearUtil : IEventInYear
 

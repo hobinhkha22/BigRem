@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConnectionSampleCode.Model;
+﻿using System.Collections.Generic;
+using RememberUtility.Enum;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     public interface IEntertainment
     {
@@ -22,5 +19,6 @@ namespace ConnectionSampleCode.Interface
         List<Entertainment> GetListEntertainments();
 
         void SaveFileTo(string filePath, string tableName);
+        void BackupDatabase(EnumFileConstant enumFile, string backUpFolder);
     }
 }

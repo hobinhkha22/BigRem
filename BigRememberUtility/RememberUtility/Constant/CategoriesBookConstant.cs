@@ -1,4 +1,4 @@
-﻿namespace ConnectionSampleCode.Constant
+﻿namespace RememberUtility.Constant
 {
     public class CategoriesBookConstant
     {

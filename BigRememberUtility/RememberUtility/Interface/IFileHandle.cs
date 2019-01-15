@@ -1,12 +1,10 @@
-﻿using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Model;
+﻿using RememberUtility.Enum;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     public interface IFileHandle
     {
-        void ReadFile(EnumFileConstant readEnumFile);
-
         void SaveFile(EnumFileConstant saveEnumFile);
 
         void SaveFileTo(string filePath, string tableName);
@@ -17,6 +15,9 @@ namespace ConnectionSampleCode.Interface
         
         void CreateOrReadJsonDb(EnumFileConstant enumFileConstant);
 
-        string GetFileName(EnumFileConstant enumFileConstant);     
+        string GetFileName(EnumFileConstant enumFileConstant);
+
+        void BackUpFileWithFolder(EnumFileConstant saveEnumFile, string backUpFolder);
+        
     }
 }

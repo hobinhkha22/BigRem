@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ConnectionSampleCode.Model
+namespace RememberUtility.Model
 {
     public class Books
     {

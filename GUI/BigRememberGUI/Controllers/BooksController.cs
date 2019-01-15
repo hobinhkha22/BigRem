@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 using PagedList;
 using static System.String;
 

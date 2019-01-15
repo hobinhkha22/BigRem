@@ -2,10 +2,10 @@
 using System;
 using System.Text;
 using System.Threading;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 
 
 namespace QuoteSampleCode

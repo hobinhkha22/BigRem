@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class QuoteUtil : IQuote
     {
@@ -29,32 +29,33 @@ namespace ConnectionSampleCode.HandleUtil
 
         public Quotes FindQuoteBy(string quoteName)
         {
-            var findQuote = _fileHandlerUtil.JsonModel.Quotes.
-                Find(q => string.Equals(q.QuotesName, quoteName, StringComparison.CurrentCultureIgnoreCase));
-
-            if (findQuote != null)
+            try
             {
                 _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
-                return findQuote;
-            }
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
-            return null;
+                return _fileHandlerUtil.JsonModel.Quotes.
+                    Find(q => string.Equals(q.QuotesName, quoteName, StringComparison.CurrentCultureIgnoreCase));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public Quotes FindQuoteByQuoteId(string quoteId)
         {
-            if (quoteId == null) return null;
-
-            var getQuoteById = _fileHandlerUtil.JsonModel.Quotes.Find(x => string.Equals(x.QuotesId, quoteId, StringComparison.CurrentCultureIgnoreCase));
-
-            if (getQuoteById != null)
+            try
             {
-                return getQuoteById;
+                _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
+
+                return _fileHandlerUtil.JsonModel.Quotes.Find(x => string.Equals(x.QuotesId,
+                    quoteId, StringComparison.CurrentCultureIgnoreCase));
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
-            return null;
         }
 
         public bool UpdateQuote(string currentQuoteName, string newQuoteName, string newAuthor, string newType)
@@ -98,29 +99,46 @@ namespace ConnectionSampleCode.HandleUtil
 
         public List<Quotes> GetListQuotes()
         {
-            var listQuotes = _fileHandlerUtil.JsonModel.Quotes.ToList();
+            try
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
-
-            return listQuotes;
+                return _fileHandlerUtil.JsonModel.Quotes.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Quotes> GetListQuotetBy(string author)
         {
-            var getListQuotesByAuthor = _fileHandlerUtil.JsonModel.Quotes.Where(a => a.Author == author).ToList();
+            try
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
+                return _fileHandlerUtil.JsonModel.Quotes.Where(a => a.Author == author).ToList(); ;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
-            return getListQuotesByAuthor;
+
         }
 
         public IEnumerable<string> GetListQuotesNameBy(string author)
         {
-            var getListQuotesNameByAuthor = _fileHandlerUtil.JsonModel.Quotes.Where(a => a.Author == author).ToList().OfType<string>();
+            try
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.QUOTESCONSTANT);
-
-            return getListQuotesNameByAuthor;
+                return _fileHandlerUtil.JsonModel.Quotes.Where(a => a.Author == author).ToList().OfType<string>();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

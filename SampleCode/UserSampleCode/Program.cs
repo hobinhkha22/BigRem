@@ -2,8 +2,10 @@
 using System.Text;
 using System.Threading;
 using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 
 namespace UserSampleCode
 {
@@ -11,12 +13,15 @@ namespace UserSampleCode
     {
         private static void Main()
         {
+            Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
+
+            LoggerUtil.HandleLogPath();
+
             var userUtil = new UserUtil();
             int choose;
             do
             {
-                Console.OutputEncoding = Encoding.UTF8;
                 Console.WriteLine("1. Get list Users");
                 Console.WriteLine("2. Add user");
                 Console.WriteLine("3. Find user");
@@ -33,6 +38,7 @@ namespace UserSampleCode
                         {
                             Console.WriteLine("User Name: " + itemUsers.Username);
                             Console.WriteLine("Password encrypt: " + itemUsers.PasswordEncrypt);
+                            Console.WriteLine("Password Decrypt: " + Encrypter.Decrypt(itemUsers.PasswordEncrypt, UserConstant.KeyEncrypt));
                             Console.WriteLine("Created date: " + itemUsers.CreatedDate);
                             Console.WriteLine("Role: " + itemUsers.UserRole);
                             Console.WriteLine("-----------------------------");
@@ -46,7 +52,7 @@ namespace UserSampleCode
                         var password = Console.ReadLine();
 
 
-                        userUtil.AddUser(new UserLogin() { Username = username, PasswordEncrypt = HandleRandom.Encrypt(password) });
+                        userUtil.AddUser(new UserLogin() { Username = username, PasswordEncrypt = Encrypter.Encrypt(password, UserConstant.KeyEncrypt) });
                         HandleRandom.ChooseColorForString("Adding successful", ConsoleColor.Blue);
                         break;
                     case 3: // find user
@@ -59,7 +65,7 @@ namespace UserSampleCode
                         if (result != null)
                         {
                             HandleRandom.ChooseColorForString("Found User", ConsoleColor.Blue);
-                            Console.WriteLine("User info---");
+                            Console.WriteLine("--- User info ---");
                             Console.WriteLine("Id: " + result.UserId);
                             Console.WriteLine("User Name: " + result.Username);
                             Console.WriteLine("Password encrypt: " + result.PasswordEncrypt);

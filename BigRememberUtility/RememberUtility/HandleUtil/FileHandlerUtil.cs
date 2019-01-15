@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using ClosedXML.Excel;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class FileHandlerUtil : IFileHandle
     {
@@ -31,44 +30,121 @@ namespace ConnectionSampleCode.HandleUtil
             JsonModel = new ConfigModel();
         }
 
-        public void ReadFile(EnumFileConstant readEnumFile)
-        {
+        /// <summary>
+        /// Backup database every time starting a WPF Windows.
+        /// </summary>
+        /// <param name="saveEnumFile">An enum option</param>
+        /// <param name="backUpFolder">Folder where want to backup place</param>
+        public void BackUpFileWithFolder(EnumFileConstant saveEnumFile, string backUpFolder)
+        {            
             try
             {
-                if (readEnumFile == EnumFileConstant.BOOKCONSTANT)
+                if (saveEnumFile == EnumFileConstant.CONFIGMODEL)
                 {
-                    Logger.Info($"[ReadFile] Reading {nameof(Books)} db");
-                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
-                    JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
+                    _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        ContractResolver = new NullToEmptyStringResolver()
+                    });
                 }
-                else if (readEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
+
+                var currentFolder = Directory.GetCurrentDirectory() + @"\JsonDb\" + GetFileName(saveEnumFile);
+
+                if (File.Exists(currentFolder)) // check file db
                 {
-                    Logger.Info($"[ReadFile] Reading {nameof(Entertainment)} db");
-                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
-                    JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
+                    Logger.Info($"[BackUpFileWithFolder] Starting backup dabatase...");
+
+                    var folderBackUp = Directory.GetCurrentDirectory() + $@"\{backUpFolder}\";
+                    if (!Directory.Exists(folderBackUp)) // Check backup folder
+                    {
+                        Logger.Warn($"[BackUpFileWithFolder] '{backUpFolder}' doesn't exist.");
+                        Directory.CreateDirectory(Directory.GetCurrentDirectory() + $@"\{backUpFolder}\");
+                    }
+
+                    folderBackUp += GetFileName(saveEnumFile);
+
+                    if (saveEnumFile == EnumFileConstant.BOOKCONSTANT)
+                    {
+                        _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ContractResolver = new NullToEmptyStringResolver()
+                        });
+
+                        File.WriteAllText(folderBackUp, string.Empty, Encoding.Unicode);
+                        using (var sw = new StreamWriter(File.Open(folderBackUp, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
+                        {
+                            sw.WriteLine(_jsonObject);
+                        }
+                    }
+                    else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
+                    {
+                        _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ContractResolver = new NullToEmptyStringResolver()
+                        });
+
+                        File.WriteAllText(folderBackUp, string.Empty, Encoding.Unicode);
+                        using (var sw = new StreamWriter(File.Open(folderBackUp, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
+                        {
+                            sw.WriteLine(_jsonObject);
+                        }
+                    }
+                    else if (saveEnumFile == EnumFileConstant.QUOTESCONSTANT)
+                    {
+                        _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ContractResolver = new NullToEmptyStringResolver()
+                        });
+
+                        File.WriteAllText(folderBackUp, string.Empty, Encoding.Unicode);
+                        using (var sw = new StreamWriter(File.Open(folderBackUp, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
+                        {
+                            sw.Write(_jsonObject);
+                        }
+                    }
+                    else if (saveEnumFile == EnumFileConstant.EVENTINYEAR)
+                    {
+                        _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ContractResolver = new NullToEmptyStringResolver()
+                        });
+
+                        File.WriteAllText(folderBackUp, string.Empty, Encoding.Unicode);
+                        using (var sw = new StreamWriter(File.Open(folderBackUp, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
+                        {
+                            sw.Write(_jsonObject);
+                        }
+                    }
+                    else if (saveEnumFile == EnumFileConstant.USERLOGIN)
+                    {
+                        _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                        {
+                            NullValueHandling = NullValueHandling.Ignore,
+                            ContractResolver = new NullToEmptyStringResolver()
+                        });
+
+                        File.WriteAllText(folderBackUp, string.Empty, Encoding.Unicode);
+                        using (var sw = new StreamWriter(File.Open(folderBackUp, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
+                        {
+                            sw.Write(_jsonObject);
+                        }
+                    }
+
+                    Logger.Info($"[BackUpFileWithFolder] Backup '{GetFileName(saveEnumFile)}' successful.");
                 }
-                else if (readEnumFile == EnumFileConstant.QUOTESCONSTANT)
+                else // database doesn't exist
                 {
-                    Logger.Info($"[ReadFile] Reading ${nameof(Quotes)} db");
-                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
-                    JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
-                }
-                else if (readEnumFile == EnumFileConstant.EVENTINYEAR)
-                {
-                    Logger.Info($"[ReadFile] Reading ${nameof(EventInYear)} db");
-                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
-                    JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
-                }
-                else if (readEnumFile == EnumFileConstant.USERLOGIN)
-                {
-                    Logger.Info($"[ReadFile] Reading ${nameof(UserLogin)} db");
-                    var reader = File.ReadAllText(PathHandle.GetPathOfFile(readEnumFile));
-                    JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
+                    Logger.Warn($"[BackUpFileWithFolder] '{GetFileName(saveEnumFile)}' Database doesn't exist.");
                 }
             }
             catch (Exception e)
             {
-                Logger.Error($"[ReadFile] Unexpected error: {e.Message}");
+                Logger.Error($"[BackUpFileWithFolder] Unexpected error: '{e.Message}'.");
+                Logger.Error($"[BackUpFileWithFolder] Name of error type: '{e.GetType().FullName}'.");
             }
         }
 
@@ -76,8 +152,16 @@ namespace ConnectionSampleCode.HandleUtil
         {
             try
             {
+                if (saveEnumFile == EnumFileConstant.CONFIGMODEL)
+                {
+                    _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        ContractResolver = new NullToEmptyStringResolver()
+                    });
+                }
+
                 var currentFolder = Directory.GetCurrentDirectory() + @"\JsonDb\" + GetFileName(saveEnumFile);
-                Logger.Info("[SaveFile] Begin Save db file");
 
                 if (saveEnumFile == EnumFileConstant.BOOKCONSTANT)
                 {
@@ -87,8 +171,8 @@ namespace ConnectionSampleCode.HandleUtil
                         ContractResolver = new NullToEmptyStringResolver()
                     });
 
-                    File.WriteAllText(currentFolder, string.Empty);
-                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write), Encoding.Unicode))
+                    File.WriteAllText(currentFolder, string.Empty, Encoding.Unicode);
+                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
                     {
                         sw.WriteLine(_jsonObject);
                     }
@@ -100,7 +184,9 @@ namespace ConnectionSampleCode.HandleUtil
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new NullToEmptyStringResolver()
                     });
-                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write), Encoding.Unicode))
+
+                    File.WriteAllText(currentFolder, string.Empty, Encoding.Unicode);
+                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
                     {
                         sw.WriteLine(_jsonObject);
                     }
@@ -112,7 +198,9 @@ namespace ConnectionSampleCode.HandleUtil
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new NullToEmptyStringResolver()
                     });
-                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write), Encoding.Unicode))
+
+                    File.WriteAllText(currentFolder, string.Empty, Encoding.Unicode);
+                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
                     {
                         sw.Write(_jsonObject);
                     }
@@ -124,7 +212,9 @@ namespace ConnectionSampleCode.HandleUtil
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new NullToEmptyStringResolver()
                     });
-                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write), Encoding.Unicode))
+
+                    File.WriteAllText(currentFolder, string.Empty, Encoding.Unicode);
+                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
                     {
                         sw.Write(_jsonObject);
                     }
@@ -136,17 +226,19 @@ namespace ConnectionSampleCode.HandleUtil
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new NullToEmptyStringResolver()
                     });
-                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write), Encoding.Unicode))
+
+                    File.WriteAllText(currentFolder, string.Empty, Encoding.Unicode);
+                    using (var sw = new StreamWriter(File.Open(currentFolder, FileMode.Open, FileAccess.Write, FileShare.Read), Encoding.Unicode))
                     {
                         sw.Write(_jsonObject);
                     }
                 }
-
-                Logger.Info("[SaveFile] Ending Save db file");
+                CheckModelValue(JsonModel);
             }
             catch (Exception e)
             {
                 Logger.Error($"[SaveFile] Unexpected error: '{e.Message}'.");
+                Logger.Error($"[SaveFile] Name of error type: '{e.GetType().FullName}'.");
             }
         }
 
@@ -154,23 +246,25 @@ namespace ConnectionSampleCode.HandleUtil
         {
             // get from Json db
             var listObject = JsonModel.Books.ToList();
-
-            var dt = ToDataTable(listObject);
-            dt.TableName = tableName;
-
-            using (var wb = new XLWorkbook())
+            if (listObject != null)
             {
-                wb.Worksheets.Add(dt);
-                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                wb.Style.Font.Bold = true;
+                var dt = ToDataTable(listObject);
+                dt.TableName = tableName;
 
-                // Save file as excel
-                wb.SaveAs(filePath);
+                using (var wb = new XLWorkbook())
+                {
+                    wb.Worksheets.Add(dt);
+                    wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    wb.Style.Font.Bold = true;
+
+                    // Save file as excel
+                    wb.SaveAs(filePath);
+                }
+
+                // Dispose object
+                ReleaseObject(dt);
+                ReleaseObject(listObject);
             }
-
-            // Dispose object
-            ReleaseObject(dt);
-            ReleaseObject(listObject);
         }
 
         public static DataTable ToDataTable<T>(List<T> items)
@@ -220,8 +314,6 @@ namespace ConnectionSampleCode.HandleUtil
 
         public void ExportFile<T>(string filePath, string tableName)
         {
-            Logger.Info($"[ExportFile] Saving '{Path.GetFileName(filePath)}' file to {Path.GetFullPath(filePath).Split('.')[0]}");
-
             // Books
             if (typeof(Books).IsAssignableFrom(typeof(T)))
             {
@@ -244,6 +336,7 @@ namespace ConnectionSampleCode.HandleUtil
 
                         // Save file as excel
                         wb.SaveAs(filePath);
+                        Logger.Info($"[ExportFile] Saving file successful.");
                     }
 
                     // Dispose object
@@ -296,7 +389,6 @@ namespace ConnectionSampleCode.HandleUtil
                             wb.Worksheets.Add(dt);
                             wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                             wb.Style.Font.Bold = true;
-
 
                             // Save file as excel
                             wb.SaveAs(filePath);
@@ -381,7 +473,8 @@ namespace ConnectionSampleCode.HandleUtil
         {
             var fileName = GetFileName(enumFileConstant);
 
-            var currentFileFolder = Directory.GetCurrentDirectory() + "\\JsonDb" + "\\" + fileName;
+            var currentFileFolder = Directory.GetCurrentDirectory() + @"\JsonDb\" + fileName;
+
             if (File.Exists(currentFileFolder))
             {
                 if (currentFileFolder.EndsWith(".json") && currentFileFolder.Split('.')[0] != "")
@@ -392,15 +485,25 @@ namespace ConnectionSampleCode.HandleUtil
                     using (var sr = new StreamReader(bs, true))
                     {
                         var reader = sr.ReadToEnd();
-                        JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader, new JsonSerializerSettings
+                        if (reader != "")
                         {
-                            NullValueHandling = NullValueHandling.Ignore,
-                            ContractResolver = new NullToEmptyStringResolver()
-                        });
-                    }
+                            JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader, new JsonSerializerSettings
+                            {                                
+                                Formatting = Formatting.Indented,
+                                NullValueHandling = NullValueHandling.Ignore,
+                                ContractResolver = new NullToEmptyStringResolver()
+                            });
 
-                    // If null -> Create model as List<object>()
-                    CheckModelValue(JsonModel);
+                            CheckModelValue(JsonModel);
+                        }
+                        else // reader == ""
+                        {
+                            Logger.Warn($"There's no element in '{GetFileName(enumFileConstant)}'.");
+                            CheckModelValue(JsonModel);
+                        }
+
+//                        SaveFile(enumFileConstant);
+                    }
                 }
             }
             else // filePath doesn't exist (included folder)
@@ -421,6 +524,9 @@ namespace ConnectionSampleCode.HandleUtil
                         var reader = sr.ReadToEnd();
                         JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader);
                     }
+
+                    // If null -> Create model as List<object>()
+                    CheckModelValue(JsonModel);
                 }
                 else
                 {
@@ -433,23 +539,41 @@ namespace ConnectionSampleCode.HandleUtil
 
         public void CheckModelValue(ConfigModel jsonModel)
         {
+            if (jsonModel == null)
+            {
+                jsonModel = new ConfigModel
+                {
+                    Books = new List<Books>(),
+                    Quotes = new List<Quotes>(),
+                    Entertainment = new List<Entertainment>(),
+                    UserLogin = new List<UserLogin>(),
+                    EventInYears = new List<EventInYear>()
+                };
+                //SaveFile();
+            }
+
+            // Books
             if (jsonModel.Books == null)
             {
                 JsonModel.Books = new List<Books>();
             }
+            // Entertainment
             if (jsonModel.Entertainment == null)
             {
                 JsonModel.Entertainment = new List<Entertainment>();
             }
+            //Quotes
             if (jsonModel.Quotes == null)
             {
                 JsonModel.Quotes = new List<Quotes>();
             }
+            // EventInYear
             if (jsonModel.EventInYears == null)
             {
                 JsonModel.EventInYears = new List<EventInYear>();
             }
-            if (jsonModel.Books == null)
+            // User
+            if (jsonModel.UserLogin == null)
             {
                 JsonModel.UserLogin = new List<UserLogin>();
             }
@@ -481,7 +605,6 @@ namespace ConnectionSampleCode.HandleUtil
 
             return fileName;
         }
-
     } // end class
 
 

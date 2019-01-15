@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionSampleCode.Constant
+namespace RememberUtility.Constant
 {
     public class CategoriesEntertainmentConstant
     {
@@ -17,6 +17,7 @@ namespace ConnectionSampleCode.Constant
         public const string HealthInformation = "Health Information";
         public const string ResearchInformation = "Research Information";
         public const string Dubstep = "Dubstep";
+        public const string NormalInformation = "Information";
         public const string SpecialInformation = "Special Information"; // special moment
     }
 }

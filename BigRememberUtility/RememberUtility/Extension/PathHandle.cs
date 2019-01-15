@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Enum;
+using RememberUtility.Constant;
+using RememberUtility.Enum;
 
-namespace ConnectionSampleCode.Extension
+namespace RememberUtility.Extension
 {
     public static class PathHandle
     {

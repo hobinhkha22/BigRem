@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Windows.Forms;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 using log4net;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class BooksUtil : IBooks
     {
@@ -21,28 +17,45 @@ namespace ConnectionSampleCode.HandleUtil
         public BooksUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
-            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.BOOKCONSTANT);
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.BOOKCONSTANT);            
         }
 
         public void AddBook(Books books)
         {
-            books.CreatedDate = $"{DateTime.Now:MMMM dd, yyyy}";
+            if (books != null)
+            {
+                var checkDuplicate = FindBookBy(books.BookName);
+                if (checkDuplicate == null)
+                {
+                    books.CreatedDate = $"{DateTime.Now:MMMM dd, yyyy}";
+                    books.BookId = HandleRandom.RandomString(10);
 
-            _fileHandlerUtil.JsonModel.Books.Add(books);
+                    _fileHandlerUtil.JsonModel.Books.Add(books);
 
-            Logs.Info($"[AddBook] Adding '{books.BookName}' successful.");
+                    Logs.Info($"[AddBook] Adding '{books.BookName}' successful.");
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+                    _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+                }
+                else
+                {
+                    // Duplicate book name
+                    Logs.Warn($"[AddBook] '{books.BookName}' have duplicate. Add failed");
+                    _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
+                }
+            }
         }
 
         public Books FindBookBy(string bookName)
         {
-            var getBooks = _fileHandlerUtil.JsonModel.Books.
-                Find(x => string.Equals(x.BookName, bookName, StringComparison.CurrentCultureIgnoreCase));
-
-            if (getBooks == null) return null;
-
-            return getBooks;
+            try
+            {
+                return _fileHandlerUtil.JsonModel.Books.
+                    Find(x => string.Equals(x.BookName, bookName, StringComparison.CurrentCultureIgnoreCase)); ;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public bool UpdateBook(string currentBookName, string bookName, string author, string category)
@@ -68,15 +81,15 @@ namespace ConnectionSampleCode.HandleUtil
 
         public Books FindBookByBookId(string bookId)
         {
-            var getBookById = _fileHandlerUtil.JsonModel.Books.Find(x =>
-                string.Equals(x.BookId, bookId, StringComparison.CurrentCultureIgnoreCase));
-
-            if (getBookById != null)
+            try
             {
-                return getBookById;
+                return _fileHandlerUtil.JsonModel.Books.Find(x =>
+           string.Equals(x.BookId, bookId, StringComparison.CurrentCultureIgnoreCase));
             }
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public bool DeleteBook(string bookName)
@@ -101,9 +114,21 @@ namespace ConnectionSampleCode.HandleUtil
 
         public List<Books> GetListBooks()
         {
-            var list = _fileHandlerUtil.JsonModel.Books.ToList();
+            try
+            {
+                _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
 
-            return list;
+                return _fileHandlerUtil.JsonModel.Books.ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public void BackupDatabase(EnumFileConstant enumFile, string backUpFolder)
+        {
+            _fileHandlerUtil.BackUpFileWithFolder(enumFile, backUpFolder);
         }
 
         public void SaveBookToExcel(string filePath, string tableName)

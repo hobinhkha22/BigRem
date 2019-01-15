@@ -3,10 +3,10 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 using Console = System.Console;
 
 namespace EntertainmentSampleCode

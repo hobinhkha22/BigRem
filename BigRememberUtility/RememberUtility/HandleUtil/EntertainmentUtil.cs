@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 using log4net;
+using System.Text;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class EntertainmentUtil : IEntertainment
     {
@@ -17,7 +18,7 @@ namespace ConnectionSampleCode.HandleUtil
         public EntertainmentUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
-            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTAT);
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTAT);            
         }
 
         public void AddEntertainment(Entertainment et)
@@ -32,36 +33,32 @@ namespace ConnectionSampleCode.HandleUtil
 
         public Entertainment FindEntertainmentBy(string enterName)
         {
-            var findEt = _fileHandlerUtil.JsonModel.Entertainment.Find(e =>
-                string.Equals(e.EnterName, enterName, StringComparison.CurrentCultureIgnoreCase));
-
-            if (findEt != null)
+            try
             {
                 _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
 
-                return findEt;
+                return _fileHandlerUtil.JsonModel.Entertainment.Find(e =>
+                string.Equals(e.EnterName, enterName, StringComparison.CurrentCultureIgnoreCase));
             }
-
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public Entertainment FindEntertainmentByEnterId(string enterId)
         {
-            var getEtById = _fileHandlerUtil.JsonModel.Entertainment.Find(x =>
-                string.Equals(x.EnterId, enterId, StringComparison.CurrentCultureIgnoreCase));
-
-            if (getEtById != null)
+            try
             {
                 _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
 
-                return getEtById;
+                return _fileHandlerUtil.JsonModel.Entertainment.Find(x =>
+                    string.Equals(x.EnterId, enterId, StringComparison.CurrentCultureIgnoreCase));
             }
-
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string newCategory)
@@ -113,11 +110,24 @@ namespace ConnectionSampleCode.HandleUtil
 
         public List<Entertainment> GetListEntertainments()
         {
-            var listEt = _fileHandlerUtil.JsonModel.Entertainment.ToList();
+            List<Entertainment> listEt = null;
+            try
+            {
+                listEt = _fileHandlerUtil.JsonModel.Entertainment.ToList();
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
 
-            return listEt;
+                return listEt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public void BackupDatabase(EnumFileConstant enumFile, string backupFolder)
+        {
+            _fileHandlerUtil.BackUpFileWithFolder(enumFile, backupFolder);
         }
 
         public void SaveFileTo(string filePath, string tableName)

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
 
 namespace BigRememberGUI.Controllers
 {
