@@ -4,6 +4,7 @@ using RememberUtility.Constant;
 using RememberUtility.Extension;
 using RememberUtility.HandleUtil;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -30,6 +31,14 @@ namespace WPFBigRemGUI
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
 
+            // Count object in db
+            countObjectList.Content = booksUtil.GetListBooks().Count;
+            countObjectList.Foreground = Brushes.ForestGreen;
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Restart();
+            Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+            Show_ms.Foreground = Brushes.ForestGreen;
 
             // show list book
             if (booksUtil.GetListBooks() != null)
@@ -41,6 +50,26 @@ namespace WPFBigRemGUI
                 Logs.Warn($"[ListBooks] There's no element in Db Book.");
             }
         }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            var getSelected = (RememberUtility.Model.Books)listviewBook.SelectedItem;
+            if (getSelected != null)
+            {
+                // Copy Book name
+                if (e.Key == Key.B && Keyboard.Modifiers == ModifierKeys.Control)
+                {
+                    Clipboard.SetText(getSelected.BookName, TextDataFormat.UnicodeText);
+                }
+
+                // Copy author
+                if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
+                {
+                    Clipboard.SetText(getSelected.Author, TextDataFormat.UnicodeText);
+                }
+            }
+        }
+
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +119,5 @@ namespace WPFBigRemGUI
                 Clipboard.SetText(books.Author, TextDataFormat.UnicodeText);
             }
         }
-
     } // end class
 }

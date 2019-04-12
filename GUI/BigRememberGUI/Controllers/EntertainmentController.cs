@@ -94,7 +94,7 @@ namespace BigRememberGUI.Controllers
             if (!ModelState.IsValid) return View();
             var currentEt = _entertainmentUtil.FindEntertainmentByEnterId(et.EnterId);
 
-            _entertainmentUtil.UpdateEntertainment(currentEt.EnterName, et.EnterName, et.Links, et.Category);
+            //_entertainmentUtil.UpdateEntertainment(currentEt.EnterName, et.EnterName, et.Links, et.Category);
 
             return RedirectToAction("Index", "Entertainment");
         }

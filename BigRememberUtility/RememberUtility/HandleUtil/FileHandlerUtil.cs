@@ -14,6 +14,7 @@ using RememberUtility.Model;
 using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Diagnostics;
 
 namespace RememberUtility.HandleUtil
 {
@@ -36,7 +37,7 @@ namespace RememberUtility.HandleUtil
         /// <param name="saveEnumFile">An enum option</param>
         /// <param name="backUpFolder">Folder where want to backup place</param>
         public void BackUpFileWithFolder(EnumFileConstant saveEnumFile, string backUpFolder)
-        {            
+        {
             try
             {
                 if (saveEnumFile == EnumFileConstant.CONFIGMODEL)
@@ -77,7 +78,7 @@ namespace RememberUtility.HandleUtil
                             sw.WriteLine(_jsonObject);
                         }
                     }
-                    else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
+                    else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTANT)
                     {
                         _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
                         {
@@ -177,7 +178,7 @@ namespace RememberUtility.HandleUtil
                         sw.WriteLine(_jsonObject);
                     }
                 }
-                else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTAT)
+                else if (saveEnumFile == EnumFileConstant.ENTERTAINMENTCONSTANT)
                 {
                     _jsonObject = JsonConvert.SerializeObject(JsonModel, Formatting.Indented, new JsonSerializerSettings
                     {
@@ -464,10 +465,10 @@ namespace RememberUtility.HandleUtil
         }
 
         /*
-        * 1. check if has file and read json file   -> OK
-        * 2. If doesn't, create and read json file  -> OK
-        * 3. Write as normal                        -> OK
-        * 4. Save file                              -> OK
+        * 1. check if file exist and read json file     -> OK
+        * 2. If doesn't, create and read json file      -> OK
+        * 3. Write as normal                            -> OK
+        * 4. Save file                                  -> OK
         */
         public void CreateOrReadJsonDb(EnumFileConstant enumFileConstant)
         {
@@ -477,6 +478,8 @@ namespace RememberUtility.HandleUtil
 
             if (File.Exists(currentFileFolder))
             {
+                var stopwatch = Stopwatch.StartNew();
+
                 if (currentFileFolder.EndsWith(".json") && currentFileFolder.Split('.')[0] != "")
                 {
                     // Use bufferedstream for performance reading file
@@ -488,7 +491,7 @@ namespace RememberUtility.HandleUtil
                         if (reader != "")
                         {
                             JsonModel = JsonConvert.DeserializeObject<ConfigModel>(reader, new JsonSerializerSettings
-                            {                                
+                            {
                                 Formatting = Formatting.Indented,
                                 NullValueHandling = NullValueHandling.Ignore,
                                 ContractResolver = new NullToEmptyStringResolver()
@@ -502,9 +505,12 @@ namespace RememberUtility.HandleUtil
                             CheckModelValue(JsonModel);
                         }
 
-//                        SaveFile(enumFileConstant);
+                        // SaveFile(enumFileConstant);
                     }
                 }
+
+                stopwatch.Stop();
+                Logger.Info($"[CreateOrReadJsonDb] End reading existed file: {stopwatch.ElapsedMilliseconds} ms.");
             }
             else // filePath doesn't exist (included folder)
             {
@@ -586,7 +592,7 @@ namespace RememberUtility.HandleUtil
             {
                 fileName = FileConstant.BookJson;
             }
-            else if (enumFileConstant == EnumFileConstant.ENTERTAINMENTCONSTAT)
+            else if (enumFileConstant == EnumFileConstant.ENTERTAINMENTCONSTANT)
             {
                 fileName = FileConstant.EntertainmentJson;
             }
@@ -602,8 +608,16 @@ namespace RememberUtility.HandleUtil
             {
                 fileName = FileConstant.UserJson;
             }
+            else if (enumFileConstant == EnumFileConstant.BOOK)
+            {
+                fileName = FileConstant.BookJson;
+            }
+            else if (enumFileConstant == EnumFileConstant.ENTERTAINMENT)
+            {
+                fileName = FileConstant.EntertainmentJson;
+            }
 
-            return fileName;
+                return fileName;
         }
     } // end class
 

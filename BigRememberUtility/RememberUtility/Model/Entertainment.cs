@@ -11,12 +11,35 @@ namespace RememberUtility.Model
     {
         [DisplayName("Enter id")]
         public string EnterId { get; set; }
+        private string enterName;
         [DisplayName("Enter name")]
-        public string EnterName { get; set; }
+        public string EnterName
+        {
+            get { return enterName; }
+            set {
+                if (enterName != value)
+                {
+                    enterName = value;
+                }
+            }
+        }
+
+        private string links;
         [DisplayName("Link")]
-        public string Links { get; set; }
+        public string Links
+        {
+            get { return links; }
+            set {
+                if (links != value)
+                {
+                    links = value;
+                }
+            }
+        }
         [DisplayName("Category")]
         public string Category { get; set; }
+        [DisplayName("AuthorEnter")]
+        public string AuthorEnter { get; set; }
         [DisplayName("Created date")]
         public string CreatedDate { get; set; }
         [DisplayName("Last Mod date")]

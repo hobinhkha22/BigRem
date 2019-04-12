@@ -58,7 +58,7 @@ namespace WPFBigRemGUI.Entertainment
                         {
                             EntertainmentUtil.UpdateEntertainment(entertainment.EnterName,
                                 txtUpdateEtName.Text,
-                                                txtLink.Text, cbbListEtUpdateCategory.Text);
+                                                txtLink.Text, txtAuthorEnter.Text, cbbListEtUpdateCategory.Text);
                             lblResult.Foreground = Brushes.Green;
                             lblResult.Content = $"Update '{txtUpdateEtName.Text}' successful.";
                         }

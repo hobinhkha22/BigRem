@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI"
         mc:Ignorable="d"
-        Title="List Book" Height="470" Width="800">
+        Title="List Book" Height="478" Width="800">
 
 
     <Grid>
@@ -25,6 +25,7 @@
                     </ContextMenu.BitmapEffect>
                     <MenuItem Header="Copy BookName" Name="CopyBookNameContextMenu" Click="CopyBookNameContextMenu_Click"/>
                     <MenuItem Header="Copy Author" Name="CopyAuthorContextMenu" Click="CopyAuthorContextMenu_Click"/>
+                    <MenuItem Header="Open with browser" Name="OpenBrowserContextMenu" Click="CopyAuthorContextMenu_Click"/>
                 </ContextMenu>
             </ListView.ContextMenu>          
 
@@ -91,8 +92,16 @@
         </ListView>
         <Button Name="btnExport" Content="Export File" HorizontalAlignment="Left" Margin="641,360,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click"/>
         <Label Name="lblExportBookResult" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="309,403,0,0" VerticalAlignment="Top" Width="190"/>
+        <Label Content="Object:" HorizontalAlignment="Left" Margin="60,363,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label Name="countObjectList" HorizontalAlignment="Left" Margin="118,363,0,0" VerticalAlignment="Top" Width="53" Height="26" RenderTransformOrigin="0.396,0.538"/>
+        <Label Content="Load:" HorizontalAlignment="Left" Margin="60,394,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label Name="Show_ms" HorizontalAlignment="Left" Margin="118,394,0,0" VerticalAlignment="Top" Width="71" Height="26" RenderTransformOrigin="0.396,0.538"/>
+        <Label Content="ms" HorizontalAlignment="Left" Margin="194,394,0,0" VerticalAlignment="Top" Width="43" Height="26" RenderTransformOrigin="0.396,0.538"/>
 
     </Grid>
+
+
+   
 
 </Window>
     

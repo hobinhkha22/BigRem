@@ -10,10 +10,20 @@ namespace RememberUtility.Model
         [JsonProperty(PropertyName = "BookId", NullValueHandling = NullValueHandling.Ignore)]
         public string BookId { get; set; }
 
+        public string bookName;
         [DisplayName("Book name")]
         [Required(ErrorMessage = "Book name is required")]
         [JsonProperty(PropertyName = "BookName", NullValueHandling = NullValueHandling.Ignore)]
-        public string BookName { get; set; }
+        public string BookName
+        {
+            get { return bookName; }
+            set {
+                if (bookName != value)
+                {
+                    bookName = value;
+                }
+            }
+        }
 
         [DisplayName("Author")]
         [Required(ErrorMessage = "Author is required")]

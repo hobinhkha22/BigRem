@@ -12,6 +12,8 @@ namespace RememberUtility.Interface
 
         Books FindBookByBookId(string bookId);
 
+        Books FindBookByBookAuthor(string author);
+
         bool DeleteBook(string bookName);
 
         bool UpdateBook(string currentBookName, string bookName, string author, string category);

@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <Label Content="Big remember" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.664,0.407" FontSize="22" Grid.Column="1"/>
         <Button Name="btnBook" Content="Book" HorizontalAlignment="Left" Margin="161,112,0,0" VerticalAlignment="Top" Width="136" Height="59" Click="btnBook_Click" Grid.ColumnSpan="2"/>
-        <Button Name="btnEntertainment" Content="Entertainment" HorizontalAlignment="Left" Margin="179,112,0,0" VerticalAlignment="Top" Width="136" Height="59" RenderTransformOrigin="0.5,0.5" Click="btnEntertainment_Click" Grid.Column="1">
+        <Button Name="btnEntertainment" Content="Entermainment" HorizontalAlignment="Left" Margin="174,112,0,0" VerticalAlignment="Top" Width="136" Height="59" Click="btnEntertainment_Click" Grid.Column="1">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

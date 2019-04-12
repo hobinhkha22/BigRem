@@ -4,6 +4,7 @@ using System.Linq;
 using RememberUtility.Enum;
 using RememberUtility.Extension;
 using RememberUtility.Interface;
+using System.Collections.ObjectModel;
 using RememberUtility.Model;
 using log4net;
 
@@ -17,7 +18,7 @@ namespace RememberUtility.HandleUtil
         public BooksUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
-            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.BOOKCONSTANT);            
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.BOOKCONSTANT);
         }
 
         public void AddBook(Books books)
@@ -149,6 +150,16 @@ namespace RememberUtility.HandleUtil
             _fileHandlerUtil.SaveFile(EnumFileConstant.BOOKCONSTANT);
         }
 
-
+        public Books FindBookByBookAuthor(string author)
+        {
+            try
+            {
+                return _fileHandlerUtil.JsonModel.Books.Find(x => x.Author == author);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     } // End class
 }

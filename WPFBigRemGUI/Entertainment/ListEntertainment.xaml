@@ -5,24 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI.Entertainment"
         mc:Ignorable="d"
-        Title="ListEntertainment" Height="470" Width="800">
+        Title="ListEntertainment" Height="480" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"/>
+            <RowDefinition Height="378*"/>
+        </Grid.RowDefinitions>
         <Label Name="lblListEt" Content="List Entertainment" HorizontalContentAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="267,10,0,0" VerticalAlignment="Top" Height="42" Width="254"/>
-        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="341,360,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click" RenderTransformOrigin="0.299,0.455"/>
+        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="341,299,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click" RenderTransformOrigin="0.299,0.455" Grid.Row="1"/>
 
         <ListView Name="listviewEt"
                   HorizontalAlignment="Left"
                   ItemsSource="{Binding}"
                   HorizontalContentAlignment="Stretch" Height="287" Margin="60,57,0,0"
-                  VerticalAlignment="Top" Width="678">
+                  VerticalAlignment="Top" Width="678" Grid.RowSpan="2">
 
             <ListView.ContextMenu>
-                <ContextMenu>
+                <ContextMenu KeyDown="OpenWithBrowserContextMenu_KeyDown">
                     <ContextMenu.BitmapEffect>
                         <BitmapEffectGroup/>
                     </ContextMenu.BitmapEffect>
                     <MenuItem Header="Copy Enter Name" Name="CopyEtNameContextMenu" Click="CopyEtNameContextMenu_Click"/>
                     <MenuItem Header="Copy Link" Name="CopyLinkContextMenu" Click="CopyLinkContextMenu_Click"/>
+                    <MenuItem Header="Check Alive" Name="CheckAlive" Click="CheckAlive_Click"/>
+                    <MenuItem Header="Open with browser(c)" Name="OpenWithBrowser" Click="OpenWithBrowser_Click"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
@@ -43,6 +49,16 @@
                         </GridViewColumn.CellTemplate>
                         <TextBlock Text="Links"/>
                     </GridViewColumn>
+
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding AuthorEnter}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        <TextBlock Text="Author"/>
+                    </GridViewColumn>
+
                     <GridViewColumn Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -78,18 +94,16 @@
                 </ContextMenu>
             </ListView.ContextMenu>-->
         </ListView>
-        <Button Name="btnExport" Content="Export file" HorizontalAlignment="Left" Margin="641,360,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click"/>
-        <Label Name="lblResultExportFile" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="287,403,0,0" VerticalAlignment="Top" Width="206"/>
-
+        <Button Name="btnExport" Content="Export file" HorizontalAlignment="Left" Margin="641,299,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click" Grid.Row="1"/>
+        <Label Name="lblResultExportFile" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="287,342,0,0" VerticalAlignment="Top" Width="206" Grid.Row="1"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="60,299,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="lblResultStatus" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,299,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1"/>
+        <Label Name="lblTime" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label Content="Objects:" HorizontalAlignment="Left" Margin="60,328,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="ListObjectEt" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,328,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1"/>
+        <Label Content="Load:" HorizontalAlignment="Left" Margin="60,354,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="Show_ms" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,354,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
+        <Label Content="ms" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="190,354,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
     </Grid>
-
-    <Window.CommandBindings>
-        <CommandBinding
-        Command="ApplicationCommands.Copy"
-        CanExecute="CommandBinding_CanExecute"
-        Executed="CommandBinding_Executed"/>
-    </Window.CommandBindings>
-
-  
 
 </Window>

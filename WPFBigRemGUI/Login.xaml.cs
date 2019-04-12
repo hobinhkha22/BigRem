@@ -24,7 +24,7 @@ namespace WPFBigRemGUI
             InitializeComponent();
             userLogin = new UserUtil();
             Application.Current.MainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            //Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;

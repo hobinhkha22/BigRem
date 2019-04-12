@@ -11,9 +11,10 @@
 
         <Label Content="Name: " HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="91,73,0,0" VerticalAlignment="Top" Width="166" FontSize="18"/>
         <TextBox KeyboardNavigation.TabIndex="0" Name="txtFind" HorizontalAlignment="Left" Height="33" Margin="257,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359"/>
-        <Button KeyboardNavigation.TabIndex="1" Name="btnFind" Content="Find" HorizontalAlignment="Left" Margin="327,184,0,0" VerticalAlignment="Top" Width="93" Height="28" Click="btnFind_Click"/>
-        <Label Name="lblFindResult" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="257,125,0,0" VerticalAlignment="Top" Width="359" FontSize="18" Height="34"/>
-        <CheckBox KeyboardNavigation.TabIndex="2" Name="cbxAutoClose" Content="Auto close when search finished" HorizontalAlignment="Left" Margin="257,249,0,0" VerticalAlignment="Top" FontSize="15"/>        
+        <Button KeyboardNavigation.TabIndex="1" Name="btnFind" Content="Find" HorizontalAlignment="Left" Margin="327,240,0,0" VerticalAlignment="Top" Width="93" Height="28" Click="btnFind_Click"/>
+        <Label Name="lblFindResult" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="257,181,0,0" VerticalAlignment="Top" Width="359" FontSize="18" Height="34"/>
+        <CheckBox KeyboardNavigation.TabIndex="2" Name="cbxAutoClose" Content="Auto close when search finished" HorizontalAlignment="Left" Margin="257,305,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <ComboBox Name="comboboxNameAuthor" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="257,134,0,0" VerticalAlignment="Top" Width="90"/>
 
     </Grid>
 </Window>

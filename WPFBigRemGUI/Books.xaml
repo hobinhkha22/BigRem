@@ -41,7 +41,7 @@
         <Label Name="AddBookResult" HorizontalAlignment="Left" Margin="224,205,0,0" VerticalAlignment="Top" Width="372" Height="37">
 
         </Label>
-        <ComboBox KeyboardNavigation.TabIndex="4" Name="lstListCategory" HorizontalAlignment="Left" Margin="233,149,0,0" VerticalAlignment="Top" Width="372" Height="27"/>
+        <ComboBox KeyboardNavigation.TabIndex="4" Name="lstListCategory" KeyDown="Spacebar_KeyDown" HorizontalAlignment="Left" Margin="233,149,0,0" VerticalAlignment="Top" Width="372" Height="27"/>
         <Button KeyboardNavigation.TabIndex="2" Name="btnUpdateBook" Content="Update" HorizontalAlignment="Left" Margin="637,59,0,0" VerticalAlignment="Top" Width="84" Height="32" Click="btnUpdateBook_Click"/>
         <Button KeyboardNavigation.TabIndex="8" Name="btnListBook" Content="List Book" HorizontalAlignment="Left" Margin="360,318,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnListBook_Click"/>
         <Button KeyboardNavigation.TabIndex="9" Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="511,318,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnBack_Click"/>

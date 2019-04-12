@@ -15,15 +15,17 @@
 
         <Label Content="Et name:" HorizontalAlignment="Left" Margin="68.818,64,0,0" VerticalAlignment="Top" Height="38" Width="162" Grid.Column="1"/>
         <Label Content="Link:" HorizontalAlignment="Left" Margin="68.818,122,0,0" VerticalAlignment="Top" Height="38" Width="162" Grid.Column="1"/>
-        <Label Content="Category:" HorizontalAlignment="Left" Margin="68.818,180,0,0" VerticalAlignment="Top" Height="38" Width="162" Grid.Column="1"/>
+        <Label Content="Category:" HorizontalAlignment="Left" Margin="69,234,0,0" VerticalAlignment="Top" Height="38" Width="162" Grid.Column="1"/>
         <Button Name="btnFind" Content="Find" HorizontalAlignment="Left" Margin="620.818,64,0,0" VerticalAlignment="Top" Width="86" Height="30" Click="btnFind_Click" Grid.Column="1"/>
 
         <TextBox Name="txtUpdateEtName" HorizontalAlignment="Left" Height="38" Margin="230.818,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Grid.Column="1"/>
         <TextBox Name="txtLink" HorizontalAlignment="Left" Height="38" Margin="230.818,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Grid.Column="1"/>
-        <Button Name="btnUpadte" Content="Update" HorizontalAlignment="Left" Margin="309.818,287,0,0" VerticalAlignment="Top" Width="86" Height="30" Click="btnUpadte_Click" Grid.Column="1"/>
+        <Button Name="btnUpadte" Content="Update" HorizontalAlignment="Left" Margin="310,341,0,0" VerticalAlignment="Top" Width="86" Height="30" Click="btnUpadte_Click" Grid.Column="1"/>
 
-        <Label Name="lblResult" HorizontalAlignment="Left" Margin="230.818,232,0,0" VerticalAlignment="Top" Width="370" Height="30" Grid.Column="1"/>
-        <ComboBox Name="cbbListEtUpdateCategory" HorizontalAlignment="Left" Margin="230.818,180,0,0" VerticalAlignment="Top" Width="370" Height="38" Grid.Column="1"/>
+        <Label Name="lblResult" HorizontalAlignment="Left" Margin="231,286,0,0" VerticalAlignment="Top" Width="370" Height="30" Grid.Column="1"/>
+        <ComboBox Name="cbbListEtUpdateCategory" HorizontalAlignment="Left" Margin="231,234,0,0" VerticalAlignment="Top" Width="370" Height="38" Grid.Column="1"/>
+        <Label Content="Author Enter:" HorizontalAlignment="Left" Margin="69,175,0,0" VerticalAlignment="Top" Height="38" Width="162" Grid.Column="1"/>
+        <TextBox Name="txtAuthorEnter" HorizontalAlignment="Left" Height="38" Margin="231,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Grid.Column="1"/>
 
     </Grid>
 </Window>

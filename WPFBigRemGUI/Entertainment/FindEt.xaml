@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="FindEt" Height="450" Width="800">
     <Grid>
-        <Label Content="Search Entertainment" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="305,10,0,0" VerticalAlignment="Top" Width="166" FontSize="20"/>
+        <Label Content="Search Entertainment" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="272,10,0,0" VerticalAlignment="Top" Width="217" FontSize="20"/>
 
         <Label Content="Name: " HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="91,73,0,0" VerticalAlignment="Top" Width="166" FontSize="18"/>
         <TextBox KeyboardNavigation.TabIndex="0" Name="txtFind" HorizontalAlignment="Left" Height="33" Margin="257,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359"/>
-        <Button KeyboardNavigation.TabIndex="1" Name="btnFind" Content="Find" HorizontalAlignment="Left" Margin="327,184,0,0" VerticalAlignment="Top" Width="93" Height="28" Click="btnFind_Click"/>
-        <Label Name="lblFindResult" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="257,125,0,0" VerticalAlignment="Top" Width="359" FontSize="18" Height="34"/>
-        <CheckBox KeyboardNavigation.TabIndex="2" Name="cbxAutoClose" Content="Auto close when search finished" HorizontalAlignment="Left" Margin="257,249,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <Button KeyboardNavigation.TabIndex="1" Name="btnFind" Content="Find" HorizontalAlignment="Left" Margin="327,216,0,0" VerticalAlignment="Top" Width="93" Height="28" Click="btnFind_Click"/>
+        <Label Name="lblFindResult" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="257,157,0,0" VerticalAlignment="Top" Width="359" FontSize="18" Height="34"/>
+        <CheckBox KeyboardNavigation.TabIndex="2" Name="cbxAutoClose" Content="Auto close when search finished" HorizontalAlignment="Left" Margin="257,281,0,0" VerticalAlignment="Top" FontSize="15"/>
+        <ComboBox Name="comboxBoxEnterLink" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="257,135,0,0" VerticalAlignment="Top" Width="134"/>
 
     </Grid>
 </Window>

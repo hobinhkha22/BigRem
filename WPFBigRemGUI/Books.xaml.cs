@@ -4,13 +4,12 @@ using RememberUtility.HandleUtil;
 using log4net;
 using System.Windows;
 using System.Windows.Media;
-using System.ComponentModel;
 using RememberUtility.Enum;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Linq;
 using Microsoft.Win32;
 using System.IO;
+using ConnectionSampleCode.HandleUtil;
+using System.Windows.Input;
 
 namespace WPFBigRemGUI
 {
@@ -55,6 +54,8 @@ namespace WPFBigRemGUI
                 if (booksUtil.GetListBooks() != null)
                 {
                     booksUtil.BackupDatabase(EnumFileConstant.BOOKCONSTANT, FileConstant.BackUpDb);
+                    // Backup by zipfile                
+                    ZipBackupFiles.ZipFile(EnumFileConstant.BOOK);
                 }
             });
         }
@@ -150,6 +151,14 @@ namespace WPFBigRemGUI
                 txtBookName.Text = resultBook.BookName;
                 txtAuthor.Text = resultBook.Author;
                 lstListCategory.Text = resultBook.Category;
+            }
+
+            var resultAuthor = booksUtil.FindBookByBookAuthor(GetStringValue);
+            if (resultAuthor != null)
+            {
+                txtBookName.Text = resultAuthor.BookName;
+                txtAuthor.Text = resultAuthor.Author;
+                lstListCategory.Text = resultAuthor.Category;
             }
         }
 
@@ -267,6 +276,14 @@ namespace WPFBigRemGUI
             {
                 AddBookResult.Foreground = Brushes.Red;
                 AddBookResult.Content = "Export failed.";
+            }
+        }
+
+        private void Spacebar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {            
+            if (e != null && e.Key == Key.Space)
+            {
+                lstListCategory.IsDropDownOpen = true;
             }
         }
     }

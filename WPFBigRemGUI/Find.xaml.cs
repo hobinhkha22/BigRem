@@ -1,17 +1,11 @@
-﻿using RememberUtility.HandleUtil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ConnectionSampleCode.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WPFBigRemGUI
 {
@@ -21,14 +15,20 @@ namespace WPFBigRemGUI
     public partial class Find : Window
     {
         private BooksUtil booksUtil;
+              
         public Find()
         {
             InitializeComponent();
-            booksUtil = new BooksUtil();            
+            booksUtil = new BooksUtil();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
+
+            var listConstantValue = typeof(TypeBooksConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            comboboxNameAuthor.ItemsSource = listConstantValue;
+            comboboxNameAuthor.SelectedIndex = 0;
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -45,36 +45,74 @@ namespace WPFBigRemGUI
         {
             if (txtFind.Text != "")
             {
-                var result = booksUtil.FindBookBy(txtFind.Text);
-                if (result != null)
-                {
-                    lblFindResult.Foreground = Brushes.Green;
-                    lblFindResult.Content = $"Found '{txtFind.Text}'";
+                var selectItem = comboboxNameAuthor.SelectedValue as string;
 
-                    // Send value to Books                    
-                    foreach (Window item in Application.Current.Windows)
+                if (selectItem == TypeBooksConstant.BookName)
+                {
+                    var result = booksUtil.FindBookBy(txtFind.Text);
+                    if (result != null)
                     {
-                        if (item is Books)
+                        lblFindResult.Foreground = Brushes.Green;
+                        lblFindResult.Content = $"Found '{txtFind.Text}'";
+
+                        // Send value to Books                    
+                        foreach (Window item in Application.Current.Windows)
                         {
-                            ((Books)item).GetName(txtFind.Text);
+                            if (item is Books)
+                            {
+                                ((Books)item).GetName(txtFind.Text);
+                            }
+                        }
+
+                        if (cbxAutoClose.IsChecked.Value) // if true
+                        {
+                            Close();
                         }
                     }
-                    
-                    if (cbxAutoClose.IsChecked.Value) // if true
+                    else
                     {
-                        Close();
+                        lblFindResult.Foreground = Brushes.Red;
+                        lblFindResult.Content = "Nothing found";
+                    }
+                }
+                else if (selectItem == TypeBooksConstant.Author)
+                {
+                    var result = booksUtil.FindBookByBookAuthor(txtFind.Text);
+                    if (result != null)
+                    {
+                        lblFindResult.Foreground = Brushes.Green;
+                        lblFindResult.Content = $"Found '{txtFind.Text}'";
+
+                        // Send value to Books                    
+                        foreach (Window item in Application.Current.Windows)
+                        {
+                            if (item is Books)
+                            {
+                                ((Books)item).GetName(txtFind.Text);
+                            }
+                        }
+
+                        if (cbxAutoClose.IsChecked.Value) // if true
+                        {
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        lblFindResult.Foreground = Brushes.Red;
+                        lblFindResult.Content = "Nothing found";
                     }
                 }
                 else
                 {
                     lblFindResult.Foreground = Brushes.Red;
-                    lblFindResult.Content = $"Nothing found";
+                    lblFindResult.Content = "Nothing found";
                 }
             }
             else
             {
                 lblFindResult.Foreground = Brushes.Red;
-                lblFindResult.Content = $"You must type a book name";
+                lblFindResult.Content = "You must type a book name";
             }
         }
     }

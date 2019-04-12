@@ -12,7 +12,9 @@ namespace RememberUtility.Interface
 
         Entertainment FindEntertainmentByEnterId(string enterId);
 
-        bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string newCategory);
+        Entertainment FindEntertainmentByLink(string link);
+
+        bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string authorEnter, string newCategory);
 
         bool DeleteEntertainment(string enterName);
 

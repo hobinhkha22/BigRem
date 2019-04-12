@@ -1,4 +1,6 @@
-﻿using RememberUtility.HandleUtil;
+﻿using ConnectionSampleCode.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,11 @@ namespace WPFBigRemGUI.Entertainment
             ResizeMode = ResizeMode.CanMinimize;
 
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            var listConstantValue = typeof(TypeEntertainmentsConstant).GetAllPublicConstantValues<string>();
+            listConstantValue.Sort();
+            comboxBoxEnterLink.ItemsSource = listConstantValue;
+            comboxBoxEnterLink.SelectedIndex = 0;
         }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
@@ -46,24 +53,61 @@ namespace WPFBigRemGUI.Entertainment
         {
             if (txtFind.Text != "")
             {
-                var result = entertainmentUtil.FindEntertainmentBy(txtFind.Text);
-                if (result != null)
+                var selectedValue = comboxBoxEnterLink.SelectedValue as string;
+                if (selectedValue == TypeEntertainmentsConstant.EnterName)
                 {
-                    lblFindResult.Foreground = Brushes.Green;
-                    lblFindResult.Content = $"Found '{txtFind.Text}'";
-
-                    // Send value to Books                    
-                    foreach (Window item in Application.Current.Windows)
+                    var result = entertainmentUtil.FindEntertainmentBy(txtFind.Text);
+                    if (result != null)
                     {
-                        if (item is Books)
+                        lblFindResult.Foreground = Brushes.Green;
+                        lblFindResult.Content = $"Found '{txtFind.Text}'";
+
+                        // Send value to EntertainemntMain                    
+                        foreach (Window item in Application.Current.Windows)
                         {
-                            ((Books)item).GetName(txtFind.Text);
+                            if (item is EntertainemntMain)
+                            {
+                                ((EntertainemntMain)item).GetName(txtFind.Text);
+                            }
+                        }
+
+                        if (cbxAutoClose.IsChecked.Value) // if true
+                        {
+                            Close();
                         }
                     }
-
-                    if (cbxAutoClose.IsChecked.Value) // if true
+                    else
                     {
-                        Close();
+                        lblFindResult.Foreground = Brushes.Red;
+                        lblFindResult.Content = $"Nothing found";
+                    }
+                }
+                else if (selectedValue == TypeEntertainmentsConstant.Link)
+                {
+                    var result = entertainmentUtil.FindEntertainmentByLink(txtFind.Text);
+                    if (result != null)
+                    {
+                        lblFindResult.Foreground = Brushes.Green;
+                        lblFindResult.Content = $"Found '{txtFind.Text}'";
+
+                        // Send value to EntertainemntMain                    
+                        foreach (Window item in Application.Current.Windows)
+                        {
+                            if (item is EntertainemntMain)
+                            {
+                                ((EntertainemntMain)item).GetName(txtFind.Text);
+                            }
+                        }
+
+                        if (cbxAutoClose.IsChecked.Value) // if true
+                        {
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        lblFindResult.Foreground = Brushes.Red;
+                        lblFindResult.Content = $"Nothing found";
                     }
                 }
                 else

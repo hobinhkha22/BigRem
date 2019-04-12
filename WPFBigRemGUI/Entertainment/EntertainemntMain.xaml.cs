@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using ConnectionSampleCode.HandleUtil;
+using log4net;
 using Microsoft.Win32;
 using RememberUtility.Constant;
 using RememberUtility.Enum;
@@ -10,6 +11,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WPFBigRemGUI.Entertainment
@@ -30,6 +32,7 @@ namespace WPFBigRemGUI.Entertainment
             entertainmentUtil = new EntertainmentUtil();
             txtEtName.Text = "";
             txtLink.Text = "";
+            txtAuthorEnter.Text = "";
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
@@ -51,8 +54,11 @@ namespace WPFBigRemGUI.Entertainment
                 // Backup Database
                 if (entertainmentUtil.GetListEntertainments() != null)
                 {
-                    entertainmentUtil.BackupDatabase(EnumFileConstant.ENTERTAINMENTCONSTAT, FileConstant.BackUpDb);
+                    entertainmentUtil.BackupDatabase(EnumFileConstant.ENTERTAINMENTCONSTANT, FileConstant.BackUpDb);
+                    // Backup by zipfile                
+                    ZipBackupFiles.ZipFile(EnumFileConstant.ENTERTAINMENT);
                 }
+
             });
         }
 
@@ -83,13 +89,24 @@ namespace WPFBigRemGUI.Entertainment
                 AddEtResult.Content = "Links cannot be null. Please choose a type";
             }
 
+            // txtAuthorEnter
+            if (txtAuthorEnter.Text != "")
+            {
+                et.AuthorEnter = txtAuthorEnter.Text.Trim();
+            }
+            else
+            {
+                AddEtResult.Foreground = Brushes.Red;
+                AddEtResult.Content = "Author Enter cannot be null. Please choose a type";
+            }
+
             if (lstListEtCategory.SelectedIndex == -1)
             {
                 AddEtResult.Foreground = Brushes.Red;
                 AddEtResult.Content = "Category aren't choose. Please choose a type";
             }
 
-            if (txtLink.Text != "" && txtEtName.Text != "" && lstListEtCategory.SelectedIndex >= 0)
+            if (txtLink.Text != "" && txtEtName.Text != "" && txtAuthorEnter.Text != "" && lstListEtCategory.SelectedIndex >= 0)
             {
                 // use dynamic as type to cast your anonymous object to
                 dynamic categoryInList = (lstListEtCategory.SelectedItem);
@@ -101,7 +118,6 @@ namespace WPFBigRemGUI.Entertainment
                 {
                     if (et.EnterName.ToLower() != findet.EnterName.ToLower())
                     {
-                        et.Links.Trim();
                         entertainmentUtil.AddEntertainment(et);
                         AddEtResult.Foreground = Brushes.Green;
 
@@ -116,6 +132,7 @@ namespace WPFBigRemGUI.Entertainment
 
                         txtEtName.Text = string.Empty;
                         txtLink.Text = string.Empty;
+                        txtAuthorEnter.Text = string.Empty;
                         lstListEtCategory.Text = string.Empty;
                     }
                     else
@@ -132,6 +149,7 @@ namespace WPFBigRemGUI.Entertainment
 
                     txtEtName.Text = string.Empty;
                     txtLink.Text = string.Empty;
+                    txtAuthorEnter.Text = string.Empty;
                     lstListEtCategory.Text = string.Empty;
                 }
             }
@@ -149,13 +167,24 @@ namespace WPFBigRemGUI.Entertainment
             var find = new FindEt();
             find.ShowDialog();
 
+
             // get data                        
             var resultEt = entertainmentUtil.FindEntertainmentBy(GetStringValue);
             if (resultEt != null)
             {
                 txtEtName.Text = resultEt.EnterName;
                 txtLink.Text = resultEt.Links;
+                txtAuthorEnter.Text = resultEt.AuthorEnter;
                 lstListEtCategory.Text = resultEt.Category;
+            }
+
+            var resultLink = entertainmentUtil.FindEntertainmentByLink(GetStringValue);
+            if (resultLink != null)
+            {
+                txtEtName.Text = resultLink.EnterName;
+                txtLink.Text = resultLink.Links;
+                txtAuthorEnter.Text = resultLink.AuthorEnter;
+                lstListEtCategory.Text = resultLink.Category;
             }
         }
 
@@ -196,6 +225,7 @@ namespace WPFBigRemGUI.Entertainment
 
                             txtEtName.Text = string.Empty;
                             txtLink.Text = string.Empty;
+                            txtAuthorEnter.Text = string.Empty;
                             lstListEtCategory.Text = string.Empty;
                         }
                         else
@@ -268,6 +298,14 @@ namespace WPFBigRemGUI.Entertainment
             {
                 AddEtResult.Foreground = Brushes.Red;
                 AddEtResult.Content = "Export failed.";
+            }
+        }
+
+        private void Spacebar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e != null && e.Key == Key.Space)
+            {
+                lstListEtCategory.IsDropDownOpen = true;
             }
         }
     }
