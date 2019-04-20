@@ -216,7 +216,7 @@ namespace WPFBigRemGUI.Entertainment
                     if (et.EnterName.ToLower() == findEt.EnterName.ToLower())
                     {
                         if (MessageBox.Show($"Found '{txtEtName.Text}'." +
-                            $" Do you wanna to delete '{txtEtName.Text}'", "Confirm delete",
+                            $" Do you wanna delete '{txtEtName.Text}'", "Confirm delete",
                             MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
                             entertainmentUtil.DeleteEntertainment(et.EnterName);

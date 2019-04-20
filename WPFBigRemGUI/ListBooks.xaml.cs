@@ -35,15 +35,16 @@ namespace WPFBigRemGUI
             countObjectList.Content = booksUtil.GetListBooks().Count;
             countObjectList.Foreground = Brushes.ForestGreen;
 
-            var stopwatch = new Stopwatch();
-            stopwatch.Restart();
-            Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
-            Show_ms.Foreground = Brushes.ForestGreen;
-
             // show list book
             if (booksUtil.GetListBooks() != null)
             {
+                var stopwatch = new Stopwatch();
+                stopwatch.Restart();
+
                 listviewBook.ItemsSource = booksUtil.GetListBooks();
+
+                Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+                Show_ms.Foreground = Brushes.ForestGreen;
             }
             else
             {
@@ -117,6 +118,46 @@ namespace WPFBigRemGUI
             {
                 var books = (RememberUtility.Model.Books)listviewBook.SelectedItem;
                 Clipboard.SetText(books.Author, TextDataFormat.UnicodeText);
+            }
+        }
+
+        private void DeleteThisBook_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.D)
+            {
+                DeleteThisBook_Click(sender, e);
+            }
+        }
+
+        private void DeleteThisBook_Click(object sender, RoutedEventArgs e)
+        {
+            var getBook = (RememberUtility.Model.Books)listviewBook.SelectedItem;
+
+            if (MessageBox.Show($"Found '{getBook.bookName}'." +
+                    $" Do you wanna delete '{getBook.bookName}'", "Confirm delete",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                booksUtil.DeleteBook(getBook.bookName);
+                lblExportBookResult.Foreground = Brushes.Green;
+                lblExportBookResult.Content = "Deleted";
+
+                // Count second
+                var stopwatch = new Stopwatch();
+                stopwatch.Restart();
+
+                // Count this object loading
+                listviewBook.ItemsSource = booksUtil.GetListBooks();
+
+                Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+
+                // Count again
+                countObjectList.Foreground = Brushes.ForestGreen;
+                countObjectList.Content = booksUtil.GetListBooks().Count;
+            }
+            else
+            {
+                lblExportBookResult.Foreground = Brushes.Red;
+                lblExportBookResult.Content = "Canceled";
             }
         }
     } // end class

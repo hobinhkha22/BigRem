@@ -6,9 +6,12 @@ using RememberUtility.Extension;
 using RememberUtility.HandleUtil;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -20,6 +23,8 @@ namespace WPFBigRemGUI.Entertainment
     /// </summary>
     public partial class ListEntertainment : Window
     {
+        private ObservableCollection<EntertainmentUtil> observableCollection;
+
         private EntertainmentUtil entertainmentUtil;
         private static readonly ILog Logs = LogManager.GetLogger(typeof(ListBooks));
 
@@ -29,6 +34,7 @@ namespace WPFBigRemGUI.Entertainment
             Logs.Info($"[WPFBigRemGUI.ListEntertainment] Starting ListEntertainment wpf GUI.");
             InitializeComponent();
             entertainmentUtil = new EntertainmentUtil();
+            observableCollection = new ObservableCollection<EntertainmentUtil>();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             lblListEt.Foreground = Brushes.Green;
 
@@ -41,12 +47,9 @@ namespace WPFBigRemGUI.Entertainment
             LiveTime.Start();
 
             // Count objects        
-            ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
             ListObjectEt.Foreground = Brushes.ForestGreen;
+            ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
 
-            var stopwatch = new Stopwatch();
-            stopwatch.Restart();
-            Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
 
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
@@ -54,7 +57,13 @@ namespace WPFBigRemGUI.Entertainment
             // show list book
             if (entertainmentUtil.GetListEntertainments() != null)
             {
+                var stopwatch = new Stopwatch();
+                stopwatch.Restart();
+
+                // count second
                 listviewEt.ItemsSource = entertainmentUtil.GetListEntertainments();
+
+                Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
             }
             else
             {
@@ -176,6 +185,47 @@ namespace WPFBigRemGUI.Entertainment
             }
         }
 
+        private void DeleteItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.D) // Press key
+            {
+                DeleteItem_Click(sender, e);
+            }
+        }
 
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            // click
+            var etLink = (RememberUtility.Model.Entertainment)listviewEt.SelectedItem;
+
+            if (MessageBox.Show($"Found '{etLink.EnterName}'." +
+                     $" Do you wanna delete '{etLink.EnterName}'", "Confirm delete",
+                     MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                entertainmentUtil.DeleteEntertainment(etLink.EnterName);
+                lblResultStatus.Foreground = Brushes.Green;
+                lblResultStatus.Content = "Deleted";
+
+                // Count second
+                var stopwatch = new Stopwatch();
+                stopwatch.Restart();
+
+                // Count this object loading
+                listviewEt.ItemsSource = entertainmentUtil.GetListEntertainments();
+
+                Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+
+
+                // Count again
+                ListObjectEt.Foreground = Brushes.ForestGreen;
+                ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
+
+            }
+            else
+            {
+                lblResultStatus.Foreground = Brushes.Red;
+                lblResultStatus.Content = "Canceled";
+            }
+        }
     }
 }
