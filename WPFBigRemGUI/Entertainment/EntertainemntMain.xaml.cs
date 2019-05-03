@@ -46,7 +46,7 @@ namespace WPFBigRemGUI.Entertainment
             // Backup Database
             DoBackupAsync();
         }
-
+               
         private async void DoBackupAsync()
         {
             await Task.Run(() =>
@@ -60,9 +60,8 @@ namespace WPFBigRemGUI.Entertainment
                 }
 
             });
-        }
-
-
+        }    
+        
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             var et = new RememberUtility.Model.Entertainment();
@@ -119,7 +118,7 @@ namespace WPFBigRemGUI.Entertainment
                     if (et.EnterName.ToLower() != findet.EnterName.ToLower())
                     {
                         entertainmentUtil.AddEntertainment(et);
-                        AddEtResult.Foreground = Brushes.Green;
+                        AddEtResult.Foreground = Brushes.Green;                      
 
                         if (et.EnterName.Length <= 10)
                         {
@@ -146,14 +145,14 @@ namespace WPFBigRemGUI.Entertainment
                     entertainmentUtil.AddEntertainment(et);
                     AddEtResult.Foreground = Brushes.Green;
                     AddEtResult.Content = "Add et Successful";
-
+                                                            
                     txtEtName.Text = string.Empty;
                     txtLink.Text = string.Empty;
                     txtAuthorEnter.Text = string.Empty;
                     lstListEtCategory.Text = string.Empty;
                 }
             }
-        }
+        }     
 
         private void btnUpdateEt_Click(object sender, RoutedEventArgs e)
         {
@@ -254,12 +253,6 @@ namespace WPFBigRemGUI.Entertainment
             Close();
         }
 
-        private void btnBackMain_Click(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().Show();
-            Close();
-        }
-
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -307,6 +300,6 @@ namespace WPFBigRemGUI.Entertainment
             {
                 lstListEtCategory.IsDropDownOpen = true;
             }
-        }
+        }   
     }
 }

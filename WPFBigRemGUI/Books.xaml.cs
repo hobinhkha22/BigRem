@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using System.IO;
 using ConnectionSampleCode.HandleUtil;
 using System.Windows.Input;
+using System;
 
 namespace WPFBigRemGUI
 {
@@ -31,7 +32,7 @@ namespace WPFBigRemGUI
             booksUtil = new BooksUtil();
             txtBookName.Text = "";
             txtAuthor.Text = "";
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;            
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             var listConstantValue = typeof(CategoriesBookConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
@@ -44,6 +45,12 @@ namespace WPFBigRemGUI
 
             // Run Asynchronous
             DoBackupAsync();
+        }
+
+        // Destructor
+        ~Books()
+        {
+            Console.WriteLine("Destructor");
         }
 
         private async void DoBackupAsync()
@@ -66,7 +73,7 @@ namespace WPFBigRemGUI
 
             // txtBookName
             if (txtBookName.Text != "")
-            {                
+            {
                 book.BookName = txtBookName.Text.Trim();
             }
             else
@@ -103,9 +110,10 @@ namespace WPFBigRemGUI
                 if (findBook != null)
                 {
                     if (book.BookName.ToLower() != findBook.BookName.ToLower())
-                    {                        
+                    {
                         booksUtil.AddBook(book);
                         AddBookResult.Foreground = Brushes.Green;
+
 
                         if (book.BookName.Length <= 10)
                         {
@@ -233,12 +241,6 @@ namespace WPFBigRemGUI
             Close();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            new MainWindow().Show();
-            Close();
-        }
-
         private void MenuBarItem_Click(object sender, RoutedEventArgs e)
         {
             if (mnuAlwaysOnTop.IsChecked)
@@ -280,7 +282,7 @@ namespace WPFBigRemGUI
         }
 
         private void Spacebar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {            
+        {
             if (e != null && e.Key == Key.Space)
             {
                 lstListCategory.IsDropDownOpen = true;

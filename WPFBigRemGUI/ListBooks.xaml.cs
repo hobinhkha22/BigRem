@@ -71,10 +71,24 @@ namespace WPFBigRemGUI
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (mnuAlwaysOnTop.IsChecked)
+            {
+                mnuAlwaysOnTop.IsCheckable = true;
+                Topmost = true;
+                Activate();
+            }
+            else
+            {
+                Topmost = false;
+                Activate();
+            }
+        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            new Books().Show();
+            new MainWindow().Show();
             Close();
         }
 
@@ -159,6 +173,11 @@ namespace WPFBigRemGUI
                 lblExportBookResult.Foreground = Brushes.Red;
                 lblExportBookResult.Content = "Canceled";
             }
+        }
+
+        private void AddMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new Books().ShowDialog();
         }
     } // end class
 }

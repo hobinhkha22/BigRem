@@ -5,20 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI.Entertainment"
         mc:Ignorable="d"
-        Title="ListEntertainment" Height="480" Width="800">
-    <Grid>
+        Title="ListEntertainment" Height="520" Width="800">
+    <Grid KeyDown="Grid_KeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
             <RowDefinition Height="378*"/>
         </Grid.RowDefinitions>
-        <Label Name="lblListEt" Content="List Entertainment" HorizontalContentAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="267,10,0,0" VerticalAlignment="Top" Height="42" Width="254"/>
-        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="341,299,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click" RenderTransformOrigin="0.299,0.455" Grid.Row="1"/>
+        <Label Name="lblListEt" Content="List Entertainment" HorizontalContentAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="266,23,0,0" VerticalAlignment="Top" Height="42" Width="254"/>
+        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="341,313,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click" RenderTransformOrigin="0.299,0.455" Grid.Row="1"/>
+
+        <!--Menu bar-->
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="25">
+                <MenuItem Header="_File" Height="25">
+                    <MenuItem Header="_Add" Name="MenuAddEt" Click="MenuAddEt_Click"/>
+                    <!--<MenuItem Header="_Close"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Export" Name="mnuItemExport" Click="mnuItemExport_Click"/>-->
+                    <Separator></Separator>
+                    <MenuItem Name="mnuAlwaysOnTop" IsCheckable="True" Header="Always on _Top" Click="MenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <!--End of Dock panel-->
+
 
         <ListView Name="listviewEt"
                   HorizontalAlignment="Left"
                   ItemsSource="{Binding}"
-                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,57,0,0"
-                  VerticalAlignment="Top" Width="678" Grid.RowSpan="2">
+                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,6,0,0"
+                  VerticalAlignment="Top" Width="678" Grid.Row="1">
 
             <ListView.ContextMenu>
                 <ContextMenu KeyDown="OpenWithBrowserContextMenu_KeyDown">
@@ -95,16 +112,16 @@
                 </ContextMenu>
             </ListView.ContextMenu>-->
         </ListView>
-        <Button Name="btnExport" Content="Export file" HorizontalAlignment="Left" Margin="641,299,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click" Grid.Row="1"/>
-        <Label Name="lblResultExportFile" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="287,342,0,0" VerticalAlignment="Top" Width="206" Grid.Row="1"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="60,299,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Name="lblResultStatus" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,299,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Row="1"/>
-        <Label Name="lblTime" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Width="206"/>
-        <Label Content="Objects:" HorizontalAlignment="Left" Margin="60,328,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Name="ListObjectEt" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,328,0,0" VerticalAlignment="Top" Height="26" Width="52" Grid.Row="1"/>
-        <Label Content="Load:" HorizontalAlignment="Left" Margin="60,354,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Name="Show_ms" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,354,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
-        <Label Content="ms" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="190,354,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
+        <Button Name="btnExport" Content="Export file" HorizontalAlignment="Left" Margin="641,313,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click" Grid.Row="1"/>
+        <Label Name="lblResultExportFile" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="287,356,0,0" VerticalAlignment="Top" Width="206" Grid.Row="1"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="60,313,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="lblResultStatus" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,313,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Row="1"/>
+        <Label Name="lblTime" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="60,32,0,0" VerticalAlignment="Top" Width="206"/>
+        <Label Content="Objects:" HorizontalAlignment="Left" Margin="60,342,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="ListObjectEt" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,342,0,0" VerticalAlignment="Top" Height="26" Width="52" Grid.Row="1"/>
+        <Label Content="Load:" HorizontalAlignment="Left" Margin="60,368,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Name="Show_ms" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="116,368,0,0" VerticalAlignment="Top" Height="26" Width="69" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
+        <Label Content="ms" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="190,368,0,0" VerticalAlignment="Top" Height="26" Width="43" Grid.Row="1" RenderTransformOrigin="1.837,0.423"/>
     </Grid>
 
 </Window>

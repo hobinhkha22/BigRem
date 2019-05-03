@@ -46,23 +46,32 @@ namespace WPFBigRemGUI.Entertainment
             LiveTime.Tick += Timer_Tick;
             LiveTime.Start();
 
-            // Count objects        
-            ListObjectEt.Foreground = Brushes.ForestGreen;
-            ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
+           
 
 
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
 
+            // Reload Data
+            ReloadData();
+        }
+
+        public void ReloadData()
+        {
+            entertainmentUtil = new EntertainmentUtil();
+
             // show list book
             if (entertainmentUtil.GetListEntertainments() != null)
             {
+                // Count objects        
+                ListObjectEt.Foreground = Brushes.ForestGreen;
+                ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
+
                 var stopwatch = new Stopwatch();
                 stopwatch.Restart();
 
                 // count second
                 listviewEt.ItemsSource = entertainmentUtil.GetListEntertainments();
-
                 Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
             }
             else
@@ -78,7 +87,7 @@ namespace WPFBigRemGUI.Entertainment
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            new EntertainemntMain().Show();
+            new MainWindow().Show();
             Close();
         }
 
@@ -176,6 +185,21 @@ namespace WPFBigRemGUI.Entertainment
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (mnuAlwaysOnTop.IsChecked)
+            {
+                mnuAlwaysOnTop.IsCheckable = true;
+                Topmost = true;
+                Activate();
+            }
+            else
+            {
+                Topmost = false;
+                Activate();
+            }
+        }
+
         private void OpenWithBrowserContextMenu_KeyDown(object sender, KeyEventArgs e)
         {
             // Open with chrome [Keyboard: B]
@@ -225,6 +249,21 @@ namespace WPFBigRemGUI.Entertainment
             {
                 lblResultStatus.Foreground = Brushes.Red;
                 lblResultStatus.Content = "Canceled";
+            }
+        }
+
+        private void MenuAddEt_Click(object sender, RoutedEventArgs e)
+        {
+            EntertainemntMain entertainemntMain = new EntertainemntMain();
+
+            entertainemntMain.ShowDialog();
+        }
+
+        private void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F5)
+            {
+                ReloadData();
             }
         }
     }

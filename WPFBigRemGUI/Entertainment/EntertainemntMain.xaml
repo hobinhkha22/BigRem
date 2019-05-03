@@ -41,7 +41,6 @@
         <ComboBox KeyboardNavigation.TabIndex="4" Name="lstListEtCategory" KeyDown="Spacebar_KeyDown" HorizontalAlignment="Left" Margin="224,205,0,0" VerticalAlignment="Top" Width="372" Height="27"/>
         <Button KeyboardNavigation.TabIndex="1" Name="btnUpdateEt" Content="Update" HorizontalAlignment="Left" Margin="629,84,0,0" VerticalAlignment="Top" Width="84" Height="32" Click="btnUpdateEt_Click"/>
         <Button KeyboardNavigation.TabIndex="8" Name="btnListEt" Content="List Et" HorizontalAlignment="Left" Margin="354,349,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnListEt_Click"/>
-        <Button KeyboardNavigation.TabIndex="9" Name="btnBackMain" Content="Back" HorizontalAlignment="Left" Margin="502,349,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnBackMain_Click"/>
         <Label HorizontalContentAlignment="Right" Content="Author Enter:" HorizontalAlignment="Left" Margin="65,163,0,0" VerticalAlignment="Top" Height="28" Width="96"/>
         <TextBox KeyboardNavigation.TabIndex="3" Name="txtAuthorEnter" HorizontalAlignment="Left" Height="23" Margin="224,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
     </Grid>

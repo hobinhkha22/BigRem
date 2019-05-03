@@ -5,18 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI"
         mc:Ignorable="d"
-        Title="List Book" Height="478" Width="800">
+        Title="List Book" Height="520" Width="800">
 
 
     <Grid>
-        <Label Name="lblListBook" Content="List Book" HorizontalContentAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="309,10,0,0" VerticalAlignment="Top" Height="42" Width="168"/>
-        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="341,360,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click"/>
+        <Label Name="lblListBook" Content="List Book" HorizontalContentAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="309,28,0,0" VerticalAlignment="Top" Height="42" Width="168"/>
+        <Button Name="btnClose" Content="Close" HorizontalAlignment="Left" Margin="342,368,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnClose_Click"/>
+
+
+        <!--Menu bar-->
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="25">
+                <MenuItem Header="_File" Height="25">
+                    <MenuItem Header="_Add" Click="AddMenuItem_Click"/>
+                    <!--<MenuItem Header="_Close"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Export" Name="mnuItemExport" Click="mnuItemExport_Click"/>-->
+                    <Separator></Separator>
+                    <MenuItem Name="mnuAlwaysOnTop" IsCheckable="True" Header="Always on _Top" Click="MenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <!--End of Dock panel-->
 
 
         <ListView x:Name="listviewBook" SelectedValuePath="listViewBookPath"                                    
                   HorizontalAlignment="Left"
                   ItemsSource="{Binding}"
-                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,57,0,0"                              
+                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,71,0,0"                              
                   VerticalAlignment="Top" Width="678">
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -91,13 +108,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="btnExport" Content="Export File" HorizontalAlignment="Left" Margin="641,360,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click"/>
-        <Label Name="lblExportBookResult" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="299,398,0,0" VerticalAlignment="Top" Width="178"/>
-        <Label Content="Objects:" HorizontalAlignment="Left" Margin="65,358,0,0" VerticalAlignment="Top" Width="53"/>
-        <Label Name="countObjectList" HorizontalAlignment="Left" Margin="123,358,0,0" VerticalAlignment="Top" Width="71" Height="26" RenderTransformOrigin="0.396,0.538"/>
-        <Label Content="Load:" HorizontalAlignment="Left" Margin="65,389,0,0" VerticalAlignment="Top" Width="53"/>
-        <Label Name="Show_ms" HorizontalAlignment="Left" Margin="123,389,0,0" VerticalAlignment="Top" Width="71" Height="26" RenderTransformOrigin="0.396,0.538"/>
-        <Label Content="ms" HorizontalAlignment="Left" Margin="199,389,0,0" VerticalAlignment="Top" Width="43" Height="26" RenderTransformOrigin="0.396,0.538"/>
+        <Button Name="btnExport" Content="Export File" HorizontalAlignment="Left" Margin="641,368,0,0" VerticalAlignment="Top" Width="97" Height="33" Click="btnExport_Click"/>
+        <Label Name="lblExportBookResult" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="299,419,0,0" VerticalAlignment="Top" Width="178"/>
+        <Label Content="Objects:" HorizontalAlignment="Left" Margin="65,370,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="0.547,0.923"/>
+        <Label Name="countObjectList" HorizontalAlignment="Left" Margin="123,370,0,0" VerticalAlignment="Top" Width="71" Height="26" RenderTransformOrigin="0.396,0.538"/>
+        <Label Content="Load:" HorizontalAlignment="Left" Margin="65,401,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label Name="Show_ms" HorizontalAlignment="Left" Margin="123,401,0,0" VerticalAlignment="Top" Width="71" Height="26" RenderTransformOrigin="0.396,0.538"/>
+        <Label Content="ms" HorizontalAlignment="Left" Margin="199,401,0,0" VerticalAlignment="Top" Width="43" Height="26" RenderTransformOrigin="0.396,0.538"/>
 
     </Grid>
 

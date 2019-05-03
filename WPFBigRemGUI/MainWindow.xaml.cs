@@ -33,14 +33,14 @@ namespace WPFBigRemGUI
 
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
-            var bookmain = new Books();
+            var bookmain = new ListBooks();
             Close();
             bookmain.Show();
         }
 
         private void btnEntertainment_Click(object sender, RoutedEventArgs e)
         {
-            var etmain = new EntertainemntMain();
+            var etmain = new ListEntertainment();
             Close();
             etmain.Show();
         }
