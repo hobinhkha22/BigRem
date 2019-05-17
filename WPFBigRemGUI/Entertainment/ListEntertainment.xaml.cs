@@ -7,11 +7,9 @@ using RememberUtility.HandleUtil;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -265,6 +263,11 @@ namespace WPFBigRemGUI.Entertainment
             {
                 ReloadData();
             }
+        }
+
+        private void MenuAFind_Click(object sender, RoutedEventArgs e)
+        {
+            new FindEt().ShowDialog();
         }
     }
 }

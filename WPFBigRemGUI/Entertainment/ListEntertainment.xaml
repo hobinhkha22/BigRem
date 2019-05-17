@@ -19,6 +19,7 @@
             <Menu DockPanel.Dock="Top" Height="25">
                 <MenuItem Header="_File" Height="25">
                     <MenuItem Header="_Add" Name="MenuAddEt" Click="MenuAddEt_Click"/>
+                    <MenuItem Header="_Find" Name="MenuAFind" Click="MenuAFind_Click"/>
                     <!--<MenuItem Header="_Close"/>
                     <MenuItem Header="_Save"/>
                     <MenuItem Header="_Export" Name="mnuItemExport" Click="mnuItemExport_Click"/>-->

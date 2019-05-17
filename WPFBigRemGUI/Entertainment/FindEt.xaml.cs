@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFTextBoxAutoComplete;
 
 namespace WPFBigRemGUI.Entertainment
 {
@@ -122,5 +123,83 @@ namespace WPFBigRemGUI.Entertainment
                 lblFindResult.Content = $"You must type a Et name";
             }
         }
+
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool found = false;
+            var border = (resultStack.Parent as ScrollViewer).Parent as Border;
+            var data = entertainmentUtil.GetListEntertainments();
+
+            string query = (sender as TextBox).Text;
+
+            if (query.Length == 0)
+            {
+                // Clear
+                resultStack.Children.Clear();
+                border.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                border.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            // Clear the list
+            resultStack.Children.Clear();
+
+            // Add the result
+            foreach (var entertainment in data)
+            {
+                if (entertainment.EnterName.ToLower().StartsWith(query.ToLower()))
+                {
+                    // The word starts with this... Autocomplete must work
+                    AddItem(entertainment.EnterName);
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                resultStack.Children.Add(new TextBlock() { Text = "No results found." });
+            }
+        }
+
+
+        private void AddItem(string text)
+        {
+            TextBlock block = new TextBlock
+            {
+
+                // Add the text
+                Text = text,
+
+                // A little style...
+                Margin = new Thickness(2, 3, 2, 3),
+                Cursor = Cursors.Hand
+            };
+
+            // Mouse events
+            block.MouseLeftButtonUp += (sender, e) =>
+            {
+                txtFind.Text = (sender as TextBlock).Text;
+            };
+
+            block.MouseEnter += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.PeachPuff;
+            };
+
+            block.MouseLeave += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.Transparent;
+            };
+
+            // Add to the panel
+            resultStack.Children.Add(block);
+        }
+
+
     }
 }
