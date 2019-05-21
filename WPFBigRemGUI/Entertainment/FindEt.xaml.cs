@@ -1,20 +1,10 @@
 ﻿using ConnectionSampleCode.Constant;
 using RememberUtility.Extension;
 using RememberUtility.HandleUtil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using WPFTextBoxAutoComplete;
 
 namespace WPFBigRemGUI.Entertainment
 {
@@ -137,11 +127,11 @@ namespace WPFBigRemGUI.Entertainment
             {
                 // Clear
                 resultStack.Children.Clear();
-                border.Visibility = System.Windows.Visibility.Collapsed;
+                border.Visibility = Visibility.Collapsed;
             }
             else
             {
-                border.Visibility = System.Windows.Visibility.Visible;
+                border.Visibility = Visibility.Visible;
             }
 
             // Clear the list
@@ -156,6 +146,13 @@ namespace WPFBigRemGUI.Entertainment
                     AddItem(entertainment.EnterName);
                     found = true;
                 }
+
+                var links = HandleRandom.RemoveHttpString(entertainment.Links);
+                if (links.ToLower().StartsWith(query.ToLower()))
+                {
+                    AddItem(entertainment.Links);
+                    found = true;
+                }
             }
 
             if (!found)
@@ -163,7 +160,6 @@ namespace WPFBigRemGUI.Entertainment
                 resultStack.Children.Add(new TextBlock() { Text = "No results found." });
             }
         }
-
 
         private void AddItem(string text)
         {

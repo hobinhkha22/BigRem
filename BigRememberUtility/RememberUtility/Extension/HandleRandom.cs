@@ -97,5 +97,32 @@ namespace RememberUtility.Extension
             //put a breakpoint here and check datatable
             return dataTable;
         }
+
+        /// <summary>
+        /// Remove string holds 'http:' or 'https:' in string
+        /// </summary>
+        /// <param name="httpString">http or https URL</param>
+        /// <returns>A string removed http or https</returns>
+        public static string RemoveHttpString(string httpString)
+        {
+            if (httpString != "")
+            {
+                if (httpString.ToLower().StartsWith("http") || httpString.ToLower().StartsWith("https"))
+                {
+                    var uri = new Uri(httpString);
+                    var host = uri.Host + uri.AbsolutePath;
+
+                    if (host.StartsWith("www"))
+                    {
+                        return host.Replace("www.", "");
+                    }
+
+                    return host;
+                }
+            }
+
+            return httpString;
+        }
+
     } // end class
 }

@@ -6,15 +6,6 @@ namespace ConnectionSampleCode.Extension
 {
     public static class Encrypter
     {
-
-        public static string HashSHA512(this string value)
-        {
-            using (var sha = SHA512.Create())
-            {
-                return Convert.ToBase64String(sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(value)));
-            }
-        }
-
         private static byte[] CreateKey(string password, int keyBytes = 32)
         {
             byte[] salt = new byte[] { 80, 70, 60, 50, 40, 30, 20, 10 };

@@ -5,23 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI"
         mc:Ignorable="d"
-        Title="Big Rem GUI" Height="450" Width="800">
+        Title="List Remember" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="145*"/>
             <ColumnDefinition Width="251*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Big remember" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.664,0.407" FontSize="22" Grid.Column="1"/>
+        <Label Content="List remember" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.664,0.407" FontSize="22" Grid.Column="1"/>
         <Button Name="btnBook" Content="List Book" HorizontalAlignment="Left" Margin="161,112,0,0" VerticalAlignment="Top" Width="136" Height="59" Click="btnBook_Click" Grid.ColumnSpan="2"/>
-        <Button Name="btnEntertainment" Content=" List Entermainment" HorizontalAlignment="Left" Margin="174,112,0,0" VerticalAlignment="Top" Width="136" Height="59" Click="btnEntertainment_Click" Grid.Column="1">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.391"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
+        <Button Name="btnEntertainment" Content="List Entermainment" HorizontalAlignment="Left" Margin="181,114,0,0" VerticalAlignment="Top" Width="136" Height="59" Click="btnEntertainment_Click" Grid.Column="1">           
         </Button>
         <Button Name="btnLogOut" Content="Log out" HorizontalAlignment="Left" Margin="20,295,0,0" VerticalAlignment="Top" Width="123" Height="51" Click="btnLogOut_Click" Grid.Column="1"/>
 

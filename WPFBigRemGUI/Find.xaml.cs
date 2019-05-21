@@ -115,5 +115,81 @@ namespace WPFBigRemGUI
                 lblFindResult.Content = "You must type a book name";
             }
         }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool found = false;
+            var border = (resultStack.Parent as ScrollViewer).Parent as Border;
+            var data = booksUtil.GetListBooks();
+
+            string query = (sender as TextBox).Text;
+
+            if (query.Length == 0)
+            {
+                // Clear
+                resultStack.Children.Clear();
+                border.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                border.Visibility = Visibility.Visible;
+            }
+
+            // Clear the list
+            resultStack.Children.Clear();
+
+            // Add the result
+            foreach (var book in data)
+            {
+                if (book.bookName.ToLower().StartsWith(query.ToLower()))
+                {
+                    // The word starts with this... Autocomplete must work
+                    AddItem(book.bookName);
+                    found = true;
+                }                
+            }
+
+            if (!found)
+            {
+                resultStack.Children.Add(new TextBlock() { Text = "No results found." });
+            }
+        }
+
+
+        private void AddItem(string text)
+        {
+            TextBlock block = new TextBlock
+            {
+
+                // Add the text
+                Text = text,
+
+                // A little style...
+                Margin = new Thickness(2, 3, 2, 3),
+                Cursor = Cursors.Hand
+            };
+
+            // Mouse events
+            block.MouseLeftButtonUp += (sender, e) =>
+            {
+                txtFind.Text = (sender as TextBlock).Text;
+            };
+
+            block.MouseEnter += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.PeachPuff;
+            };
+
+            block.MouseLeave += (sender, e) =>
+            {
+                TextBlock b = sender as TextBlock;
+                b.Background = Brushes.Transparent;
+            };
+
+            // Add to the panel
+            resultStack.Children.Add(block);
+        }
+
     }
 }

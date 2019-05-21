@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBigRemGUI.Entertainment"
         mc:Ignorable="d"
-        Title="ListEntertainment" Height="520" Width="800">
+        Title="List Entertainment" Height="520" Width="800">
     <Grid KeyDown="Grid_KeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
