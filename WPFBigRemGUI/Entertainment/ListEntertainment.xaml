@@ -63,7 +63,7 @@
                     <GridViewColumn Width="120">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Links}"/>
+                                <TextBlock Text="{Binding Links}" Name="textblock_Link"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                         <TextBlock Text="Links"/>

@@ -19,14 +19,7 @@
         <Button KeyboardNavigation.TabIndex="2" Name="btnSignin" Content="Sign in" HorizontalAlignment="Left" Margin="256,235,0,0" VerticalAlignment="Top" Width="85" Click="SignInClick" Height="32"/>
         <Button KeyboardNavigation.TabIndex="3" Content="Sign up" HorizontalAlignment="Left" Margin="417,235,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="SignUp_Click"/>
         <Label Name="lblResultLogin" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="226,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.874" Width="363" Height="28">
-            <Label.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.431"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Label.RenderTransform>
+           
         </Label>
 
     </Grid>

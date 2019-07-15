@@ -269,5 +269,10 @@ namespace WPFBigRemGUI.Entertainment
         {
             new FindEt().ShowDialog();
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("hello sort");
+        }
     }
 }
