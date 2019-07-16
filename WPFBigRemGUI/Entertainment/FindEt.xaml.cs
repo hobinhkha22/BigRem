@@ -198,26 +198,33 @@ namespace WPFBigRemGUI.Entertainment
 
         private void resultStack_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var getStringByClick = e.Source as TextBlock;            
+            var getStringByClick = e.Source as TextBlock;
 
-            ContextMenu cm = new ContextMenu
+            if (getStringByClick.Text != "No results found.")
             {
-                PlacementTarget = sender as Button,
-                IsOpen = true
-            };
+                ContextMenu cm = new ContextMenu
+                {
+                    PlacementTarget = sender as Button,
+                    IsOpen = true
+                };
 
-            cm.PlacementTarget = resultStack; // right click on beside cursor            
+                cm.PlacementTarget = resultStack; // right click on beside cursor            
 
-            MenuItem findMenuItem = new MenuItem
-            {
-                Header = "_Copy link"
-            };
-            findMenuItem.Click += (o, args) =>
-            {                   
-                Clipboard.SetText(getStringByClick.Text);
-            };
+                MenuItem findMenuItem = new MenuItem
+                {
+                    Header = "_Copy link"
+                };
 
-            cm.Items.Add(findMenuItem);
+                findMenuItem.Click += (o, args) =>
+                {
+                    if (getStringByClick != null)
+                    {
+                        Clipboard.SetText(getStringByClick.Text);
+                    }
+                };
+
+                cm.Items.Add(findMenuItem);
+            }
         }
 
         private static Label FindClickedItem(object sender)
