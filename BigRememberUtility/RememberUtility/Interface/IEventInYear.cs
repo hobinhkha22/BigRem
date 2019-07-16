@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ConnectionSampleCode.Model;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     public interface IEventInYear
     {

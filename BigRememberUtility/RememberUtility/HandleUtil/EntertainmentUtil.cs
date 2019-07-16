@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
 using log4net;
+using System.Text;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class EntertainmentUtil : IEntertainment
     {
@@ -17,7 +18,7 @@ namespace ConnectionSampleCode.HandleUtil
         public EntertainmentUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
-            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTAT);
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTANT);            
         }
 
         public void AddEntertainment(Entertainment et)
@@ -27,44 +28,40 @@ namespace ConnectionSampleCode.HandleUtil
             _fileHandlerUtil.JsonModel.Entertainment.Add(et);
             Logs.Info($"[AddEntertainment] Adding '{et.EnterName}' successful.");
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
         }
 
         public Entertainment FindEntertainmentBy(string enterName)
         {
-            var findEt = _fileHandlerUtil.JsonModel.Entertainment.Find(e =>
-                string.Equals(e.EnterName, enterName, StringComparison.CurrentCultureIgnoreCase));
-
-            if (findEt != null)
+            try
             {
-                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
-                return findEt;
+                return _fileHandlerUtil.JsonModel.Entertainment.Find(e =>
+                string.Equals(e.EnterName, enterName, StringComparison.CurrentCultureIgnoreCase));
             }
-
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public Entertainment FindEntertainmentByEnterId(string enterId)
         {
-            var getEtById = _fileHandlerUtil.JsonModel.Entertainment.Find(x =>
-                string.Equals(x.EnterId, enterId, StringComparison.CurrentCultureIgnoreCase));
-
-            if (getEtById != null)
+            try
             {
-                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
-                return getEtById;
+                return _fileHandlerUtil.JsonModel.Entertainment.Find(x =>
+                    string.Equals(x.EnterId, enterId, StringComparison.CurrentCultureIgnoreCase));
             }
-
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
-
-            return null;
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string newCategory)
+        public bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string authorEnter, string newCategory)
         {
             var getCurrentEt = _fileHandlerUtil.JsonModel.Entertainment.
                 Find(x => string.Equals(x.EnterName, currentEnterName, StringComparison.CurrentCultureIgnoreCase));
@@ -74,16 +71,17 @@ namespace ConnectionSampleCode.HandleUtil
             {
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].EnterName = enterNewName;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Links = newLink;
+                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].AuthorEnter= authorEnter;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Category = newCategory;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].LastModifiedDate = $"{DateTime.Now:MMMM dd, yyyy}";
 
                 Logs.Info($"[UpdateEntertainment] Update '{enterNewName}' successful.");
-                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
                 return true;
             }
             Logs.Warn($"[UpdateEntertainment] '{currentEnterName}' doesn't exist.");
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
             return false;
         }
@@ -97,7 +95,7 @@ namespace ConnectionSampleCode.HandleUtil
 
             if (getEt == null)
             {
-                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
                 Logs.Warn($"[DeleteEntertainment] '{enterName}' doesn't exist.");
 
                 return false;
@@ -106,24 +104,49 @@ namespace ConnectionSampleCode.HandleUtil
 
             Logs.Info($"[DeleteEntertainment] Deleting '{enterName}' successful.");
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
             return true;
         }
 
         public List<Entertainment> GetListEntertainments()
         {
-            var listEt = _fileHandlerUtil.JsonModel.Entertainment.ToList();
+            List<Entertainment> listEt = null;
+            try
+            {
+                listEt = _fileHandlerUtil.JsonModel.Entertainment.ToList();
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTAT);
+                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
 
-            return listEt;
+                return listEt;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public void BackupDatabase(EnumFileConstant enumFile, string backupFolder)
+        {
+            _fileHandlerUtil.BackUpFileWithFolder(enumFile, backupFolder);
         }
 
         public void SaveFileTo(string filePath, string tableName)
         {
             _fileHandlerUtil.ExportFile<Entertainment>(filePath.ToLower().EndsWith(".xlsx") ? filePath : filePath.Insert(filePath.Length, ".xlsx"), tableName);
             Logs.Info($"[SaveFileTo] File '{tableName}' was saved at '{filePath}'.");
+        }
+
+        public Entertainment FindEntertainmentByLink(string link)
+        {
+            try
+            {
+                return _fileHandlerUtil.JsonModel.Entertainment.Find(f => f.Links == link);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

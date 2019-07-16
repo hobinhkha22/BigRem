@@ -1,0 +1,49 @@
+﻿<Window x:Class="WPFBigRemGUI.Books"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBigRemGUI"
+        mc:Ignorable="d"
+        Title="Books" Height="450" Width="800">
+    <Grid>
+
+
+        <!--Menu bar-->
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="25">
+                <MenuItem Header="_File" Height="25">
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Close"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Export" Name="mnuItemExport" Click="mnuItemExport_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Name="mnuAlwaysOnTop" IsCheckable="True" Header="_Always on Top" Click="MenuBarItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <!--End of Dock panel-->
+
+        <Label HorizontalContentAlignment="Center" Content="Books" HorizontalAlignment="Center" Margin="297,10,313,0" VerticalAlignment="Top" Height="39" Width="182" FontSize="22"/>
+        <Label HorizontalContentAlignment="Right" Content="Book Name:" HorizontalAlignment="Left" Margin="74,55,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+        <Label HorizontalContentAlignment="Right" Content="Author:" HorizontalAlignment="Left" Margin="74,97,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+        <Label HorizontalContentAlignment="Right" Content="Category:" HorizontalAlignment="Left" Margin="74,139,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+
+        <!-- Textbox -->
+        <TextBox KeyboardNavigation.TabIndex="0" Name="txtBookName" HorizontalAlignment="Left" Height="23" Margin="233,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+        <TextBox KeyboardNavigation.TabIndex="3" Name="txtAuthor" HorizontalAlignment="Left" Height="23" Margin="233,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+
+        <!-- Button -->
+        <Button KeyboardNavigation.TabIndex="5" Name="btnBookAdd" Click="Add_Click" Content="Add" HorizontalAlignment="Left" Margin="224,261,0,0" VerticalAlignment="Top" Width="84" Height="32"/>
+        <Button KeyboardNavigation.TabIndex="6" Name="btnBookFind" Click="Find_Click" Content="Find" HorizontalAlignment="Left" Margin="360,261,0,0" VerticalAlignment="Top" Width="83" Height="32"/>
+        <Button KeyboardNavigation.TabIndex="7" Name="btnBookDelete"  Click="Delete_Click" Content="Delete" HorizontalAlignment="Left" Margin="511,261,0,0" VerticalAlignment="Top" Width="85" Height="32"/>
+        <Label Name="AddBookResult" HorizontalAlignment="Left" Margin="224,205,0,0" VerticalAlignment="Top" Width="372" Height="37">
+
+        </Label>
+        <ComboBox KeyboardNavigation.TabIndex="4" Name="lstListCategory" KeyDown="Spacebar_KeyDown" HorizontalAlignment="Left" Margin="233,149,0,0" VerticalAlignment="Top" Width="372" Height="27"/>
+        <Button KeyboardNavigation.TabIndex="2" Name="btnUpdateBook" Content="Update" HorizontalAlignment="Left" Margin="637,59,0,0" VerticalAlignment="Top" Width="84" Height="32" Click="btnUpdateBook_Click"/>
+        <Button KeyboardNavigation.TabIndex="8" Name="btnListBook" Content="List Book" HorizontalAlignment="Left" Margin="360,318,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnListBook_Click"/>
+
+    </Grid>
+</Window>

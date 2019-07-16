@@ -1,11 +1,11 @@
-﻿using ConnectionSampleCode.HandleUtil;
+﻿using RememberUtility.HandleUtil;
 using System;
 using System.IO;
 using System.Text;
 using System.Threading;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.Model;
 using System.Windows.Forms;
 
 namespace BookSampleCode
@@ -17,13 +17,14 @@ namespace BookSampleCode
         {
             Console.InputEncoding = Encoding.UTF8;
             Console.OutputEncoding = Encoding.UTF8;
-            
-            LoggerUtil.HandleLogPath(FileConstant.LoggerFolderName);
+
+            LoggerUtil.HandleLogPath();
             var bookUtil = new BooksUtil();
 
             int choose;
             int tempChoose;
 
+            HandleRandom.ChooseColorForString("--- Welcome to Web Bookmark ---", ConsoleColor.Yellow);
             Console.WriteLine("1. Get list books");
             Console.WriteLine("2. Add book");
             Console.WriteLine("3. Find book");
@@ -31,7 +32,7 @@ namespace BookSampleCode
             Console.WriteLine("5. Upate book");
             Console.WriteLine("6. Save book to Excel");
             Console.WriteLine("7. Save book Model to db");
-            Console.WriteLine("0. Exit");
+            HandleRandom.ChooseColorForString("0. Exit", ConsoleColor.Red);
             Console.Write("Choose: ");
 
             while (int.TryParse(Console.ReadLine(), out tempChoose))
@@ -184,8 +185,7 @@ namespace BookSampleCode
 
                         bookUtil.SaveBookToExcel(filePath, tableName);
                         break;
-                    case 7:
-                        // Test a request                        
+                    case 7:                       
                         break;
                 }
 

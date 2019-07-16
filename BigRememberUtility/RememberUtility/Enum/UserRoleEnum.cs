@@ -1,4 +1,4 @@
-﻿namespace ConnectionSampleCode.Enum
+﻿namespace RememberUtility.Enum
 {
     public enum UserRoleEnum
     {

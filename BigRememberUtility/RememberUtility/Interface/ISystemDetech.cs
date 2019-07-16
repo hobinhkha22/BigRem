@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     interface ISystemDetech
     {

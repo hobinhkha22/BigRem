@@ -1,0 +1,27 @@
+﻿<Window x:Class="WPFBigRemGUI.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBigRemGUI"        
+        mc:Ignorable="d"                
+        KeyDown="Window_KeyDown"        
+        Title="Login" Height="450" Width="800">
+
+    <Grid>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="352,10,0,0" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.804,1.886"/>
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="121,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.874"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="125,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.874"/>
+        <TextBox KeyboardNavigation.TabIndex="0" Name="txtUsername" HorizontalAlignment="Left" Height="26" Margin="224,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="364"/>
+        <PasswordBox KeyboardNavigation.TabIndex="1" Name="txtPassword" HorizontalAlignment="Left" Margin="224,135,0,0" VerticalAlignment="Top" Width="364" Height="26"/>
+
+        <!-- Sign (in | up) button -->
+        <Button KeyboardNavigation.TabIndex="2" Name="btnSignin" Content="Sign in" HorizontalAlignment="Left" Margin="256,235,0,0" VerticalAlignment="Top" Width="85" Click="SignInClick" Height="32"/>
+        <Button KeyboardNavigation.TabIndex="3" Content="Sign up" HorizontalAlignment="Left" Margin="417,235,0,0" VerticalAlignment="Top" Width="85" Height="32" Click="SignUp_Click"/>
+        <Label Name="lblResultLogin" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="226,188,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.598,2.874" Width="363" Height="28">
+           
+        </Label>
+
+    </Grid>
+
+</Window>

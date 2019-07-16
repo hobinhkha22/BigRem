@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConnectionSampleCode.Model
+namespace RememberUtility.Model
 {
     public class EventInYear
     {

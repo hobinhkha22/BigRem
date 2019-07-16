@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     internal interface IBooks
     {
@@ -11,6 +11,8 @@ namespace ConnectionSampleCode.Interface
         Books FindBookBy(string bookName);
 
         Books FindBookByBookId(string bookId);
+
+        Books FindBookByBookAuthor(string author);
 
         bool DeleteBook(string bookName);
 
@@ -22,6 +24,6 @@ namespace ConnectionSampleCode.Interface
 
         void SaveBookDb();
 
-        bool CreateJsonDb(EnumFileConstant enumFileConstant);
+        bool CreateJsonDb(EnumFileConstant enumFileConstant);        
     }
 }

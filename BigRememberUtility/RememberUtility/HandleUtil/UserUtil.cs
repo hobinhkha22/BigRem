@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConnectionSampleCode.Enum;
+using System.Security.Cryptography;
+using System.Text;
+using RememberUtility.Enum;
+using RememberUtility.Extension;
+using RememberUtility.Interface;
+using RememberUtility.Model;
+using log4net;
 using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.Interface;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
 
-namespace ConnectionSampleCode.HandleUtil
+namespace RememberUtility.HandleUtil
 {
     public class UserUtil : IUser
     {
         private readonly FileHandlerUtil _fileHandlerUtil;
+        private static readonly ILog Logs = LogManager.GetLogger(typeof(BooksUtil));
 
         public UserUtil()
         {
@@ -20,32 +26,45 @@ namespace ConnectionSampleCode.HandleUtil
 
         public void AddUser(UserLogin userLogin)
         {
-            userLogin.CreatedDate = $"{DateTime.Now:MMMM dd,yyyy}";
-            userLogin.UserId = HandleRandom.RandomString(10);
-            HandleRandom.Encrypt(userLogin.PasswordEncrypt);
-            userLogin.UserRole = UserRoleEnum.NormalUser;
+            if (userLogin != null)
+            {
+                var checkDuplicate = CheckUser(userLogin.Username);
+                if (checkDuplicate == null)
+                {
+                    userLogin.CreatedDate = $"{DateTime.Now:MMMM dd,yyyy}";
+                    userLogin.UserId = HandleRandom.RandomString(10);
+                    Encrypter.Encrypt(userLogin.PasswordEncrypt, UserConstant.KeyEncrypt);
+                    userLogin.UserRole = UserRoleEnum.NormalUser;
 
-            _fileHandlerUtil.JsonModel.UserLogin.Add(userLogin);
+                    _fileHandlerUtil.JsonModel.UserLogin.Add(userLogin);
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+                    _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+
+                    Logs.Info($"[AddUser] Adding '{userLogin.Username}' successful.");
+
+                    _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.USERLOGIN);
+                }
+            }
+            else
+            {
+                // Duplicate user name
+                Logs.Warn($"[AddUser] '{userLogin.Username}' have duplicate. Add failed!");
+                _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+            }
         }
 
         public UserLogin CheckUser(string username, string password)
         {
-            var findUser = _fileHandlerUtil.JsonModel.UserLogin.
-                Find(x => string.Equals(x.Username, username, StringComparison.CurrentCultureIgnoreCase) &&
-                          string.Equals(HandleRandom.Decrypt(x.PasswordEncrypt), password, StringComparison.CurrentCultureIgnoreCase));
-
-            if (findUser != null)
+            try
             {
-                _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
-
-                return findUser;
+                return _fileHandlerUtil.JsonModel.UserLogin.Find(x => x.Username.ToLower() == username.ToLower());
             }
+            catch (Exception)
+            {
+                Logs.Warn($"[CheckUser] The user '{username}' doesn't exist.");
 
-            _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
-
-            return null;
+                return null;
+            }
         }
 
         public bool UpdateUser(string currentUserName, string newUserName, string newPassword)
@@ -57,14 +76,18 @@ namespace ConnectionSampleCode.HandleUtil
             if (getCurrentUser != null)
             {
                 _fileHandlerUtil.JsonModel.UserLogin[indexOfUser].Username = newUserName;
-                _fileHandlerUtil.JsonModel.UserLogin[indexOfUser].PasswordEncrypt = HandleRandom.Encrypt(newPassword); // encrypt and save
+                _fileHandlerUtil.JsonModel.UserLogin[indexOfUser].PasswordEncrypt = Encrypter.Encrypt(newPassword, UserConstant.KeyEncrypt); // encrypt and save
                 _fileHandlerUtil.JsonModel.UserLogin[indexOfUser].LastModifiedDate = $"{DateTime.Now:MMMM dd, yyyy}";
+
                 _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+                Logs.Info($"[UpdateUser] Updating '{newUserName}' successful.");
 
                 return true;
             }
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+            Logs.Warn($"[UpdateUser] Updating '{newUserName}' failed.");
+
             return false;
         }
 
@@ -78,22 +101,56 @@ namespace ConnectionSampleCode.HandleUtil
             if (getUser != null)
             {
                 _fileHandlerUtil.JsonModel.UserLogin.Remove(getUser);
+
                 _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+                Logs.Info($"[DeleteUser] Deleting '{username}' successful.");
 
                 return true;
             }
 
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+            Logs.Warn($"[DeleteUser] Deleting '{username}' failed.");
+
             return false;
         }
 
         public List<UserLogin> GetListUsers()
         {
-            var listUser = _fileHandlerUtil.JsonModel.UserLogin.ToList();
+            try
+            {
+                return _fileHandlerUtil.JsonModel.UserLogin.ToList();
+            }
+            catch (Exception)
+            {
+                Logs.Error($"[GetListUsers] Error while getting user list.");
 
+                return null;
+            }
+        }
+
+        public void SaveUserDb()
+        {
             _fileHandlerUtil.SaveFile(EnumFileConstant.USERLOGIN);
+        }
 
-            return listUser;
+        public UserLogin CheckUser(string username)
+        {
+            try
+            {
+                return _fileHandlerUtil.JsonModel.UserLogin.
+                Find(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase));
+            }
+            catch (Exception)
+            {
+                Logs.Warn($"[CheckUser] The user '{username}' doesn't exist.");
+
+                return null;
+            }
+        }
+
+        public void ReloadDatbase()
+        {
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.USERLOGIN);
         }
     }
 }

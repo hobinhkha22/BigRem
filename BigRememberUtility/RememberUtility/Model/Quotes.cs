@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ConnectionSampleCode.Model
+namespace RememberUtility.Model
 {
     public class Quotes
     {

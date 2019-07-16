@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ConnectionSampleCode.Enum;
-using ConnectionSampleCode.Model;
+using RememberUtility.Enum;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     public interface IUser
     {
@@ -14,10 +14,16 @@ namespace ConnectionSampleCode.Interface
 
         UserLogin CheckUser(string username, string password);
 
+        UserLogin CheckUser(string username);
+
         bool UpdateUser(string currentUserName, string newUserName, string newPassword);
 
         bool DeleteUser(string username);
 
         List<UserLogin> GetListUsers();
+
+        void SaveUserDb();
+
+        void ReloadDatbase();
     }
 }

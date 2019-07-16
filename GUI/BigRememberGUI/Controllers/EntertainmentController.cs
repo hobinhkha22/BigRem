@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Web.Mvc;
-using ConnectionSampleCode.Constant;
-using ConnectionSampleCode.Extension;
-using ConnectionSampleCode.HandleUtil;
-using ConnectionSampleCode.Model;
+using RememberUtility.Constant;
+using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
+using RememberUtility.Model;
 
 namespace BigRememberGUI.Controllers
 {
@@ -94,7 +94,7 @@ namespace BigRememberGUI.Controllers
             if (!ModelState.IsValid) return View();
             var currentEt = _entertainmentUtil.FindEntertainmentByEnterId(et.EnterId);
 
-            _entertainmentUtil.UpdateEntertainment(currentEt.EnterName, et.EnterName, et.Links, et.Category);
+            //_entertainmentUtil.UpdateEntertainment(currentEt.EnterName, et.EnterName, et.Links, et.Category);
 
             return RedirectToAction("Index", "Entertainment");
         }

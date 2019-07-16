@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConnectionSampleCode.Model;
+﻿using System.Collections.Generic;
+using RememberUtility.Enum;
+using RememberUtility.Model;
 
-namespace ConnectionSampleCode.Interface
+namespace RememberUtility.Interface
 {
     public interface IEntertainment
     {
@@ -15,12 +12,15 @@ namespace ConnectionSampleCode.Interface
 
         Entertainment FindEntertainmentByEnterId(string enterId);
 
-        bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string newCategory);
+        Entertainment FindEntertainmentByLink(string link);
+
+        bool UpdateEntertainment(string currentEnterName, string enterNewName, string newLink, string authorEnter, string newCategory);
 
         bool DeleteEntertainment(string enterName);
 
         List<Entertainment> GetListEntertainments();
 
         void SaveFileTo(string filePath, string tableName);
+        void BackupDatabase(EnumFileConstant enumFile, string backUpFolder);
     }
 }

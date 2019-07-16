@@ -1,4 +1,4 @@
-﻿namespace ConnectionSampleCode.Constant
+﻿namespace RememberUtility.Constant
 {
     public class FileConstant
     {
@@ -19,5 +19,11 @@
         public const string QuotesJson = "Quotes.json";
         public const string EventInYearJson = "EventInYear.json";
         public const string UserJson = "User.json";
+        public const string BackUpDb = "BackupDb";
+
+        // 
+        public const string Entertainment = "Entertainment";
+        public const string Books = "Books";
+        public const string Quotes = "Quotes";
     }
 }

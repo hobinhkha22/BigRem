@@ -1,0 +1,47 @@
+﻿<Window x:Class="WPFBigRemGUI.Entertainment.EntertainemntMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBigRemGUI.Entertainment"
+        mc:Ignorable="d"
+        Title="Entertainemnt" Height="450" Width="800">
+    <Grid>
+
+        <!--Menu bar-->
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="25">
+                <MenuItem Header="_File" Height="25">
+                    <MenuItem Header="_Open"/>
+                    <MenuItem Header="_Close"/>
+                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_Export" Name="mnuItemExport" Click="mnuItemExport_Click"/>
+                    <Separator></Separator>
+                    <MenuItem Name="mnuAlwaysOnTop" IsCheckable="True" Header="_Always on Top" Click="MenuItem_Click"/>
+                </MenuItem>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
+        <!--End of Dock panel-->
+
+        <Label HorizontalContentAlignment="Center" Content="Entertainment" HorizontalAlignment="Center" Margin="288,42,322,0" VerticalAlignment="Top" Height="39" Width="182" FontSize="22"/>
+        <Label HorizontalContentAlignment="Right" Content="Et Name:" HorizontalAlignment="Left" Margin="65,87,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+        <Label HorizontalContentAlignment="Right" Content="Link:" HorizontalAlignment="Left" Margin="65,129,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+        <Label HorizontalContentAlignment="Right" Content="Category:" HorizontalAlignment="Left" Margin="65,205,0,0" VerticalAlignment="Top" Height="37" Width="96"/>
+
+        <!-- Textbox -->
+        <TextBox KeyboardNavigation.TabIndex="0" Name="txtEtName" HorizontalAlignment="Left" Height="23" Margin="224,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+        <TextBox KeyboardNavigation.TabIndex="2" Name="txtLink" HorizontalAlignment="Left" Height="23" Margin="224,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+
+        <!-- Button -->
+        <Button KeyboardNavigation.TabIndex="5" Name="btnEtAdd" Click="Add_Click" Content="Add" HorizontalAlignment="Left" Margin="215,293,0,0" VerticalAlignment="Top" Width="84" Height="32"/>
+        <Button KeyboardNavigation.TabIndex="6" Name="btnEtFind" Click="Find_Click" Content="Find" HorizontalAlignment="Left" Margin="354,293,0,0" VerticalAlignment="Top" Width="83" Height="32"/>
+        <Button KeyboardNavigation.TabIndex="7" Name="btnEtDelete"  Click="Delete_Click" Content="Delete" HorizontalAlignment="Left" Margin="502,293,0,0" VerticalAlignment="Top" Width="85" Height="32"/>
+        <Label Name="AddEtResult" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="224,251,0,0" VerticalAlignment="Top" Width="372" Height="29"/>
+        <ComboBox KeyboardNavigation.TabIndex="4" Name="lstListEtCategory" KeyDown="Spacebar_KeyDown" HorizontalAlignment="Left" Margin="224,205,0,0" VerticalAlignment="Top" Width="372" Height="27"/>
+        <Button KeyboardNavigation.TabIndex="1" Name="btnUpdateEt" Content="Update" HorizontalAlignment="Left" Margin="629,84,0,0" VerticalAlignment="Top" Width="84" Height="32" Click="btnUpdateEt_Click"/>
+        <Button KeyboardNavigation.TabIndex="8" Name="btnListEt" Content="List Et" HorizontalAlignment="Left" Margin="354,349,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="btnListEt_Click"/>
+        <Label HorizontalContentAlignment="Right" Content="Author Enter:" HorizontalAlignment="Left" Margin="65,163,0,0" VerticalAlignment="Top" Height="28" Width="96"/>
+        <TextBox KeyboardNavigation.TabIndex="3" Name="txtAuthorEnter" HorizontalAlignment="Left" Height="23" Margin="224,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="372"/>
+    </Grid>
+</Window>

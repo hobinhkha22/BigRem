@@ -1,14 +1,16 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 
-namespace ConnectionSampleCode.Extension
+namespace RememberUtility.Extension
 {
     public static class HandleRandom
     {
+
         /// <summary>
         /// Return a string with numbers and letters
         /// </summary>
@@ -43,55 +45,84 @@ namespace ConnectionSampleCode.Extension
                 .ToList();
         }
 
-        /// <summary>
-        /// Encrypts a given password and returns the encrypted data
-        /// as a base64 string.
-        /// </summary>
-        /// <param name="plainText">An unencrypted string that needs
-        /// to be secured.</param>
-        /// <returns>A base64 encoded string that represents the encrypted
-        /// binary data.
-        /// </returns>
-        /// <remarks>This solution is not really secure as we are
-        /// keeping strings in memory. If runtime protection is essential,
-        /// <see cref="SecureString"/> should be used.</remarks>
-        /// <exception cref="ArgumentNullException">If <paramref name="plainText"/>
-        /// is a null reference.</exception>
-        public static string Encrypt(string plainText)
+        public static void ExportExcel<T>(List<T> listObject, string worksheetName, string path)
         {
-            if (plainText == null) throw new ArgumentNullException(nameof(plainText));
+            DataTable dt = ToDataTable(listObject);
 
-            //encrypt data
-            var data = Encoding.Unicode.GetBytes(plainText);
-            var encrypted = ProtectedData.Protect(data, null, DataProtectionScope.CurrentUser);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt, worksheetName);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
 
-            //return as base64 string
-            return Convert.ToBase64String(encrypted);
+                // Save workbook                
+                GetStream(wb, path);
+            }
+        }
+
+        public static void GetStream(XLWorkbook excelWorkbook, string path)
+        {
+            using (MemoryStream fs = new MemoryStream())
+            {
+                excelWorkbook.SaveAs(fs);
+                fs.Position = 0;
+                FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+                fs.WriteTo(fileStream);
+            }
+        }
+
+        public static DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            // Get all the properties
+            PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (PropertyInfo prop in Props)
+            {
+                //Defining type of data column gives proper data table 
+                var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
+                //Setting column names as Property names
+                dataTable.Columns.Add(prop.Name, type);
+            }
+            foreach (T item in items)
+            {
+                var values = new object[Props.Length];
+                for (int i = 0; i < Props.Length; i++)
+                {
+                    //inserting property values to datatable rows
+                    values[i] = Props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+            //put a breakpoint here and check datatable
+            return dataTable;
         }
 
         /// <summary>
-        /// Decrypts a given string.
+        /// Remove string holds 'http:' or 'https:' in string
         /// </summary>
-        /// <param name="cipher">A base64 encoded string that was created
-        /// through the <see cref="Encrypt(string)"/> or
-        /// <see cref="Encrypt(string)"/> extension methods.</param>
-        /// <returns>The decrypted string.</returns>
-        /// <remarks>Keep in mind that the decrypted string remains in memory
-        /// and makes your application vulnerable per se. If runtime protection
-        /// is essential, <see cref="SecureString"/> should be used.</remarks>
-        /// <exception cref="ArgumentNullException">If <paramref name="cipher"/>
-        /// is a null reference.</exception>
-        public static string Decrypt(string cipher)
+        /// <param name="httpString">http or https URL</param>
+        /// <returns>A string removed http or https</returns>
+        public static string RemoveHttpString(string httpString)
         {
-            if (cipher == null) throw new ArgumentNullException(nameof(cipher));
+            if (httpString != "")
+            {
+                if (httpString.ToLower().StartsWith("http") || httpString.ToLower().StartsWith("https"))
+                {
+                    var uri = new Uri(httpString);
+                    var host = uri.Host + uri.AbsolutePath;
 
-            //parse base64 string
-            var data = Convert.FromBase64String(cipher);
+                    if (host.StartsWith("www"))
+                    {
+                        return host.Replace("www.", "");
+                    }
 
-            //decrypt data
-            var decrypted = ProtectedData.Unprotect(data, null, DataProtectionScope.CurrentUser);
-            return Encoding.Unicode.GetString(decrypted);
+                    return host;
+                }
+            }
+
+            return httpString;
         }
 
-    }
+    } // end class
 }
