@@ -1,10 +1,10 @@
-﻿using ClosedXML.Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using ClosedXML.Excel;
 
 namespace RememberUtility.Extension
 {
@@ -49,7 +49,7 @@ namespace RememberUtility.Extension
         {
             DataTable dt = ToDataTable(listObject);
 
-            using (XLWorkbook wb = new XLWorkbook())
+            using (var wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(dt, worksheetName);
                 wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
