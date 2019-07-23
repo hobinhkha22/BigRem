@@ -92,6 +92,7 @@ namespace WPFBigRemGUI.Entertainment
 
                 txtUpdateEtName.Text = entertainment.EnterName;
                 txtLink.Text = entertainment.Links;
+                txtAuthorEnter.Text = entertainment.AuthorEnter;
                 cbbListEtUpdateCategory.Text = entertainment.Category;
                 btnUpadte.IsEnabled = true;
             }

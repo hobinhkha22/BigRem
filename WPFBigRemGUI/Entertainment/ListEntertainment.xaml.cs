@@ -116,7 +116,8 @@ namespace WPFBigRemGUI.Entertainment
                 // example: saveFileDialog1.Filter = "RichTextFormate|*.rtf|Text Files|*.txt|All Files|*.*"; 
                 Filter = "Data file (*.xlsx)|*.xlsx|All file (*.*)|*.*",
                 DefaultExt = "xlsx",
-                AddExtension = true
+                AddExtension = true,
+                FileName = FileConstant.SaveFileName + HandleRandom.GetDateTimeNow()
             };
 
             if (savefile.ShowDialog() == true)

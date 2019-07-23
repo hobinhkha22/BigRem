@@ -25,5 +25,8 @@
         public const string Entertainment = "Entertainment";
         public const string Books = "Books";
         public const string Quotes = "Quotes";
+
+        // Save file name
+        public const string SaveFileName = "ExportAll_";
     }
 }

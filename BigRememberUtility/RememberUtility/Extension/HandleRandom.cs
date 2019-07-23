@@ -29,6 +29,11 @@ namespace RememberUtility.Extension
             Console.ResetColor();
         }
 
+        public static string GetDateTimeNow()
+        {
+            return DateTime.Now.ToString("MMMMddyyyy");
+        }
+
         /// <summary>
         /// Get all public constant value
         /// </summary>
@@ -49,6 +54,7 @@ namespace RememberUtility.Extension
         {
             DataTable dt = ToDataTable(listObject);
 
+            // Handle worksheet
             using (var wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(dt, worksheetName);
