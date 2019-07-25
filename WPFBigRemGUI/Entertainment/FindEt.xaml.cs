@@ -208,22 +208,33 @@ namespace WPFBigRemGUI.Entertainment
                     IsOpen = true
                 };
 
-                cm.PlacementTarget = resultStack; // right click on beside cursor            
+                cm.PlacementTarget = resultStack; // right click on beside cursor
 
-                MenuItem findMenuItem = new MenuItem
-                {
-                    Header = "_Copy link"
-                };
+                MenuItem findMenuItem = new MenuItem { Header = "_Copy Name" };
+                MenuItem linkMenuItem = new MenuItem { Header = "Copy _Link" };
 
                 findMenuItem.Click += (o, args) =>
                 {
-                    if (getStringByClick != null)
+                    if (getStringByClick.Text != "")
                     {
                         Clipboard.SetText(getStringByClick.Text);
                     }
                 };
 
-                cm.Items.Add(findMenuItem);
+                linkMenuItem.Click += (o, args) =>
+                {
+                    if (getStringByClick.Text != "")
+                    {
+                        var getResult = entertainmentUtil.FindEntertainmentBy(getStringByClick.Text);
+                        if (getResult.Links != "")
+                        {
+                            Clipboard.SetText(getResult.Links);
+                        }
+                    }
+                };
+
+                cm.Items.Add(findMenuItem); // for name
+                cm.Items.Add(linkMenuItem); // for link
             }
         }
 

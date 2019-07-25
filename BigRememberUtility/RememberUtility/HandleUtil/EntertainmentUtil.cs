@@ -72,7 +72,7 @@ namespace RememberUtility.HandleUtil
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].EnterName = enterNewName;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Links = newLink;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].AuthorEnter= authorEnter;
-                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Category = newCategory;
+                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Category = newCategory;                
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].LastModifiedDate = $"{DateTime.Now:MMMM dd, yyyy}";
 
                 Logs.Info($"[UpdateEntertainment] Update '{enterNewName}' successful.");

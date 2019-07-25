@@ -182,7 +182,9 @@
       <Name>RememberUtility</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Pattern\EntertainmentPattern.html" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\fruit-juice-icon-png-18 %281%29.ico" />
   </ItemGroup>
