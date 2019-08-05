@@ -13,6 +13,7 @@
         public const string Dubstep = "Dubstep";
         public const string NormalInformation = "Information";
         public const string Relax = "Relax";
+        public const string JpLanguage = "Language";
         public const string SpecialInformation = "Special Information"; // special moment
     }
 }

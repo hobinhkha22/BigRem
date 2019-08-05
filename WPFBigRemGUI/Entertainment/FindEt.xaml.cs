@@ -140,7 +140,7 @@ namespace WPFBigRemGUI.Entertainment
             // Add the result
             foreach (var entertainment in data)
             {
-                if (entertainment.EnterName.ToLower().StartsWith(query.ToLower()))
+                if (entertainment.EnterName.ToLower().Contains(query.ToLower()))
                 {
                     // The word starts with this... Autocomplete must work
                     AddItem(entertainment.EnterName);
@@ -148,7 +148,7 @@ namespace WPFBigRemGUI.Entertainment
                 }
 
                 var links = HandleRandom.RemoveHttpString(entertainment.Links);
-                if (links.ToLower().StartsWith(query.ToLower()))
+                if (links.ToLower().Contains(query.ToLower()))
                 {
                     AddItem(entertainment.Links);
                     found = true;
