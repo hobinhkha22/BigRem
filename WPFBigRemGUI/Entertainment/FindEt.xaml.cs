@@ -208,33 +208,59 @@ namespace WPFBigRemGUI.Entertainment
                     IsOpen = true
                 };
 
+                MenuItem findMenuItem = null;
+                MenuItem linkMenuItem = null;
+
                 cm.PlacementTarget = resultStack; // right click on beside cursor
 
-                MenuItem findMenuItem = new MenuItem { Header = "_Copy Name" };
-                MenuItem linkMenuItem = new MenuItem { Header = "Copy _Link" };
-
-                findMenuItem.Click += (o, args) =>
+                // For case just [COPY LINK]
+                if (getStringByClick.Text.ToLower().StartsWith("http"))
                 {
-                    if (getStringByClick.Text != "")
-                    {
-                        Clipboard.SetText(getStringByClick.Text);
-                    }
-                };
+                    linkMenuItem = new MenuItem { Header = "Copy _Link" };
 
-                linkMenuItem.Click += (o, args) =>
-                {
-                    if (getStringByClick.Text != "")
+                    // Http(s) links
+                    linkMenuItem.Click += (o, args) =>
                     {
-                        var getResult = entertainmentUtil.FindEntertainmentBy(getStringByClick.Text);
-                        if (getResult.Links != "")
+                        if (getStringByClick.Text != "")
                         {
-                            Clipboard.SetText(getResult.Links);
+                            var getResult = entertainmentUtil.FindEntertainmentByLink(getStringByClick.Text);
+                            if (getResult.Links != "")
+                            {
+                                Clipboard.SetText(getResult.Links);
+                            }
                         }
-                    }
-                };
+                    };
+                    cm.Items.Add(linkMenuItem); // for link
+                }
+                else // for name and link
+                {
+                    findMenuItem = new MenuItem { Header = "_Copy Name" };
+                    linkMenuItem = new MenuItem { Header = "Copy _Link" };
 
-                cm.Items.Add(findMenuItem); // for name
-                cm.Items.Add(linkMenuItem); // for link
+                    // Enter name
+                    findMenuItem.Click += (o, args) =>
+                    {
+                        if (getStringByClick.Text != "")
+                        {
+                            Clipboard.SetText(getStringByClick.Text);
+                        }
+                    };
+
+                    // Http(s) links
+                    linkMenuItem.Click += (o, args) =>
+                    {
+                        if (getStringByClick.Text != "")
+                        {
+                            var getResult = entertainmentUtil.FindEntertainmentBy(getStringByClick.Text);
+                            if (getResult.Links != "")
+                            {
+                                Clipboard.SetText(getResult.Links);
+                            }
+                        }
+                    };
+                    cm.Items.Add(findMenuItem); // for name
+                    cm.Items.Add(linkMenuItem); // for link
+                }
             }
         }
 
