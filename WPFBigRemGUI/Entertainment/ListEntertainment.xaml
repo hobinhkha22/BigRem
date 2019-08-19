@@ -31,7 +31,6 @@
         </DockPanel>
         <!--End of Dock panel-->
 
-
         <ListView Name="listviewEt"
                   HorizontalAlignment="Left"
                   ItemsSource="{Binding}"
@@ -47,7 +46,7 @@
                     <MenuItem Header="Copy Link" Name="CopyLinkContextMenu" Click="CopyLinkContextMenu_Click"/>
                     <MenuItem Header="Check Alive" Name="CheckAlive" Click="CheckAlive_Click"/>
                     <MenuItem Header="Open with browser(c)" Name="OpenWithBrowser" Click="OpenWithBrowser_Click"/>
-                    <MenuItem Header="Delete this item(d)" Name="DeleteItem" Click="DeleteItem_Click" KeyDown="DeleteItem_KeyDown"/>
+                    <MenuItem Header="Delete this item(d)" Name="DeleteItem" Click="DeleteItem_Click" KeyDown="DeleteItem_KeyDown" Background="red"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

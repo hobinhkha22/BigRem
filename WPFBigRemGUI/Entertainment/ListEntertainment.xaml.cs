@@ -44,7 +44,7 @@ namespace WPFBigRemGUI.Entertainment
             LiveTime.Tick += Timer_Tick;
             LiveTime.Start();
 
-           
+
 
 
             // Disable resize
