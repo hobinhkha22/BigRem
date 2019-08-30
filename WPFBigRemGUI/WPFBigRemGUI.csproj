@@ -186,7 +186,9 @@
     <Content Include="Pattern\EntertainmentPattern.html" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\fruit-juice-icon-png-18 %281%29.ico" />
+    <Resource Include="Image\fruit_juice.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="fruit-juice-icon-png-18 %281%29.ico" />
