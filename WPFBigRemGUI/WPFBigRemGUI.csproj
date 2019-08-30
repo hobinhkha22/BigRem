@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>fruit_juice.ico</ApplicationIcon>
+    <ApplicationIcon>Image\fruit_juice.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -187,9 +187,9 @@
     <Content Include="Pattern\EntertainmentPattern.html" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\fruit_juice.ico">
+    <Content Include="Image\fruit_juice.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
