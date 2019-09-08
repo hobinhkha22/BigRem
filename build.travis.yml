@@ -1,0 +1,6 @@
+language: csharp
+solution: BigRemember.sln
+install:
+– nuget restore BigRemember.sln
+script:
+- msbuild /p:Configuration=Debug BigRemember.sln
