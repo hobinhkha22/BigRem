@@ -44,9 +44,6 @@ namespace WPFBigRemGUI.Entertainment
             LiveTime.Tick += Timer_Tick;
             LiveTime.Start();
 
-
-
-
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
 
@@ -54,6 +51,9 @@ namespace WPFBigRemGUI.Entertainment
             ReloadData();
         }
 
+        /// <summary>
+        /// Load data to list view
+        /// </summary>
         public void ReloadData()
         {
             entertainmentUtil = new EntertainmentUtil();
@@ -76,7 +76,7 @@ namespace WPFBigRemGUI.Entertainment
             {
                 Logs.Warn($"[WPFBigRemGUI.ListEntertainment] There's no element in Db Entertainment.");
             }
-        }
+        }        
 
         private void Timer_Tick(object sender, EventArgs e)
         {
