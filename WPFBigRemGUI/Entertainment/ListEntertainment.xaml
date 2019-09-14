@@ -32,9 +32,8 @@
         <!--End of Dock panel-->
 
         <ListView Name="listviewEt"
-                  HorizontalAlignment="Left"
-                  ItemsSource="{Binding}"
-                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,6,0,0"
+                  HorizontalAlignment="Left" ItemsSource="{Binding}" ScrollViewer.ScrollChanged="ListviewEt_ScrollChanged"
+                  HorizontalContentAlignment="Stretch" Height="287" Margin="60,6,0,0" ScrollViewer.CanContentScroll="False"
                   VerticalAlignment="Top" Width="678" Grid.Row="1">
 
             <ListView.ContextMenu>

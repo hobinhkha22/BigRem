@@ -6,10 +6,12 @@ using RememberUtility.Extension;
 using RememberUtility.HandleUtil;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -21,9 +23,10 @@ namespace WPFBigRemGUI.Entertainment
     /// </summary>
     public partial class ListEntertainment : Window
     {
-        private ObservableCollection<EntertainmentUtil> observableCollection;
+        private bool DisabledEventTEmporary = false; // false: disable; true: enable
+        public EntertainmentUtil entertainmentUtil;
+        public List<RememberUtility.Model.Entertainment> GetAllRecordEntertainments;
 
-        private EntertainmentUtil entertainmentUtil;
         private static readonly ILog Logs = LogManager.GetLogger(typeof(ListBooks));
 
         public ListEntertainment()
@@ -31,8 +34,12 @@ namespace WPFBigRemGUI.Entertainment
             LoggerUtil.HandleLogPath();
             Logs.Info($"[WPFBigRemGUI.ListEntertainment] Starting ListEntertainment wpf GUI.");
             InitializeComponent();
+
             entertainmentUtil = new EntertainmentUtil();
-            observableCollection = new ObservableCollection<EntertainmentUtil>();
+
+            // list total
+            GetAllRecordEntertainments = entertainmentUtil.GetListEntertainments();
+
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             lblListEt.Foreground = Brushes.Green;
 
@@ -44,33 +51,42 @@ namespace WPFBigRemGUI.Entertainment
             LiveTime.Tick += Timer_Tick;
             LiveTime.Start();
 
-
-
-
             // Disable resize
             ResizeMode = ResizeMode.CanMinimize;
 
-            // Reload Data
-            ReloadData();
+            listviewEt.ItemsSource = entertainmentUtil.GetfirstEntertainment(30);
+            ListObjectEt.Content = entertainmentUtil.GetListEntertainment(30, GetAllRecordEntertainments).Count;
         }
 
+        /// <summary>
+        /// Load data to list view
+        /// </summary>
         public void ReloadData()
         {
-            entertainmentUtil = new EntertainmentUtil();
-
             // show list book
             if (entertainmentUtil.GetListEntertainments() != null)
             {
                 // Count objects        
                 ListObjectEt.Foreground = Brushes.ForestGreen;
-                ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
+                ListObjectEt.Content = entertainmentUtil.GetListEntertainment(30, GetAllRecordEntertainments).Count;
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Restart();
 
-                // count second
-                listviewEt.ItemsSource = entertainmentUtil.GetListEntertainments();
+                // Reload all
+                listviewEt.ItemsSource = entertainmentUtil.GetfirstEntertainment(30);
+
+                // Refresh list view
+                ICollectionView view = CollectionViewSource.GetDefaultView(listviewEt.ItemsSource);
+                view.Refresh();
+
+                // Count objects        
+                ListObjectEt.Foreground = Brushes.ForestGreen;
+                ListObjectEt.Content = entertainmentUtil.GetListEntertainment(30, GetAllRecordEntertainments).Count;
+
+                // count seconds
                 Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+                stopwatch.Stop();
             }
             else
             {
@@ -242,7 +258,7 @@ namespace WPFBigRemGUI.Entertainment
                 // Count again
                 ListObjectEt.Foreground = Brushes.ForestGreen;
                 ListObjectEt.Content = entertainmentUtil.GetListEntertainments().Count;
-
+                stopwatch.Stop();
             }
             else
             {
@@ -260,9 +276,13 @@ namespace WPFBigRemGUI.Entertainment
 
         private void Grid_KeyDown(object sender, KeyEventArgs e)
         {
+            Debug.WriteLine($"[Grid_KeyDown] was called");
             if (e.Key == Key.F5)
             {
-                ReloadData();
+                if (!DisabledEventTEmporary)
+                {
+                    ReloadData();
+                }
             }
         }
 
@@ -271,9 +291,49 @@ namespace WPFBigRemGUI.Entertainment
             new FindEt().ShowDialog();
         }
 
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+        private void ListviewEt_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            MessageBox.Show("hello sort");
+            DisabledEventTEmporary = true;
+
+            Debug.WriteLine($"[ListviewEt_ScrollChanged] was called");
+            // Get the border of the listview (first child of a listview)
+            Decorator border = VisualTreeHelper.GetChild(sender as ListView, 0) as Decorator;
+
+            // Get scrollviewer
+            ScrollViewer scrollViewer = border.Child as ScrollViewer;
+
+            // check if load full from db
+            var result = (listviewEt.ItemsSource as List<RememberUtility.Model.Entertainment>).Count;
+            var resultFromDb = entertainmentUtil.GetListEntertainments().Count; // always be the maximum number
+
+            if (result != resultFromDb)
+            {
+                if (scrollViewer.VerticalOffset == scrollViewer.ScrollableHeight)
+                {
+                    // get 30 records more
+                    var currentRecords = listviewEt.ItemsSource as List<RememberUtility.Model.Entertainment>;
+                    var getNextRecords = entertainmentUtil.GetListEntertainment(currentRecords.Count, GetAllRecordEntertainments);
+
+                    currentRecords.AddRange(getNextRecords);
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Restart();
+
+                    listviewEt.ItemsSource = currentRecords;
+
+                    // Refresh list view
+                    ICollectionView view = CollectionViewSource.GetDefaultView(listviewEt.ItemsSource);
+                    view.Refresh();
+
+                    // count seconds
+                    Show_ms.Content = stopwatch.Elapsed.TotalMilliseconds;
+                    stopwatch.Stop();
+
+                    // count again
+                    ListObjectEt.Content = currentRecords.Count;
+                }
+            }
+            DisabledEventTEmporary = false;
         }
     }
 }

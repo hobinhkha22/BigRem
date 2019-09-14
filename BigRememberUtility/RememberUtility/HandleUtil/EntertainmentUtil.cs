@@ -6,7 +6,6 @@ using RememberUtility.Extension;
 using RememberUtility.Interface;
 using RememberUtility.Model;
 using log4net;
-using System.Text;
 
 namespace RememberUtility.HandleUtil
 {
@@ -18,7 +17,7 @@ namespace RememberUtility.HandleUtil
         public EntertainmentUtil()
         {
             _fileHandlerUtil = new FileHandlerUtil();
-            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTANT);            
+            _fileHandlerUtil.CreateOrReadJsonDb(EnumFileConstant.ENTERTAINMENTCONSTANT);
         }
 
         public void AddEntertainment(Entertainment et)
@@ -71,8 +70,8 @@ namespace RememberUtility.HandleUtil
             {
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].EnterName = enterNewName;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Links = newLink;
-                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].AuthorEnter= authorEnter;
-                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Category = newCategory;                
+                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].AuthorEnter = authorEnter;
+                _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].Category = newCategory;
                 _fileHandlerUtil.JsonModel.Entertainment[indexOfEt].LastModifiedDate = $"{DateTime.Now:MMMM dd, yyyy}";
 
                 Logs.Info($"[UpdateEntertainment] Update '{enterNewName}' successful.");
@@ -111,19 +110,41 @@ namespace RememberUtility.HandleUtil
 
         public List<Entertainment> GetListEntertainments()
         {
-            List<Entertainment> listEt = null;
             try
             {
-                listEt = _fileHandlerUtil.JsonModel.Entertainment.ToList();
-
-                _fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
-
-                return listEt;
+                return _fileHandlerUtil.JsonModel.Entertainment.ToList();
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+
+        public List<Entertainment> GetfirstEntertainment(int number)
+        {
+            try
+            {
+                return _fileHandlerUtil.JsonModel.Entertainment.Take(number).ToList();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Return the next list
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="number"></param>
+        /// <param name="existListEntertainments"></param>
+        /// <returns></returns>
+        public List<Entertainment> GetListEntertainment(int number, List<Entertainment> existListEntertainments)
+        {            
+            var secondSkip = existListEntertainments.Skip(number).ToList().Take(number).ToList(); // 70 left
+
+            return secondSkip;
         }
 
         public void BackupDatabase(EnumFileConstant enumFile, string backupFolder)
