@@ -112,20 +112,9 @@ namespace RememberUtility.HandleUtil
         {
             try
             {
+                //_fileHandlerUtil.SaveFile(EnumFileConstant.ENTERTAINMENTCONSTANT);
+
                 return _fileHandlerUtil.JsonModel.Entertainment.ToList();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-
-        public List<Entertainment> GetfirstEntertainment(int number)
-        {
-            try
-            {
-                return _fileHandlerUtil.JsonModel.Entertainment.Take(number).ToList();
             }
             catch (Exception)
             {

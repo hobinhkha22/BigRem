@@ -92,7 +92,7 @@ namespace WPFBigRemGUI.Entertainment
             {
                 Logs.Warn($"[WPFBigRemGUI.ListEntertainment] There's no element in Db Entertainment.");
             }
-        }
+        }        
 
         private void Timer_Tick(object sender, EventArgs e)
         {
