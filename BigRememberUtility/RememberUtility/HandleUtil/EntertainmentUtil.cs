@@ -130,7 +130,7 @@ namespace RememberUtility.HandleUtil
         /// <param name="existListEntertainments"></param>
         /// <returns></returns>
         public List<Entertainment> GetListEntertainment(int number, List<Entertainment> existListEntertainments)
-        {            
+        {
             var secondSkip = existListEntertainments.Skip(number).ToList().Take(number).ToList(); // 70 left
 
             return secondSkip;
@@ -152,6 +152,18 @@ namespace RememberUtility.HandleUtil
             try
             {
                 return _fileHandlerUtil.JsonModel.Entertainment.Find(f => f.Links == link);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<Entertainment> GetfirstEntertainment(int number)
+        {
+            try
+            {
+                return _fileHandlerUtil.JsonModel.Entertainment.Take(number).ToList();
             }
             catch (Exception)
             {
