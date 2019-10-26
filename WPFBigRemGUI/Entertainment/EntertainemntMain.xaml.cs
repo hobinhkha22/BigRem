@@ -36,6 +36,10 @@ namespace WPFBigRemGUI.Entertainment
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
 
+            lstListEtCategory.Visibility = Visibility.Visible;
+            txtBtnCustomTextBox.Visibility = Visibility.Hidden;
+            btnCancelCustom.Visibility = Visibility.Hidden;
+
             var listConstantValue = typeof(CategoriesEntertainmentConstant).GetAllPublicConstantValues<string>();
             listConstantValue.Sort();
             lstListEtCategory.ItemsSource = listConstantValue;
@@ -46,7 +50,7 @@ namespace WPFBigRemGUI.Entertainment
             // Backup Database
             DoBackupAsync();
         }
-               
+
         private async void DoBackupAsync()
         {
             await Task.Run(() =>
@@ -60,8 +64,8 @@ namespace WPFBigRemGUI.Entertainment
                 }
 
             });
-        }    
-        
+        }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             var et = new RememberUtility.Model.Entertainment();
@@ -107,10 +111,29 @@ namespace WPFBigRemGUI.Entertainment
 
             if (txtLink.Text != "" && txtEtName.Text != "" && txtAuthorEnter.Text != "" && lstListEtCategory.SelectedIndex >= 0)
             {
-                // use dynamic as type to cast your anonymous object to
                 dynamic categoryInList = (lstListEtCategory.SelectedItem);
+                string catchCustom = categoryInList as string;
+                if (catchCustom.ToString() == CategoriesEntertainmentConstant.Custom)
+                {
+                    if (txtBtnCustomTextBox.Text == "")
+                    {
+                        AddEtResult.Foreground = Brushes.Red;
+                        AddEtResult.Content = "Category custom is emtpy. Please pick one.";
+                        return;
+                    }
+                    else
+                    {
+                        et.Category = txtBtnCustomTextBox.Text;
+                    }
+                }
+                else
+                {
+                    // use dynamic as type to cast your anonymous object to
+                    categoryInList = (lstListEtCategory.SelectedItem);
 
-                et.Category = categoryInList as string;
+                    // add category here
+                    et.Category = categoryInList as string;
+                }
 
                 var findet = entertainmentUtil.FindEntertainmentBy(txtEtName.Text);
                 if (findet != null)
@@ -118,7 +141,7 @@ namespace WPFBigRemGUI.Entertainment
                     if (et.EnterName.ToLower() != findet.EnterName.ToLower())
                     {
                         entertainmentUtil.AddEntertainment(et);
-                        AddEtResult.Foreground = Brushes.Green;                      
+                        AddEtResult.Foreground = Brushes.Green;
 
                         if (et.EnterName.Length <= 10)
                         {
@@ -145,14 +168,14 @@ namespace WPFBigRemGUI.Entertainment
                     entertainmentUtil.AddEntertainment(et);
                     AddEtResult.Foreground = Brushes.Green;
                     AddEtResult.Content = "Add et Successful";
-                                                            
+
                     txtEtName.Text = string.Empty;
                     txtLink.Text = string.Empty;
                     txtAuthorEnter.Text = string.Empty;
                     lstListEtCategory.Text = string.Empty;
                 }
             }
-        }     
+        }
 
         private void btnUpdateEt_Click(object sender, RoutedEventArgs e)
         {
@@ -300,6 +323,39 @@ namespace WPFBigRemGUI.Entertainment
             {
                 lstListEtCategory.IsDropDownOpen = true;
             }
-        }   
+        }
+
+        private void btnCancelCustom_Click(object sender, RoutedEventArgs e)
+        {
+            btnCancelCustom.Visibility = Visibility.Hidden;
+            txtBtnCustomTextBox.Visibility = Visibility.Hidden;
+
+            lstListEtCategory.Visibility = Visibility.Visible;
+            lstListEtCategory.Text = string.Empty;
+        }
+
+        private void lstListEtCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // use dynamic as type to cast your anonymous object to
+            dynamic categoryInList = (lstListEtCategory.SelectedItem);
+
+            btnCancelCustom.Visibility = Visibility.Hidden;
+            txtBtnCustomTextBox.Visibility = Visibility.Hidden;
+            string catchCustom = categoryInList as string;
+
+            if (catchCustom == null)
+            {
+                return;
+            }
+
+            if (catchCustom.ToString() == CategoriesEntertainmentConstant.Custom)
+            {
+                lstListEtCategory.Visibility = Visibility.Hidden;
+
+                btnCancelCustom.Visibility = Visibility.Visible;
+                txtBtnCustomTextBox.Visibility = Visibility.Visible;
+                txtBtnCustomTextBox.Text = string.Empty;
+            }            
+        }
     }
 }
