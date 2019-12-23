@@ -10,7 +10,7 @@ namespace ConnectionSampleCode.Constant
     {
         public const string Server = "192.168.1.4";
         public const string UserName = "pi";
-        public const string Password = "hello@world22";
+        public const string Password = "";
 
         public const string CommandToSend = "echo hello world";
         public const string CreaTeFile = "touch /home/pi/Documents/createfromremote.txt";
