@@ -107,6 +107,7 @@
     <Compile Include="Constant\CategoriesBookConstant.cs" />
     <Compile Include="Constant\CategoriesCountryOccuredConstant.cs" />
     <Compile Include="Constant\CategoriesEntertainmentConstant.cs" />
+    <Compile Include="Constant\SSHRemoteConstant.cs" />
     <Compile Include="Constant\TypeBooksConstant.cs" />
     <Compile Include="Constant\TypeEntertainmentsConstant.cs" />
     <Compile Include="Constant\UserConstant.cs" />

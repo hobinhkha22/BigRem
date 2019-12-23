@@ -1,9 +1,11 @@
-﻿using ConnectionSampleCode.HandleUtil;
+﻿using ConnectionSampleCode.Constant;
+using ConnectionSampleCode.HandleUtil;
 using log4net;
 using Microsoft.Win32;
 using RememberUtility.Constant;
 using RememberUtility.Extension;
 using RememberUtility.HandleUtil;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,7 +94,7 @@ namespace WPFBigRemGUI.Entertainment
             {
                 Logs.Warn($"[WPFBigRemGUI.ListEntertainment] There's no element in Db Entertainment.");
             }
-        }        
+        }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -215,6 +217,16 @@ namespace WPFBigRemGUI.Entertainment
             }
         }
 
+        private void RemoteSSH_Click(object sender, RoutedEventArgs e)
+        {
+            ShowOutputET showOutputET = new ShowOutputET();
+            showOutputET.Show();
+            string[] ListCommand = new string[] {
+                "", "", ""
+            };
+            showOutputET.GetCriteriaAsync(ListCommand);
+        }
+
         private void OpenWithBrowserContextMenu_KeyDown(object sender, KeyEventArgs e)
         {
             // Open with chrome [Keyboard: B]
@@ -295,8 +307,7 @@ namespace WPFBigRemGUI.Entertainment
         private void ListviewEt_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             DisabledEventTEmporary = true;
-
-            Debug.WriteLine($"[ListviewEt_ScrollChanged] was called");
+            
             // Get the border of the listview (first child of a listview)
             Decorator border = VisualTreeHelper.GetChild(sender as ListView, 0) as Decorator;
 

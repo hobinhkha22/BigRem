@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BigRememberUtility\RememberUtility\bin\Debug\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -75,19 +78,22 @@
     <Compile Include="Entertainment\ListEntertainment.xaml.cs">
       <DependentUpon>ListEntertainment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entertainment\ShowOutputET.xaml.cs">
+      <DependentUpon>ShowOutputET.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entertainment\UpdateEt.xaml.cs">
       <DependentUpon>UpdateEt.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListBooks.xaml.cs">
+    <Compile Include="Book\ListBooks.xaml.cs">
       <DependentUpon>ListBooks.xaml</DependentUpon>
     </Compile>
     <Compile Include="SignupWindow.xaml.cs">
       <DependentUpon>SignupWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateBooks.xaml.cs">
+    <Compile Include="Book\UpdateBooks.xaml.cs">
       <DependentUpon>UpdateBooks.xaml</DependentUpon>
     </Compile>
-    <Page Include="Books.xaml">
+    <Page Include="Book\Books.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,15 +109,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Entertainment\ShowOutputET.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Entertainment\UpdateEt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Find.xaml">
+    <Page Include="Book\Find.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListBooks.xaml">
+    <Page Include="Book\ListBooks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,10 +137,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Books.xaml.cs">
+    <Compile Include="Book\Books.xaml.cs">
       <DependentUpon>Books.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Find.xaml.cs">
+    <Compile Include="Book\Find.xaml.cs">
       <DependentUpon>Find.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
@@ -144,7 +154,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateBooks.xaml">
+    <Page Include="Book\UpdateBooks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,5 +201,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
