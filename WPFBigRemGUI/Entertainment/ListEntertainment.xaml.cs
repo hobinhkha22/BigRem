@@ -141,9 +141,9 @@ namespace WPFBigRemGUI.Entertainment
             if (savefile.ShowDialog() == true)
             {
                 string fullPath = savefile.FileName;
-
+                var getFullList = entertainmentUtil.GetListEntertainments();
                 HandleRandom.ExportExcel(
-                    listviewEt.ItemsSource as List<RememberUtility.Model.Entertainment>, FileConstant.Entertainment, fullPath);
+                    getFullList as List<RememberUtility.Model.Entertainment>, FileConstant.Entertainment, fullPath);
                 lblResultExportFile.Foreground = Brushes.Green;
                 lblResultExportFile.Content = "Export file successfull.";
             }

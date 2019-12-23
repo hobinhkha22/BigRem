@@ -39,7 +39,8 @@ namespace RememberUtility.Extension
 
         public static string GetDateTimeNow()
         {
-            return DateTime.Now.ToString("MMMMddyyyy");
+            var handleDate = DateTime.Now.Month.ToString() + "_" + DateTime.Now.Year.ToString();
+            return handleDate;
         }
 
         /// <summary>
