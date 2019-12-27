@@ -1,5 +1,7 @@
 ﻿using ConnectionSampleCode.Constant;
+using RememberUtility.Constant;
 using RememberUtility.Extension;
+using RememberUtility.HandleUtil;
 using Renci.SshNet;
 using System;
 using System.Collections.Generic;
@@ -24,9 +26,11 @@ namespace WPFBigRemGUI.Entertainment
     /// </summary>
     public partial class ShowOutputET : Window
     {
+        private EntertainmentUtil entertainmentUtil;
         public ShowOutputET()
         {
             InitializeComponent();
+            entertainmentUtil = new EntertainmentUtil();
             showOutputSSH.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             showOutputSSH.IsReadOnly = true;
         }
@@ -41,17 +45,23 @@ namespace WPFBigRemGUI.Entertainment
         {
             using (var client = new SshClient(SSHRemoteConstant.Server, SSHRemoteConstant.UserName, SSHRemoteConstant.Password))
             {
-                if (HandleRandom.IsNullOrEmpty(multiCommand))
+                if (!HandleRandom.IsNullOrEmpty(multiCommand))
                 {
                     showOutputSSH.Text = "Connecting...";
                     Thread.Sleep(1200);
 
+                    // 1. Connection
                     await Task.Run(() => client.Connect());
                     if (client.IsConnected)
                     {
                         Thread.Sleep(1200);
                         showOutputSSH.Text += "\n";
                         showOutputSSH.Text += "Connected...";
+
+                        // 2. Write file
+                        //var getFullList = entertainmentUtil.GetListEntertainments();
+                        //HandleRandom.ExportExcel(
+                        //getFullList as List<RememberUtility.Model.Entertainment>, FileConstant.Entertainment, "/home/pi/Documents/file.xlsx");
 
                         foreach (var subCommand in multiCommand)
                         {

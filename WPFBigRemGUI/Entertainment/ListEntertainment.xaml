@@ -31,9 +31,9 @@
                     <MenuItem Name="mnuAlwaysOnTop" IsCheckable="True" Header="Always on _Top" Click="MenuItem_Click"/>
                 </MenuItem>
                 <!--For SSH-->
-                <MenuItem Header="_Remote" Height="25">
+                <!--<MenuItem Header="_Remote" Height="25">
                     <MenuItem Header="SSH" Name="RemoteSSH" Click="RemoteSSH_Click"/>
-                </MenuItem>
+                </MenuItem>-->
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>

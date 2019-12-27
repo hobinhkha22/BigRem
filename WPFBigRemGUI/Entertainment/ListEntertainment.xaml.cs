@@ -222,7 +222,7 @@ namespace WPFBigRemGUI.Entertainment
             ShowOutputET showOutputET = new ShowOutputET();
             showOutputET.Show();
             string[] ListCommand = new string[] {
-                "", "", ""
+                "scp 'F:\\analysis.txt' pi@192.168.1.4:/home/pi/Documents/", "", ""
             };
             showOutputET.GetCriteriaAsync(ListCommand);
         }
